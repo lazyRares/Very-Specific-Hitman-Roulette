@@ -1,0 +1,15 @@
+C:\Users\rares\source\repos\HitmanRoulette\HitmanRoulette\bin\Debug\net6.0\HitmanRoulette.exe
+C:\Users\rares\source\repos\HitmanRoulette\HitmanRoulette\bin\Debug\net6.0\HitmanRoulette.deps.json
+C:\Users\rares\source\repos\HitmanRoulette\HitmanRoulette\bin\Debug\net6.0\HitmanRoulette.runtimeconfig.json
+C:\Users\rares\source\repos\HitmanRoulette\HitmanRoulette\bin\Debug\net6.0\HitmanRoulette.dll
+C:\Users\rares\source\repos\HitmanRoulette\HitmanRoulette\bin\Debug\net6.0\HitmanRoulette.pdb
+C:\Users\rares\source\repos\HitmanRoulette\HitmanRoulette\obj\Debug\net6.0\HitmanRoulette.csproj.AssemblyReference.cache
+C:\Users\rares\source\repos\HitmanRoulette\HitmanRoulette\obj\Debug\net6.0\HitmanRoulette.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\rares\source\repos\HitmanRoulette\HitmanRoulette\obj\Debug\net6.0\HitmanRoulette.AssemblyInfoInputs.cache
+C:\Users\rares\source\repos\HitmanRoulette\HitmanRoulette\obj\Debug\net6.0\HitmanRoulette.AssemblyInfo.cs
+C:\Users\rares\source\repos\HitmanRoulette\HitmanRoulette\obj\Debug\net6.0\HitmanRoulette.csproj.CoreCompileInputs.cache
+C:\Users\rares\source\repos\HitmanRoulette\HitmanRoulette\obj\Debug\net6.0\HitmanRoulette.dll
+C:\Users\rares\source\repos\HitmanRoulette\HitmanRoulette\obj\Debug\net6.0\refint\HitmanRoulette.dll
+C:\Users\rares\source\repos\HitmanRoulette\HitmanRoulette\obj\Debug\net6.0\HitmanRoulette.pdb
+C:\Users\rares\source\repos\HitmanRoulette\HitmanRoulette\obj\Debug\net6.0\HitmanRoulette.genruntimeconfig.cache
+C:\Users\rares\source\repos\HitmanRoulette\HitmanRoulette\obj\Debug\net6.0\ref\HitmanRoulette.dll

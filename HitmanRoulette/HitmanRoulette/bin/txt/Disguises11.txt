@@ -1,0 +1,20 @@
+Baseball Player
+Bodyguard
+Chef
+Chief Surgeon
+Doctor
+Handyman
+Helicopter Pilot
+Hospital Director
+Morgue Doctor
+Motorcyclist
+Ninja
+Patient
+Resort Security
+Resort Staff
+Surgeon
+VIP Patient (Dexter)
+VIP Patient (Portman)
+Yoga Instructor
+Suit
+Any Disguise

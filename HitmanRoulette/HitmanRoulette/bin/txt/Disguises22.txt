@@ -1,0 +1,10 @@
+Bodyguard
+Gardener
+Lawyer
+Mansion Guard
+Mansion Staff
+Photographer
+Private Investigator
+Undertaker
+Suit
+Any Disguise

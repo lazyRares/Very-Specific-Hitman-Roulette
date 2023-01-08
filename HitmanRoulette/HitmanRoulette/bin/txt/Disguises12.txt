@@ -1,0 +1,19 @@
+Bio Suit
+Bodyguard
+Chef
+Doctor
+Handyman
+Head Researcher
+Helicopter Pilot
+Hospital Director
+Morgue Doctor
+Motorcyclist
+Patient
+Resort Security
+Resort Staff
+Surgeon
+VIP Patient
+VIP Patient (Dexter)
+Yoga Instructor
+Suit
+Any Disguise

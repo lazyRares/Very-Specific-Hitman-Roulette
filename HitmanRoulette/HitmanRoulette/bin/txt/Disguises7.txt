@@ -1,0 +1,9 @@
+Bodyguard
+Food Vendor
+Fortune Teller
+Handyman
+Soldier
+Shopkeeper
+Waiter
+Suit
+Any Disguise

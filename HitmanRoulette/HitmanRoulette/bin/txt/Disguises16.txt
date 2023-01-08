@@ -1,0 +1,21 @@
+Barber
+Bollywood Bodyguard
+Bollywood Crew
+Dancer
+Elite Thug
+Food Vendor
+Holy Man
+Kashmirian
+Laundry Foreman
+Laundry Worker
+Lead Actor
+Local Security
+Metal Worker
+Painter
+Queen's Bodyguard
+Queen's Guard
+Tailor
+Thug
+Vanya's Servant
+Suit
+Any Disguise
