@@ -1,13 +1,16 @@
 # Very-Specific-Hitman-Roulette
-A randomizer for Hitman that's very specific. you can input your mastery and level and it will draw items from that as well.
+
+A randomizer for making Hitman Contracts that's very specific. It will draw kill conditions not only from what available on the level currently, but you can also input your mastery and it will draw items from that as well.
+
+## This Roulette isn't for main missions. Only Contracts.
 
 Features
-- Accounts for Mastery and Level 
+- Accounts for Mastery with kills.
 - Saves your Mastery so you don't have to re-input each time
 - Able to manually choose how many targets you want, can go up to 10.
-- Generalized targets to allow players to choose whoever they'd like.
+- Generalized targets to allow players to choose whoever they'd like in their contract.
 
-USE:
+# USE:
 
 To use this randomizer you need to first install Visual Studio Code 2022, then launch and open the SLN for HitmanRoulette in Visual Studio. Then simply just run the program at the top and wait.
 
