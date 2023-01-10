@@ -28,9 +28,32 @@ class Randomization
             mapsList.Add(data);
         }
 
-        int mapInt = randomNumber.Next(27);
-        mapChosen = mapsList[mapInt];
-        
+        Console.WriteLine("Would You Like To Choose a map? (Y/N)");
+        String manualMap = Console.ReadLine();
+
+        int mapInt = 0;
+
+        if (manualMap.Equals("Y", StringComparison.OrdinalIgnoreCase))
+        {
+
+            Console.WriteLine("Which Map Would You Like? Type the respective number");
+            Console.WriteLine("Available Maps are: \n");
+
+            for (int i = 0; i < 28; i++)
+            {
+                Console.WriteLine($"{i}: {mapsList[i]}");
+            }
+
+            Console.WriteLine("\n");
+
+            mapInt = Convert.ToInt32(Console.ReadLine());
+            mapChosen = mapsList[mapInt];
+        }
+        if (manualMap.Equals("N", StringComparison.OrdinalIgnoreCase))
+        {
+            mapInt = randomNumber.Next(27);
+            mapChosen = mapsList[mapInt];
+        }
         Console.WriteLine($"\nThe Map Chosen Was {mapChosen}!");
 
         //RANDOM KILLS
@@ -63,6 +86,7 @@ class Randomization
         string username = mastery.Username();
         int additions = 0;
         int counterMap = 0;
+        int killsMastery = 0;
         masteryList = mastery.ReturnMastery(username);
 
         while (killsIssued < targetAmount)
@@ -78,6 +102,15 @@ class Randomization
             {
                 broadOrNot = false;
             }
+            if (mapInt == 0)
+            {
+                broadOrNot = false;
+            }
+            if (killsMastery > 4)
+            {
+                broadOrNot = false;
+            }
+
 
             //LISTS FOR CONDITIONS
 
@@ -714,7 +747,7 @@ class Randomization
 
                 Targets();
                 Console.WriteLine($"With The Method '{killChosen}'");
-                Disguises();  
+                Disguises();
 
                 killsIssued++;
             }
@@ -741,6 +774,7 @@ class Randomization
                 Disguises();
 
                 killsIssued++;
+                killsMastery++;
             }
         }
         
