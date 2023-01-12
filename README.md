@@ -12,7 +12,10 @@ Features
 
 # USE:
 
-To use this randomizer you need to first install Visual Studio Code 2022, then launch and open the SLN for HitmanRoulette in Visual Studio. Then simply just run the program at the top and wait.
+Head to HitmanRoulette\HitmanRoulette\bin\Debug\net6.0\
+and launch HitmanRoulette.exe
+
+This will launch the roulette, and that's it, you've got it working!
 
 Now, you will be asked to either create a profile or not. Included with the Github release are two profiles: "Snail", and "The Mafia" which is mine and AgentSnail's mastery levels respectively. You can type "Y" or "N" to either create or use an existing profile.
 
