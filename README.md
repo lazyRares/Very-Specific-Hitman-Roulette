@@ -22,4 +22,11 @@ Then the randomizer will ask you how many target's you'd like, this can be any n
 
 Now it will randomize and give you that many target's, drawing kill conditions from the map it chose and also possible items you can bring with you at your current mastery. For example, if Mendoza was chosen, you might be asked to kill a Guard with the wine press, or with an Iceballer.
 
-The system is not foolproof however, certain items like the Golden Shaska A33 or any other weapon that is unlockable at any time (Not restricted to mastery) may be chosen as a kill condition regardless if the player has them. There also may be scenarios where you need to either kill a unique NPC twice, or kill that NPC wearing their own unique disguise. This happens alot with Sapienza - The Author, where Craig Black may be requested to be killed twice. If this happens you can re-spin. Another scenario is being asked to kill an NPC in a way that requires them awake while wearing their disguise. You can get past this by allowing a guard to find the unconscius NPC, allowing them to wake-up, which then lets you fiber wire them or whatever was requested.
+## Possible Bugs
+
+Some notable bugs to consider:
+
+- Sometimes has a small chance to tell you to kill a unique NPC more than once. Solution is to just re-spin.
+- Might give you more than 4 Items that required to be imported into the map. This should be fixed but keep it in mind, i re-wrote the system it used for this.
+
+NOTE: Spins above 5 targets are usually volatile and you won't be guranteed a functioning spin. It might contain both of the bugs mentioned above or something else stupid. Either re-spin or try a smaller number.

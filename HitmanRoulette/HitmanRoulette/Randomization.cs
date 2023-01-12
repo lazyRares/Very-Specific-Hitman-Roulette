@@ -15,6 +15,7 @@ class Randomization
     List<String> previousTarget = new List<String>();
 
     int killsIssued = 0;
+    int killsMastery = 0;
 
     Random randomNumber = new Random();
     public void ChooseSpin()
@@ -86,7 +87,7 @@ class Randomization
         string username = mastery.Username();
         int additions = 0;
         int counterMap = 0;
-        int killsMastery = 0;
+        
         masteryList = mastery.ReturnMastery(username);
 
         while (killsIssued < targetAmount)
@@ -97,6 +98,7 @@ class Randomization
             if (broadOrNotint == 1)
             {
                 broadOrNot = true;
+                killsMastery++;
             }
             else
             {
@@ -111,13 +113,12 @@ class Randomization
                 broadOrNot = false;
             }
 
-
             //LISTS FOR CONDITIONS
 
             if (broadOrNot == true)
             {
 
-                for (int i = 0; i < 46; i++)
+                for (int i = 0; i < 21; i++)
                 {
                     String data = readerKillsBroad.ReadLine();
                     killsList.Add(data);
@@ -737,12 +738,45 @@ class Randomization
                     additions = additions + 5;
                 }
 
-                int killChosenInt = randomNumber.Next(45 + additions);
+                killsList.Add("Sieger 300 Ghost");
+                killsList.Add("Floral Baller");
+                killsList.Add("Fiber Wire Classic");
+                killsList.Add("ICA Bartoli Woodsman Hunting Rifle Covert");
+                killsList.Add("TAC-4 AR Desert");
+                killsList.Add("Earphones");
+                killsList.Add("ICA19");
+                killsList.Add("ICA19 Classicballer");
+                killsList.Add("TAC-4 S/A Jungle");
+                killsList.Add("Measuring Tape");
+                killsList.Add("Krugermeier 2-2 Dark");
+                killsList.Add("Sieger AR552 Tactical");
+                killsList.Add("Striker V3");
+                killsList.Add("The Ducky Gun");
+                killsList.Add("The Iridescent Katana");
+                killsList.Add("The White Ruby Rude 300 Sniper Rifle");
+                killsList.Add("IO Elite S2VP Earphones");
+                killsList.Add("Piton");
+                killsList.Add("Quickdraw");
+                killsList.Add("Ice Pick");
+                killsList.Add("Nitroglycerin");
+                killsList.Add("Remote Explosive Present");
+                killsList.Add("Ancestral Fountain Pen");
+                killsList.Add("ICA19 Iceballer");
+                killsList.Add("Shashka A33 Gold");
+                killsList.Add("Explosive Pen");
+                killsList.Add("Proffesional Screwdriver");
+                additions = additions + 27;
+
+                int killChosenInt = randomNumber.Next(21 + additions);
                 String killChosen = killsList[killChosenInt];
 
                 if (killChosen == null || killChosen.Equals(""))
                 {
-                    killChosen = "Any Method";
+                    while (killChosen == null || killChosen.Equals(""))
+                    {
+                        killChosenInt = randomNumber.Next(21 + additions);
+                        killChosen = killsList[killChosenInt];
+                    }
                 }
 
                 Targets();
@@ -774,7 +808,6 @@ class Randomization
                 Disguises();
 
                 killsIssued++;
-                killsMastery++;
             }
         }
         
