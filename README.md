@@ -24,9 +24,11 @@ Now it will randomize and give you that many target's, drawing kill conditions f
 
 ## Possible Bugs
 
-Some notable bugs to consider:
+Some bugs that I believe to have fixed, but please consider:
 
 - Sometimes has a small chance to tell you to kill a unique NPC more than once. Solution is to just re-spin.
 - Might give you more than 4 Items that required to be imported into the map. This should be fixed but keep it in mind, i re-wrote the system it used for this.
 
 NOTE: Spins above 5 targets are usually volatile and you won't be guranteed a functioning spin. It might contain both of the bugs mentioned above or something else stupid. Either re-spin or try a smaller number.
+
+If you DO get any of the bugs noted above, please make an issue and show me the spin you got. So i can pinpoint where it went wrong. It might not be a case of it messing up the spin but my ignorance when i made the disguise replacements. Since currently if it runs into a disguise that is ONLY a disguise and not also a person, it'll swap it for a term I manually input. But this term might be ANOTHER unique NPC.
