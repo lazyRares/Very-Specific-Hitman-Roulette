@@ -849,8 +849,8 @@ class Randomization
 
             int targetInt = randomNumber.Next(lineCount);
             String targetChosen= targetList[targetInt];
-            
-            targetChosen = CheckInvalidDisguises(ref targetChosen);
+
+            targetChosen = CheckInvalidDisguises(ref targetChosen, ref targetInt, ref lineCount);
 
             for (int i = 0; i < previousTarget.Count(); i++)
             {
@@ -858,8 +858,9 @@ class Randomization
                 {
                     for (int j = 0; j < lineCountUnique; j++)
                     {
-                        if (targetChosen.Equals(uniqueList[i]))
+                        if (targetChosen.Equals(uniqueList[j]))
                         {
+                            //Console.WriteLine("Unique Duplicate!");
                             targetInt = randomNumber.Next(lineCount);
                             targetChosen = targetList[targetInt];
                         }
@@ -867,18 +868,19 @@ class Randomization
                 }
             }
 
+            targetChosen = CheckInvalidDisguises(ref targetChosen, ref targetInt, ref lineCount);
+
             previousTarget.Add(targetChosen);
-
-
 
             Console.WriteLine($"Eliminate '{targetChosen}'");
         }
-
-        string CheckInvalidDisguises(ref string targetChosen)
+        string CheckInvalidDisguises(ref string targetChosen, ref int targetInt, ref int lineCount)
         {
             if (targetChosen.Equals("Suit", StringComparison.OrdinalIgnoreCase) || targetChosen.Equals("Any Disguise", StringComparison.OrdinalIgnoreCase))
             {
-                targetChosen = ("Anyone");
+                //Console.WriteLine("Previously Was Suit");
+                targetInt = randomNumber.Next(lineCount);
+                targetChosen = targetList[targetInt];
             }
             if (targetChosen.Equals("Vampire Magician"))
             {
@@ -894,11 +896,11 @@ class Randomization
             }
             if (targetChosen.Equals("Baseball Player"))
             {
-                targetChosen = ("Helicopter Pilot");
+                targetChosen = ("Patient");
             }
             if (targetChosen.Equals("Motorcyclist"))
             {
-                targetChosen = ("Agent Smith");
+                targetChosen = ("Gardener");
             }
             if (targetChosen.Equals("Ninja"))
             {
@@ -910,7 +912,7 @@ class Randomization
             }
             if (targetChosen.Equals("Arkian Robe"))
             {
-                targetChosen = ("Janus");
+                targetChosen = ("Civillian");
             }
             if (targetChosen.Equals("Knight's Armour"))
             {
