@@ -715,6 +715,8 @@ class Randomization
 
                 bool sevenDeadly = contentList[0];
                 bool deluxe = contentList[1];
+                bool concreteArt = contentList[2];
+                bool makeshiftPack = contentList[3];
 
                 if (sevenDeadly == true)
                 {
@@ -727,6 +729,25 @@ class Randomization
                     killsList.Add("Jaeger 7 Green Eye");
                     killsList.Add("The Shashka Beast");
                     additions = additions + 8;
+                }
+                if (concreteArt == true)
+                {
+                    killsList.Add("The Concrete Bunny Pistol");
+                    killsList.Add("The Concrete Shotgun");
+                    killsList.Add("The Shark SMG");
+                    killsList.Add("The Concrete Assault Rifle");
+                    killsList.Add("The Concrete Sniper Rifle");
+                    additions = additions + 5;
+                }
+                if (makeshiftPack == true)
+                {
+                    killsList.Add("The Makeshift Katana");
+                    killsList.Add("The Scrap Gun");
+                    killsList.Add("The Makeshift Scrap Shotgun");
+                    killsList.Add("The Scrap SMG");
+                    killsList.Add("The Makeshift Scrap Assault Rifle");
+                    killsList.Add("The Scrappy Sniper Rifle");
+                    additions = additions + 5;
                 }
                 if (deluxe == true)
                 {
@@ -770,9 +791,9 @@ class Randomization
                 int killChosenInt = randomNumber.Next(21 + additions);
                 String killChosen = killsList[killChosenInt];
 
-                if (killChosen == null || killChosen.Equals(""))
+                if (killChosen == null || killChosen.Equals("") || killChosen.Equals("Suit")) 
                 {
-                    while (killChosen == null || killChosen.Equals(""))
+                    while (killChosen == null || killChosen.Equals("") || killChosen.Equals("Suit"))
                     {
                         killChosenInt = randomNumber.Next(21 + additions);
                         killChosen = killsList[killChosenInt];
@@ -829,11 +850,7 @@ class Randomization
 
         void Targets()
         {
-            StreamReader readerUnique = new StreamReader($"../../txt/UniqueKills.txt");
-            List<String> uniqueList = new List<String>();
-
             int lineCount = File.ReadLines($"../../txt/Disguises{mapInt}.txt").Count();
-            int lineCountUnique  = File.ReadLines($"../../txt/UniqueKills.txt").Count();
 
             for (int i = 0; i < lineCount; i++)
             {
@@ -841,16 +858,29 @@ class Randomization
                 targetList.Add(data);
             }
 
+            int targetInt = randomNumber.Next(lineCount);
+            String targetChosen= targetList[targetInt];
+
+            targetChosen = CheckInvalidDisguises(ref targetChosen, ref targetInt, ref lineCount);
+            targetChosen = CheckUniqueDisguises(ref targetChosen, ref targetInt, ref lineCount);
+
+            previousTarget.Add(targetChosen);
+
+            Console.WriteLine($"Eliminate '{targetChosen}'");
+        }
+
+        string CheckUniqueDisguises(ref string targetChosen, ref int targetInt, ref int lineCount)
+        {
+            int lineCountUnique = File.ReadLines($"../../txt/UniqueKills.txt").Count();
+
+            StreamReader readerUnique = new StreamReader($"../../txt/UniqueKills.txt");
+            List<String> uniqueList = new List<String>();
+
             for (int i = 0; i < lineCountUnique; i++)
             {
                 String data = readerUnique.ReadLine();
                 uniqueList.Add(data);
             }
-
-            int targetInt = randomNumber.Next(lineCount);
-            String targetChosen= targetList[targetInt];
-
-            targetChosen = CheckInvalidDisguises(ref targetChosen, ref targetInt, ref lineCount);
 
             for (int i = 0; i < previousTarget.Count(); i++)
             {
@@ -863,17 +893,16 @@ class Randomization
                             //Console.WriteLine("Unique Duplicate!");
                             targetInt = randomNumber.Next(lineCount);
                             targetChosen = targetList[targetInt];
+                            targetChosen = CheckInvalidDisguises(ref targetChosen, ref targetInt, ref lineCount);
+                            targetChosen = CheckUniqueDisguises(ref targetChosen, ref targetInt, ref lineCount);
+                            return targetChosen;
                         }
                     }
                 }
             }
-
-            targetChosen = CheckInvalidDisguises(ref targetChosen, ref targetInt, ref lineCount);
-
-            previousTarget.Add(targetChosen);
-
-            Console.WriteLine($"Eliminate '{targetChosen}'");
+            return targetChosen;
         }
+
         string CheckInvalidDisguises(ref string targetChosen, ref int targetInt, ref int lineCount)
         {
             if (targetChosen.Equals("Suit", StringComparison.OrdinalIgnoreCase) || targetChosen.Equals("Any Disguise", StringComparison.OrdinalIgnoreCase))
@@ -881,6 +910,9 @@ class Randomization
                 //Console.WriteLine("Previously Was Suit");
                 targetInt = randomNumber.Next(lineCount);
                 targetChosen = targetList[targetInt];
+                targetChosen = CheckInvalidDisguises(ref targetChosen, ref targetInt, ref lineCount);
+                targetChosen = CheckUniqueDisguises(ref targetChosen, ref targetInt, ref lineCount);
+
             }
             if (targetChosen.Equals("Vampire Magician"))
             {
@@ -916,7 +948,7 @@ class Randomization
             }
             if (targetChosen.Equals("Knight's Armour"))
             {
-                targetChosen = ("Jebediah Block");
+                targetChosen = ("Elite Guard");
             }
             if (targetChosen.Equals("Gas Suit"))
             {
@@ -928,7 +960,7 @@ class Randomization
             }
             if (targetChosen.Equals("Skydiving Suit"))
             {
-                targetChosen = ("Helicopter Pilot");
+                targetChosen = ("Event Staff");
             }
             if (targetChosen.Equals("Rave On Suit"))
             {
@@ -936,7 +968,7 @@ class Randomization
             }
             if (targetChosen.Equals("47's Signature Suit with Gloves"))
             {
-                targetChosen = ("Don Yates");
+                targetChosen = ("Gaucho");
             }
             if (targetChosen.Equals("The Buccaneer"))
             {
@@ -948,7 +980,7 @@ class Randomization
             }
             if (targetChosen.Equals("Burial Robes"))
             {
-                targetChosen = ("Butler");
+                targetChosen = ("Architect");
             }
 
             return targetChosen;
