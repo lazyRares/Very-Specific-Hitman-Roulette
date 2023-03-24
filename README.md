@@ -5,14 +5,17 @@ A randomizer for making Hitman Contracts that's very specific. It will draw kill
 ## This Roulette isn't for main missions. Only Contracts.
 
 Features
-- Accounts for Mastery with kills.
+- Accounts for Mastery and owned DLC's with kills.
 - Saves your Mastery so you don't have to re-input each time
 - Able to manually choose how many targets you want, can go up to 10.
 - Generalized targets to allow players to choose whoever they'd like in their contract.
 
 # USE:
 
-To use this randomizer you need to first install Visual Studio Code 2022, then launch and open the SLN for HitmanRoulette in Visual Studio. Then simply just run the program at the top and wait.
+Head to HitmanRoulette\HitmanRoulette\bin\Debug\net6.0\
+and launch HitmanRoulette.exe
+
+This will launch the roulette, and that's it, you've got it working!
 
 Now, you will be asked to either create a profile or not. Included with the Github release are two profiles: "Snail", and "The Mafia" which is mine and AgentSnail's mastery levels respectively. You can type "Y" or "N" to either create or use an existing profile.
 
@@ -22,4 +25,4 @@ Then the randomizer will ask you how many target's you'd like, this can be any n
 
 Now it will randomize and give you that many target's, drawing kill conditions from the map it chose and also possible items you can bring with you at your current mastery. For example, if Mendoza was chosen, you might be asked to kill a Guard with the wine press, or with an Iceballer.
 
-The system is not foolproof however, certain items like the Golden Shaska A33 or any other weapon that is unlockable at any time (Not restricted to mastery) may be chosen as a kill condition regardless if the player has them. There also may be scenarios where you need to either kill a unique NPC twice, or kill that NPC wearing their own unique disguise. This happens alot with Sapienza - The Author, where Craig Black may be requested to be killed twice. If this happens you can re-spin. Another scenario is being asked to kill an NPC in a way that requires them awake while wearing their disguise. You can get past this by allowing a guard to find the unconscius NPC, allowing them to wake-up, which then lets you fiber wire them or whatever was requested.
+NOTE: Spins above 5 targets are usually volatile and you won't be guranteed a functioning spin. It might contain both of the bugs mentioned above or something else stupid. Either re-spin or try a smaller number.
