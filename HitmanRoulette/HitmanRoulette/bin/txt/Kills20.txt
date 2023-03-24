@@ -1,22 +1,23 @@
 Bartoli 75R
-Bartoli 75S
+Hackl 9S
 Hackl 9S Covert
-HX-10
-Tactical Bartoli 12G
-Barber Razor
-Cleaver
-Earphones
+"Rude Ruby"
+DAK X2
+DAK X2 Covert
+HX-7 Covert
+Fusil G1-4
+Fusil G2
+RS-15
+TAC-4 AR Auto
+Battle Axe
+Beak Staff
 Fire Axe
-Folding Knife
-Jarl's Pirate Saber
+Hatchet
 Kitchen Knife
 Letter Opener
-Machete
-Scalpel
 Scissors
 Screwdriver
-Seashell
-Starfish
-Stethoscope
+Car Bomb
+Remote CX Demo Block
 Lethal Poisonous Frog
-Lethal Poison Pill Jar
+Lethal Pills

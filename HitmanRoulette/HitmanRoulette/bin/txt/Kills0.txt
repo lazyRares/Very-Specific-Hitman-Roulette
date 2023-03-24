@@ -1,14 +1,5 @@
-Shashka A33
-ICA19
+ICA Remote Explosive
+Fusil G2
+Tactical Bartoli 12G
 Bartoli 75R
-Accidental Fall
-Falling Object
-Accidental Explosion
-Exploding Vehicle
-Drowning
-Pistol Elimination
-Assault Rifle
-Pistol
-Loud Assault Rifle
-Loud Pistol
-Any Method
+ICA19

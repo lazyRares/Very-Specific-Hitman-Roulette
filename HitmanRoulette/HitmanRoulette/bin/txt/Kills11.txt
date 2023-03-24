@@ -1,11 +1,13 @@
 Bartoli 75R
-HX-7
-Tactical Bartoli 12G
+Bartoli 75S
+Fusil G2
+Amputation Knife
+Circumcision Knife
 Cleaver
 Fire Axe
+Hatchet
 Katana
 Kitchen Knife
-Scalpel
-Scissors
+Letter Opener
+Sapper's Axe
 Screwdriver
-Car Bomb

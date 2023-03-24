@@ -1,14 +1,19 @@
-Art Crew
-Event Security
+Architect
+Ark Member
+Blake Nathaniel
+Burial Robes
+Butler
+Castle Staff
+Chef
+Custodian
+Elite Guard
+Entertainer
 Event Staff
-Famous Chef
-Helicopter Pilot
-Ingram's Bodyguard
-Kitchen Staff
-Maintenance Staff
-Penthouse Guard
-Penthouse Staff
-The Assassin
-Skydiving Suit
+Guard
+Initiate
+Jebediah Block
+Knight's Armour
+Master of Ceremonies
+Raider
 Suit
 Any Disguise

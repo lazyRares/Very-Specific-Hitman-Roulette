@@ -1,23 +1,15 @@
 Bartoli 75R
+Hackl 9R
 Hackl 9S
-Hackl 9S Covert
-"Rude Ruby"
-DAK X2
-DAK X2 Covert
-HX-7 Covert
-Fusil G1-4
-Fusil G2
-RS-15
-TAC-4 AR Auto
+HX-10
+Tactical Bartoli 12G
+Amputation Knife
 Battle Axe
-Beak Staff
+Cleaver
 Fire Axe
-Hatchet
 Kitchen Knife
-Letter Opener
+Old Axe
 Scissors
 Screwdriver
+Starfish
 Car Bomb
-Remote CX Demo Block
-Lethal Poisonous Frog
-Lethal Pills

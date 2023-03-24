@@ -1,17 +1,6 @@
-47's Signature Suit with Gloves
-Asado Chef
 Bodyguard
-Chief Winemaker
-Corvo Black
-Gaucho
-Head of Security
-Lawyer
-Mercenary
-Providence Herald
-Sommelier
-Tactical Wetsuit
-Tango Musician
-Waiter
-Winery Worker
+Gardener
+Mansion Guard
+Mansion Staff
 Suit
 Any Disguise

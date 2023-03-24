@@ -1,9 +1,13 @@
-Cook
-Engineer
-Hippie
-Metal Worker
-Militia Soldier
-Pirate
-The Buccaneer
+Rave On Suit
+Bartender
+Biker
+Club Crew
+Club Security
+Dealer
+Delivery Guy
+DJ
+Florida Man
+Rolf Hirschmüller
+Technician
 Suit
 Any Disguise

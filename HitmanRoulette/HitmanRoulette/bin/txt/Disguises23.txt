@@ -1,6 +1,20 @@
+Boat Captain
 Bodyguard
-Gardener
-Mansion Guard
-Mansion Staff
+Butler
+Chef
+Doctor
+Gas Suit
+Life Guard
+Masseur
+Personal Trainer
+Resort Guard
+Resort Staff
+Snorkel Instructor
+Swimwear
+Tech Crew
+Villa Guard
+Villa Staff
+Waiter
+The Tropical Islander
 Suit
 Any Disguise

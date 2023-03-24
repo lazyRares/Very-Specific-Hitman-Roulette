@@ -1,17 +1,27 @@
+Biolab Security
 Bodyguard
 Hippie
-Brother Akram
-Craig Black
+Butler
 Church Staff
+Cyclist
+Delivery Man
+Dr. Oscar Lafayette
 Gardener
 Green Plumber
+Hazmat Suit
 Housekeeper
 Kitchen Assistant
+Lab Technician
 Mansion Chef
+Mansion Security
+Mansion Staff
+Plague Doctor
+Priest
+Private Detective
 Red Plumber
-Salvatore Bravuomo
-SFX Crew
-Super Fan
+Roberto Vargas
+Store Clerk
+Street Performer
 Waiter
 Suit
 Any Disguise

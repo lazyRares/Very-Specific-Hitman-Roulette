@@ -1,13 +1,12 @@
 Bartoli 75R
-Fusil G1-4
-HX-7
-HX-10
+Bartoli 75S
+Fusil G2
 Bartoli 12G
-Tactical Bartoli 12G
 Cleaver
+Fire Axe
+Hatchet
+Katana
 Kitchen Knife
-Old Axe
+Letter Opener
+Sapper's Axe
 Screwdriver
-Nitroglycerin
-Fire
-Wicker Man Fire

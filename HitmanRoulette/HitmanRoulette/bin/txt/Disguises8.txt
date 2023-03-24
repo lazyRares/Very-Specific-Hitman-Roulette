@@ -1,13 +1,19 @@
-Abel de Silva
-Exterminator
-Groundskeeper
-Hotel Security
-Hotel Staff
-Jordan Cross' Bodyguard
-Kitchen Staff
-Morgan's Bodyguard
-Recording Crew
-Stalker
+Bodyguard
+Cameraman
+Consulate Intern
+Consulate Janitor
+Consulate Security
+Food Vendor
+Fortune Teller
+Handyman
+Headmaster
+Local Printing Crew
+Masseur
+Military Officer
+Military Soldier
+Military Elite Soldier
+Prisoner
+Shopkeeper
 Waiter
 Suit
 Any Disguise

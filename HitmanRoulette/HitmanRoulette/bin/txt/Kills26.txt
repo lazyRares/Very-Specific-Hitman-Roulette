@@ -1,29 +1,8 @@
-Bartoli 75S
+Bartoli 75R
 Bartoli Hunting Shotgun
-Bartoli Woodsman Hunting Rifle
-Hackl 9R
-Hackl 9S Covert
-HX-7 Covert
-Sieger 300 Tactical
-Sieger AR552 Tactical
-Broadsword
-Fire Axe
-Fishing Line
 Garden Fork
-Grape Knife
 Hatchet
-Hobby Knife
-Icicle
-Jarl's Pirate Saber
-Kitchen Knife
-Machete
-Old Axe
-Sapper's Axe
 Screwdriver
 Shears
-Remote CX Demo Block MK II
-Lethal Poison Pill Jar
-Cannon
-Grape Crusher
-Grape Shredder
-Wine Vat
+Unicorn Horn
+Garden Shredder

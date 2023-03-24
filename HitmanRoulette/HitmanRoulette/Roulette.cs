@@ -3,20 +3,41 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-public class Roulette
+class Roulette
 {
     public static void Main(String[] args)
     {
-        Console.WriteLine("Do You Want To See Your Profile, Or Create One? (Y/N)");
-        string answerProfile = Console.ReadLine();
 
-        if (answerProfile.Equals("Y", StringComparison.OrdinalIgnoreCase))
+        bool finished = false;
+
+        while (finished == false)
         {
-            MasteryAndContent mastery = new MasteryAndContent();
-            mastery.AskInfo();
-        }
+            Console.WriteLine("Would You Like To Spin ? (Y/N)");
+            String spinInput = Console.ReadLine();
 
-        Randomization randomizer = new Randomization();
-        randomizer.ChooseSpin();
+            if (spinInput.Equals("Y", StringComparison.OrdinalIgnoreCase))
+            {
+                Console.WriteLine("Do You Want To See Your Profile, Or Create One? (Y/N)");
+                string answerProfile = Console.ReadLine();
+
+                if (answerProfile.Equals("Y", StringComparison.OrdinalIgnoreCase))
+                {
+                    MasteryAndContent mastery = new MasteryAndContent();
+                    mastery.AskInfo();
+                }
+
+                Randomization randomizer = new Randomization();
+                randomizer.ChooseSpin();
+            }
+            else
+            {
+                finished = true;
+            }
+         }
+        if (finished == true)
+        {
+            Console.WriteLine("Thanks For Playing!");
+            Environment.Exit(2);
+        }
     }
 }

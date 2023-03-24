@@ -1,14 +1,28 @@
 Bartoli 75R
-Cleaver
-DAK DTI
-Fire Axe
-Folding Knife
 Hackl 9S Covert
-HX-10
+DAK X2 Covert
+HX-7
+Fusil G1-4
+Fusil G2
+Tactical Bartoli 12G
+Aztec Necklace
+Battle Axe
+Burial Dagger
+Circumcision Knife
+Cleaver
+Hatchet
+Katana
 Kitchen Knife
-Lethal Poison Pill Jar
 Letter Opener
-Ornate Scimitar
-Scissors
+Old Axe
+Saber
+Sacrificial Knife
+Sapper's Axe
+Scalpel
 Screwdriver
-Shaskha A33 Covert
+Viking Axe
+Broadsword
+Nitroglycerin
+Botulinum Toxin
+Portcullis
+Gibbet

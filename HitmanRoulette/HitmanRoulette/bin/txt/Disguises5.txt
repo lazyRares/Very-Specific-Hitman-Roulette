@@ -1,15 +1,6 @@
-Bodyguard
-Hippie
-Church Staff
-Gardener
-Green Plumber
 Kitchen Assistant
-Photographer
-Priest
-Red Plumber
-Salvatore Bravuomo
+Movie Crew
 Security
-Stage Crew
-Waiter
+SFX Crew
 Suit
 Any Disguise

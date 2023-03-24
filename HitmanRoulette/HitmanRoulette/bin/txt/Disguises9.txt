@@ -1,13 +1,9 @@
-Cult Bodyguard
-Cult Initiate
-Exterminator
-Groundskeeper
-Hotel Security
-Hotel Staff
-Jordan Cross' Bodyguard
-Kitchen Staff
-Militia Soldier
-Recording Crew
+Bodyguard
+Food Vendor
+Fortune Teller
+Handyman
+Soldier
+Shopkeeper
 Waiter
 Suit
 Any Disguise

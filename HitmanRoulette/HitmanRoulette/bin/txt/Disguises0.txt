@@ -1,6 +1,7 @@
-KGB Officer
-Airplane Mechanic
-Soviet Soldier
-Airfield Security
+Bodyguard
+Mechanic
+Terry Norfolk
 Suit
+Yacht Crew
+Yacht Security
 Any Disguise

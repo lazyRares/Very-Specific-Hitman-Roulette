@@ -1,28 +1,25 @@
-Bartoli 75R
+"El Matador"
+Bartoli 75S
+Bartoli 12G
+DAK X2
 Hackl 9S Covert
-DAK X2 Covert
-HX-7
-Fusil G1-4
-Fusil G2
-Tactical Bartoli 12G
-Aztec Necklace
+Shashka A33
+Shashka A33 Gold
+Barber Razor
 Battle Axe
-Burial Dagger
-Circumcision Knife
 Cleaver
-Hatchet
-Katana
+Folding Knife
 Kitchen Knife
 Letter Opener
-Old Axe
-Saber
+Machete
 Sacrificial Knife
-Sapper's Axe
-Scalpel
+Scissors
 Screwdriver
-Viking Axe
-Broadsword
-Nitroglycerin
-Botulinum Toxin
-Portcullis
-Gibbet
+Hippo
+Falling Statue
+Cement Mixer
+Cocaine Machine
+Letterbomb Parcel
+Lethal Poisonous Frog
+Poisonous Flower (Lethal)
+Fire

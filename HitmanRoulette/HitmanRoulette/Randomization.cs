@@ -15,6 +15,7 @@ class Randomization
     List<String> previousTarget = new List<String>();
 
     int killsIssued = 0;
+    int killsMastery = 0;
 
     Random randomNumber = new Random();
     public void ChooseSpin()
@@ -22,15 +23,38 @@ class Randomization
         string mapChosen = "";
         StreamReader readerMaps = new StreamReader($"../../txt/AllMaps.txt");
 
-        for (int i = 0; i < 28; i++)
+        for (int i = 0; i < 31; i++)
         {
             String data = readerMaps.ReadLine();
             mapsList.Add(data);
         }
 
-        int mapInt = randomNumber.Next(27);
-        mapChosen = mapsList[mapInt];
-        
+        Console.WriteLine("Would You Like To Choose a map? (Y/N)");
+        String manualMap = Console.ReadLine();
+
+        int mapInt = 0;
+
+        if (manualMap.Equals("Y", StringComparison.OrdinalIgnoreCase))
+        {
+
+            Console.WriteLine("Which Map Would You Like? Type the respective number");
+            Console.WriteLine("Available Maps are: \n");
+
+            for (int i = 0; i < 31; i++)
+            {
+                Console.WriteLine($"{i}: {mapsList[i]}");
+            }
+
+            Console.WriteLine("\n");
+
+            mapInt = Convert.ToInt32(Console.ReadLine());
+            mapChosen = mapsList[mapInt];
+        }
+        if (manualMap.Equals("N", StringComparison.OrdinalIgnoreCase))
+        {
+            mapInt = randomNumber.Next(27);
+            mapChosen = mapsList[mapInt];
+        }
         Console.WriteLine($"\nThe Map Chosen Was {mapChosen}!");
 
         //RANDOM KILLS
@@ -63,6 +87,7 @@ class Randomization
         string username = mastery.Username();
         int additions = 0;
         int counterMap = 0;
+        
         masteryList = mastery.ReturnMastery(username);
 
         while (killsIssued < targetAmount)
@@ -73,8 +98,17 @@ class Randomization
             if (broadOrNotint == 1)
             {
                 broadOrNot = true;
+                killsMastery++;
             }
             else
+            {
+                broadOrNot = false;
+            }
+            if (mapInt == 1 || mapInt == 0)
+            {
+                broadOrNot = false;
+            }
+            if (killsMastery > 4)
             {
                 broadOrNot = false;
             }
@@ -84,7 +118,7 @@ class Randomization
             if (broadOrNot == true)
             {
 
-                for (int i = 0; i < 46; i++)
+                for (int i = 0; i < 21; i++)
                 {
                     String data = readerKillsBroad.ReadLine();
                     killsList.Add(data);
@@ -681,6 +715,8 @@ class Randomization
 
                 bool sevenDeadly = contentList[0];
                 bool deluxe = contentList[1];
+                bool concreteArt = contentList[2];
+                bool makeshiftPack = contentList[3];
 
                 if (sevenDeadly == true)
                 {
@@ -694,6 +730,25 @@ class Randomization
                     killsList.Add("The Shashka Beast");
                     additions = additions + 8;
                 }
+                if (concreteArt == true)
+                {
+                    killsList.Add("The Concrete Bunny Pistol");
+                    killsList.Add("The Concrete Shotgun");
+                    killsList.Add("The Shark SMG");
+                    killsList.Add("The Concrete Assault Rifle");
+                    killsList.Add("The Concrete Sniper Rifle");
+                    additions = additions + 5;
+                }
+                if (makeshiftPack == true)
+                {
+                    killsList.Add("The Makeshift Katana");
+                    killsList.Add("The Scrap Gun");
+                    killsList.Add("The Makeshift Scrap Shotgun");
+                    killsList.Add("The Scrap SMG");
+                    killsList.Add("The Makeshift Scrap Assault Rifle");
+                    killsList.Add("The Scrappy Sniper Rifle");
+                    additions = additions + 5;
+                }
                 if (deluxe == true)
                 {
                     killsList.Add("DAK Gold Covert");
@@ -704,17 +759,50 @@ class Randomization
                     additions = additions + 5;
                 }
 
-                int killChosenInt = randomNumber.Next(45 + additions);
+                killsList.Add("Sieger 300 Ghost");
+                killsList.Add("Floral Baller");
+                killsList.Add("Fiber Wire Classic");
+                killsList.Add("ICA Bartoli Woodsman Hunting Rifle Covert");
+                killsList.Add("TAC-4 AR Desert");
+                killsList.Add("Earphones");
+                killsList.Add("ICA19");
+                killsList.Add("ICA19 Classicballer");
+                killsList.Add("TAC-4 S/A Jungle");
+                killsList.Add("Measuring Tape");
+                killsList.Add("Krugermeier 2-2 Dark");
+                killsList.Add("Sieger AR552 Tactical");
+                killsList.Add("Striker V3");
+                killsList.Add("The Ducky Gun");
+                killsList.Add("The Iridescent Katana");
+                killsList.Add("The White Ruby Rude 300 Sniper Rifle");
+                killsList.Add("IO Elite S2VP Earphones");
+                killsList.Add("Piton");
+                killsList.Add("Quickdraw");
+                killsList.Add("Ice Pick");
+                killsList.Add("Nitroglycerin");
+                killsList.Add("Remote Explosive Present");
+                killsList.Add("Ancestral Fountain Pen");
+                killsList.Add("ICA19 Iceballer");
+                killsList.Add("Shashka A33 Gold");
+                killsList.Add("Explosive Pen");
+                killsList.Add("Proffesional Screwdriver");
+                additions = additions + 27;
+
+                int killChosenInt = randomNumber.Next(21 + additions);
                 String killChosen = killsList[killChosenInt];
 
-                if (killChosen == null || killChosen.Equals(""))
+                if (killChosen == null || killChosen.Equals("") || killChosen.Equals("Suit")) 
                 {
-                    killChosen = "Any Method";
+                    while (killChosen == null || killChosen.Equals("") || killChosen.Equals("Suit"))
+                    {
+                        killChosenInt = randomNumber.Next(21 + additions);
+                        killChosen = killsList[killChosenInt];
+                    }
                 }
 
                 Targets();
                 Console.WriteLine($"With The Method '{killChosen}'");
-                Disguises();  
+                Disguises();
 
                 killsIssued++;
             }
@@ -762,11 +850,7 @@ class Randomization
 
         void Targets()
         {
-            StreamReader readerUnique = new StreamReader($"../../txt/UniqueKills.txt");
-            List<String> uniqueList = new List<String>();
-
             int lineCount = File.ReadLines($"../../txt/Disguises{mapInt}.txt").Count();
-            int lineCountUnique  = File.ReadLines($"../../txt/UniqueKills.txt").Count();
 
             for (int i = 0; i < lineCount; i++)
             {
@@ -774,16 +858,29 @@ class Randomization
                 targetList.Add(data);
             }
 
+            int targetInt = randomNumber.Next(lineCount);
+            String targetChosen= targetList[targetInt];
+
+            targetChosen = CheckInvalidDisguises(ref targetChosen, ref targetInt, ref lineCount);
+            targetChosen = CheckUniqueDisguises(ref targetChosen, ref targetInt, ref lineCount);
+
+            previousTarget.Add(targetChosen);
+
+            Console.WriteLine($"Eliminate '{targetChosen}'");
+        }
+
+        string CheckUniqueDisguises(ref string targetChosen, ref int targetInt, ref int lineCount)
+        {
+            int lineCountUnique = File.ReadLines($"../../txt/UniqueKills.txt").Count();
+
+            StreamReader readerUnique = new StreamReader($"../../txt/UniqueKills.txt");
+            List<String> uniqueList = new List<String>();
+
             for (int i = 0; i < lineCountUnique; i++)
             {
                 String data = readerUnique.ReadLine();
                 uniqueList.Add(data);
             }
-
-            int targetInt = randomNumber.Next(lineCount);
-            String targetChosen= targetList[targetInt];
-            
-            targetChosen = CheckInvalidDisguises(ref targetChosen);
 
             for (int i = 0; i < previousTarget.Count(); i++)
             {
@@ -791,27 +888,31 @@ class Randomization
                 {
                     for (int j = 0; j < lineCountUnique; j++)
                     {
-                        if (targetChosen.Equals(uniqueList[i]))
+                        if (targetChosen.Equals(uniqueList[j]))
                         {
+                            //Console.WriteLine("Unique Duplicate!");
                             targetInt = randomNumber.Next(lineCount);
                             targetChosen = targetList[targetInt];
+                            targetChosen = CheckInvalidDisguises(ref targetChosen, ref targetInt, ref lineCount);
+                            targetChosen = CheckUniqueDisguises(ref targetChosen, ref targetInt, ref lineCount);
+                            return targetChosen;
                         }
                     }
                 }
             }
-
-            previousTarget.Add(targetChosen);
-
-
-
-            Console.WriteLine($"Eliminate '{targetChosen}'");
+            return targetChosen;
         }
 
-        string CheckInvalidDisguises(ref string targetChosen)
+        string CheckInvalidDisguises(ref string targetChosen, ref int targetInt, ref int lineCount)
         {
             if (targetChosen.Equals("Suit", StringComparison.OrdinalIgnoreCase) || targetChosen.Equals("Any Disguise", StringComparison.OrdinalIgnoreCase))
             {
-                targetChosen = ("Anyone");
+                //Console.WriteLine("Previously Was Suit");
+                targetInt = randomNumber.Next(lineCount);
+                targetChosen = targetList[targetInt];
+                targetChosen = CheckInvalidDisguises(ref targetChosen, ref targetInt, ref lineCount);
+                targetChosen = CheckUniqueDisguises(ref targetChosen, ref targetInt, ref lineCount);
+
             }
             if (targetChosen.Equals("Vampire Magician"))
             {
@@ -827,11 +928,11 @@ class Randomization
             }
             if (targetChosen.Equals("Baseball Player"))
             {
-                targetChosen = ("Helicopter Pilot");
+                targetChosen = ("Patient");
             }
             if (targetChosen.Equals("Motorcyclist"))
             {
-                targetChosen = ("Agent Smith");
+                targetChosen = ("Gardener");
             }
             if (targetChosen.Equals("Ninja"))
             {
@@ -843,11 +944,11 @@ class Randomization
             }
             if (targetChosen.Equals("Arkian Robe"))
             {
-                targetChosen = ("Janus");
+                targetChosen = ("Civillian");
             }
             if (targetChosen.Equals("Knight's Armour"))
             {
-                targetChosen = ("Jebediah Block");
+                targetChosen = ("Elite Guard");
             }
             if (targetChosen.Equals("Gas Suit"))
             {
@@ -859,7 +960,7 @@ class Randomization
             }
             if (targetChosen.Equals("Skydiving Suit"))
             {
-                targetChosen = ("Helicopter Pilot");
+                targetChosen = ("Event Staff");
             }
             if (targetChosen.Equals("Rave On Suit"))
             {
@@ -867,7 +968,7 @@ class Randomization
             }
             if (targetChosen.Equals("47's Signature Suit with Gloves"))
             {
-                targetChosen = ("Don Yates");
+                targetChosen = ("Gaucho");
             }
             if (targetChosen.Equals("The Buccaneer"))
             {
@@ -879,7 +980,7 @@ class Randomization
             }
             if (targetChosen.Equals("Burial Robes"))
             {
-                targetChosen = ("Butler");
+                targetChosen = ("Architect");
             }
 
             return targetChosen;

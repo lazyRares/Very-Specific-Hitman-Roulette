@@ -1,23 +1,6 @@
-Sieger 300 Ghost
-Floral Baller
-ICA19
-Fiber Wire Classic
-ICA19 Classicballer
-ICA Bartoli Woodsman Hunting Rifle Covert
-TAC-4 AR Desert
-Earphones
-TAC-4 S/A Jungle
-Measuring Tape
-Krugermeier 2-2 Dark
-Sieger AR552 Tactical
-Striker V3
-The Ducky Gun
-The Iridescent Katana
-The White Ruby Rude 300 Sniper Rifle
 Accidental Explosion
 Accidental Fall
 Electrocution
-IO Elite S2VP Earphones
 Falling Object
 Exploding Vehicle
 Drowning
@@ -36,11 +19,3 @@ Loud Pistol
 Loud Sniper Rifle
 Any Method
 Explosive Device
-Piton
-Quickdraw
-Ice Pick
-Nitroglycerin
-Remote Explosive Present
-Ancestral Fountain Pen
-ICA19 Iceballer
-Shashka A33 Gold

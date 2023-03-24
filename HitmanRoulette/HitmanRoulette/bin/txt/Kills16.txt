@@ -1,22 +1,14 @@
 Bartoli 75R
 Bartoli 75S
-DAK X2
-HX-10
-Bartoli 12G
+Hackl 9S Covert
+HX-7
 Tactical Bartoli 12G
-Fusil G2
-Shaskha A33
-Amputation Knife
-Barber Razor
-Beak Staff
+Fusil G1-4C
 Cleaver
-Fire Axe
 Folding Knife
-Letter Opener
-Measuring Tape
-Old Axe
-Saber
+Katana
+Kitchen Knife
 Scissors
 Screwdriver
-Druzhina 34 (The Kashmirian's)
-Crane
+Shuriken
+Fragmentation Grenade

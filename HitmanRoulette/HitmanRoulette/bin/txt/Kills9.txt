@@ -1,13 +1,10 @@
 Bartoli 75R
-Bartoli 75S
 Fusil G2
-Amputation Knife
-Circumcision Knife
+HX-10
+Tactical Bartoli 12G
+Battle Axe
 Cleaver
-Fire Axe
-Hatchet
-Katana
+Folding Knife
 Kitchen Knife
-Letter Opener
-Sapper's Axe
+Scissors
 Screwdriver

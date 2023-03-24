@@ -1,31 +1,20 @@
-Aeon Driver
-Aeon Mechanic
-Blue Seed Driver
-Crashed Driver Kronstadt
-Event Security
-Event Crew
-Florida Man
-Food Vendor
-Journalist
-Kitchen Staff
-Kowoon Driver
-Kowoon Mechanic
-Kronstadt Engineer
-Kronstadt Mechanic
-Kronstadt Researcher
-Kronstadt Security
-Mascot
-Medic
-Moses Lee
-Pale Rider
-Race Coordinator
-Race Marshal
-Sheikh
-Sotteraneo Mechanic
-Street Musician
-Ted Mendez
-Thwack Driver
-Thwack Mechanic
-Waiter
+Baseball Player
+Bodyguard
+Chef
+Chief Surgeon
+Doctor
+Handyman
+Helicopter Pilot
+Hospital Director
+Morgue Doctor
+Motorcyclist
+Ninja
+Patient
+Resort Security
+Resort Staff
+Surgeon
+VIP Patient (Amos Dexter)
+VIP Patient (Jason Portman)
+Yoga Instructor
 Suit
 Any Disguise

@@ -1,6 +1,22 @@
 Bartoli 75R	
-Kitchen Knife
+Bartoli 75S	
+HX-10	
+Bartoli 12G	
+Tactical Bartoli 12G
+Amputation Knife		
+Battle Axe	
+Circumcision Knife	
+Combat Knife	
+Fire Axe	
+Folding Knife		
+Hatchet	
+Katana	
+Kitchen Knife	
+Letter Opener	
+Old Axe		
+Saber	
 Scissors
-Screwdriver
+Screwdriver	
+Falling Stalactite
 Church Bell
-
+Cannon

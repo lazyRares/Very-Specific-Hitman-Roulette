@@ -1,19 +1,11 @@
-Bio Suit
-Bodyguard
-Chef
-Doctor
-Handyman
-Head Researcher
-Helicopter Pilot
-Hospital Director
-Morgue Doctor
-Motorcyclist
-Patient
-Resort Security
-Resort Staff
-Surgeon
-VIP Patient
-VIP Patient (Dexter)
-Yoga Instructor
+Explosives Specialist
+Hacker
+Militia Cook
+Militia Elite
+Militia Spec Ops
+Militia Soldier
+Militia Technician
+Point Man
+Scarecrow
 Suit
 Any Disguise

@@ -1,11 +1,13 @@
-Explosives Specialist
-Hacker
-Militia Cook
-Militia Elite
-Militia Spec Ops
-Militia Soldier
-Militia Technician
-Point Man
-Scarecrow
+Abel de Silva
+Exterminator
+Groundskeeper
+Hotel Security
+Hotel Staff
+Jordan Cross' Bodyguard
+Kitchen Staff
+Morgan's Bodyguard
+Recording Crew
+Stalker
+Waiter
 Suit
 Any Disguise

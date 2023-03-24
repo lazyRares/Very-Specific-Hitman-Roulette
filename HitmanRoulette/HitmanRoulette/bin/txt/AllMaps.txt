@@ -1,5 +1,7 @@
-ICA Facility
+ICA Facility - Yacht
+ICA Facility - Final Test
 Paris
+Paris - Holiday Hoarders
 Sapienza
 Sapienza - The Icon
 Sapienza - The Author
@@ -10,6 +12,7 @@ Bangkok
 Bangkok - The Source
 Colorado
 Hokkaido
+Hokkaido - Snow Festival
 Hokkaido - Patient Zero
 Hawke's Bay
 Miami

@@ -1,20 +1,19 @@
-Barman
+Bio Suit
+Bodyguard
 Chef
-Coca Field Guard
-Coca Field Worker
-Construction Worker
-Drug Lab Worker
-Drummer
-Elite Guard
-Gardener
-Hippie
-Hippo Whisperer
-Mansion Guard
-Mansion Staff
-Shaman
-Street Soldier
-Submarine Crew
-Submarine Engineer
-Tattooist
+Doctor
+Handyman
+Head Researcher
+Helicopter Pilot
+Hospital Director
+Morgue Doctor
+Motorcyclist
+Patient
+Resort Security
+Resort Staff
+Surgeon
+VIP Patient (Amos Dexter)
+VIP Patient (Jason Portman)
+Yoga Instructor
 Suit
 Any Disguise

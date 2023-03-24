@@ -1,3 +1,20 @@
+Baseball Player
 Bodyguard
+Chef
+Chief Surgeon
+Doctor
+Handyman
+Helicopter Pilot
+Hospital Director
+Morgue Doctor
+Motorcyclist
+Ninja
+Patient
+Resort Security
+Resort Staff
+Surgeon
+VIP Patient (Amos Dexter)
+VIP Patient (Jason Portman)
+Yoga Instructor
 Suit
 Any Disguise

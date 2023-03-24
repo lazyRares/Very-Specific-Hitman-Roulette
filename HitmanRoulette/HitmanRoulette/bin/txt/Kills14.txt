@@ -1,15 +1,11 @@
 Bartoli 75R
-Hackl 9R
-Hackl 9S
-HX-10
+HX-7
 Tactical Bartoli 12G
-Amputation Knife
-Battle Axe
 Cleaver
 Fire Axe
+Katana
 Kitchen Knife
-Old Axe
+Scalpel
 Scissors
 Screwdriver
-Starfish
 Car Bomb

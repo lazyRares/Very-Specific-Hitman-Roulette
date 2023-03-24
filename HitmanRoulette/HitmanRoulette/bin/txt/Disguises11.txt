@@ -1,20 +1,13 @@
-Baseball Player
-Bodyguard
-Chef
-Chief Surgeon
-Doctor
-Handyman
-Helicopter Pilot
-Hospital Director
-Morgue Doctor
-Motorcyclist
-Ninja
-Patient
-Resort Security
-Resort Staff
-Surgeon
-VIP Patient (Dexter)
-VIP Patient (Portman)
-Yoga Instructor
+Cult Bodyguard
+Cult Initiate
+Exterminator
+Groundskeeper
+Hotel Security
+Hotel Staff
+Jordan Cross' Bodyguard
+Kitchen Staff
+Militia Soldier
+Recording Crew
+Waiter
 Suit
 Any Disguise

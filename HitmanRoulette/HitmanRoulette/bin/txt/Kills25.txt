@@ -1,22 +1,19 @@
 Bartoli 75R
-Bartoli 75S
-Fusil X2000 Stealth
-Hackl 9S
-Hackl 9S Covert
-Hackl Leviathan Sniper Rifle Covert
-HX-7 Covert
-ICA SMG Raptor
-ICA SMG Raptor Covert
+Bartoli Hunting Shotgun
+HX-10
 Tactical Bartoli 12G
+Barber Razor
 Cleaver
-Fire Axe
+Folding Knife
 Garden Fork
-Hobby Knife
+Hatchet
 Kitchen Knife
 Letter Opener
+Saber
 Scissors
-Scrap Sword
 Screwdriver
-Stethoscope
-Tanto
-Lethal Posion Pill Jar
+Shears
+Unicorn Horn
+Lethal Poison Pill Jar
+Lethal Posion Vial
+Garden Shredder

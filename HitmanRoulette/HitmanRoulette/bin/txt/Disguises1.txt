@@ -1,12 +1,6 @@
-Auction Staff
-Chef
-CICADA Bodyguard
-Helmut Kruger
-Palace Staff
-Security Guard
-Stylist
-Sheikh
-Tech Crew
-Vampire Magician
+KGB Officer
+Airplane Mechanic
+Soviet Soldier
+Airfield Security
 Suit
 Any Disguise

@@ -20,6 +20,8 @@ class MasteryAndContent
 
         bool sevenDeadly = false;
         bool deluxe = false;
+        bool concreteArt = false;
+        bool makeshiftPack = false;
 
 
         if (File.Exists($"../../txt/Profiles/{username}_Content.txt"))
@@ -42,6 +44,14 @@ class MasteryAndContent
                 if (counter == 2)
                 {
                     contentType = "Hitman 3 Deluxe Edition";
+                }
+                if (counter == 3)
+                {
+                    contentType = "Concrete Art Content Pack";
+                }
+                if (counter == 4)
+                {
+                    contentType = "Makeshift Weaponry Content Pack";
                 }
 
                 contentList.Add(dataBool);
@@ -74,12 +84,39 @@ class MasteryAndContent
                 deluxe = false;
             }
 
+            Console.WriteLine("Do you have the Street Art Weapon Pack? (Y/N)");
+            string concreteString = Console.ReadLine();
+
+            if (concreteString.Equals("Y", StringComparison.OrdinalIgnoreCase))
+            {
+                concreteArt = true;
+            }
+            else
+            {
+                concreteArt = false;
+            }
+
+            Console.WriteLine("Do you have the Makeshift Weapon Pack? (Y/N)");
+            string makeshiftString = Console.ReadLine();
+
+            if (makeshiftString.Equals("Y", StringComparison.OrdinalIgnoreCase))
+            {
+                makeshiftPack = true;
+            }
+            else
+            {
+                makeshiftPack = false;
+            }
+
+
             for (int i = 0; i < 2; i++)
             {
                 StreamWriter writerContent = new StreamWriter($"../../txt/Profiles/{username}_Content.txt");
 
                 writerContent.WriteLine(sevenDeadly);
                 writerContent.WriteLine(deluxe);
+                writerContent.WriteLine(concreteArt);
+                writerContent.WriteLine(makeshiftPack);
 
                 writerContent.Close();
             }
@@ -155,7 +192,7 @@ class MasteryAndContent
         List<bool> contentList = new List<bool>();
         StreamReader readerContent = new StreamReader($"../../txt/Profiles/{usernamePassed}_Content.txt");
 
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < 4; i++)
         {
             string data = readerContent.ReadLine();
             bool dataBool = Convert.ToBoolean(data);

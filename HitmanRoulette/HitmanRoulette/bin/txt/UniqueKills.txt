@@ -1,6 +1,8 @@
+Terry Norfolk
 KGB Officer
 Doctor
 Helmut Kruger
+Santa
 Kitchen Staff
 Sheikh
 Hippie
@@ -76,6 +78,8 @@ Butler
 Jebediah Block
 Master of Ceremonies
 Fired Banker
+IT Worker
+Bank Robber
 Job Applicant
 Boat Captain
 Famous Chef
@@ -84,6 +88,7 @@ The Assassin
 Private Investigator
 Undertaker
 Photographer
+Lawyer
 Delivery Guy
 Rolf Hirschmüller
 Perfect Test Subject

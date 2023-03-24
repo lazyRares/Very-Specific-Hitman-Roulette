@@ -1,10 +1,11 @@
-Bodyguard
-Gardener
-Lawyer
-Mansion Guard
-Mansion Staff
-Photographer
-Private Investigator
-Undertaker
+Bank Robber
+Bank Teller
+Fired Banker
+High Security Guard
+Investment Banker
+IT Worker
+Janitor
+Job Applicant
+Security Guard
 Suit
 Any Disguise

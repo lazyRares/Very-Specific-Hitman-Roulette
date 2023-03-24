@@ -1,19 +1,20 @@
-Architect
-Ark Member
-Blake Nathaniel
-Burial Robes
-Butler
-Castle Staff
+Barman
 Chef
-Custodian
+Coca Field Guard
+Coca Field Worker
+Construction Worker
+Drug Lab Worker
+Drummer
 Elite Guard
-Entertainer
-Event Staff
-Guard
-Initiate
-Jebediah Block
-Knight's Armour
-Master of Ceremonies
-Raider
+Gardener
+Hippie
+Hippo Whisperer
+Mansion Guard
+Mansion Staff
+Shaman
+Street Soldier
+Submarine Crew
+Submarine Engineer
+Tattooist
 Suit
 Any Disguise

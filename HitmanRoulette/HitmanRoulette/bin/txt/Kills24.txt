@@ -1,24 +1,14 @@
 Bartoli 75R
-Bartoli Hunting Shotgun
-Bartoli Woodsman Hunting Sniper
-DAK X2 Covert
-Hackl 9S Covert
-ICA SMG Raptor Covert
-Sawed Off Bartoli 12G
-Shashka A33
-Tactical Bartoli 12G
-Battle Axe
-Combat Knife
-Concealable Knife
+Cleaver
+DAK DTI
 Fire Axe
-Garden Fork
-Hobby Knife
+Folding Knife
+Hackl 9S Covert
+HX-10
 Kitchen Knife
-Old Axe
-Scrap Sword
+Lethal Poison Pill Jar
+Letter Opener
+Ornate Scimitar
+Scissors
 Screwdriver
-Remote Semtex Demo Block MK III
-Remote CX Demo Block
-Lethal Pills
-Modern Lethal Syringe
-Rave Climax
+Shaskha A33 Covert
