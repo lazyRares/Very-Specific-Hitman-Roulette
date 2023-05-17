@@ -42,7 +42,9 @@ class Randomization
 
             for (int i = 0; i < 31; i++)
             {
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine($"{i}: {mapsList[i]}");
+                Console.ForegroundColor = ConsoleColor.Gray;
             }
 
             Console.WriteLine("\n");
@@ -55,7 +57,11 @@ class Randomization
             mapInt = randomNumber.Next(27);
             mapChosen = mapsList[mapInt];
         }
-        Console.WriteLine($"\nThe Map Chosen Was {mapChosen}!");
+        
+        Console.Write($"\nThe Map Chosen Was ");
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine($"{mapChosen}!");
+        Console.ForegroundColor = ConsoleColor.Gray;
 
         //RANDOM KILLS
 
@@ -92,30 +98,30 @@ class Randomization
 
         while (killsIssued < targetAmount)
         {
-            int broadOrNotint = randomNumber.Next(2);
-            bool broadOrNot;
+            int broadint = randomNumber.Next(2);
+            bool broad;
 
-            if (broadOrNotint == 1)
+            if (broadint == 1)
             {
-                broadOrNot = true;
+                broad = true;
                 killsMastery++;
             }
             else
             {
-                broadOrNot = false;
+                broad = false;
             }
             if (mapInt == 1 || mapInt == 0)
             {
-                broadOrNot = false;
+                broad = false;
             }
             if (killsMastery > 4)
             {
-                broadOrNot = false;
+                broad = false;
             }
 
             //LISTS FOR CONDITIONS
 
-            if (broadOrNot == true)
+            if (broad == true)
             {
 
                 for (int i = 0; i < 21; i++)
@@ -124,7 +130,7 @@ class Randomization
                     killsList.Add(data);
                 }
 
-                for (int i = 0; i < 22; i++)
+                for (int i = 0; i < 23; i++)
                 {
                     int masteryLevel = masteryList[i];
 
@@ -708,6 +714,120 @@ class Randomization
                         }
 
                     }
+                    // FREELANCER
+                    if (counterMap == 22 & i == 22)
+                    {
+                        if (masteryLevel >= 60)
+                        {
+                            killsList.Add("The Ancestral Knife");
+                            killsList.Add("The Ancestral Sniper Rifle");
+                            killsList.Add("The Ancestral Assault Rifle");
+                            killsList.Add("The Ancestral Shotgun");
+                            killsList.Add("The Ancestral Pistol");
+                            killsList.Add("The Ornamental Sniper Rifle");
+                            killsList.Add("The Ornamental SMG");
+                            killsList.Add("The Ornamental Shotgun");
+                            killsList.Add("The Ornamental Katana");
+                            killsList.Add("The Ornamental Assault Rifle");
+                            killsList.Add("The Ornamental Pistol");
+                            additions = additions + 11;
+                        }
+                        else if (masteryLevel >= 55)
+                        {
+                            killsList.Add("The Ancestral Sniper Rifle");
+                            killsList.Add("The Ancestral Assault Rifle");
+                            killsList.Add("The Ancestral Shotgun");
+                            killsList.Add("The Ancestral Pistol");
+                            killsList.Add("The Ornamental Sniper Rifle");
+                            killsList.Add("The Ornamental SMG");
+                            killsList.Add("The Ornamental Shotgun");
+                            killsList.Add("The Ornamental Katana");
+                            killsList.Add("The Ornamental Assault Rifle");
+                            killsList.Add("The Ornamental Pistol");
+                            additions = additions + 10;
+                        }
+                        else if (masteryLevel >= 50)
+                        {
+                            killsList.Add("The Ancestral Assault Rifle");
+                            killsList.Add("The Ancestral Shotgun");
+                            killsList.Add("The Ancestral Pistol");
+                            killsList.Add("The Ornamental Sniper Rifle");
+                            killsList.Add("The Ornamental SMG");
+                            killsList.Add("The Ornamental Shotgun");
+                            killsList.Add("The Ornamental Katana");
+                            killsList.Add("The Ornamental Assault Rifle");
+                            killsList.Add("The Ornamental Pistol");
+                            additions = additions + 9;
+                        }
+                        else if (masteryLevel >= 45)
+                        {
+                            killsList.Add("The Ancestral Shotgun");
+                            killsList.Add("The Ancestral Pistol");
+                            killsList.Add("The Ornamental Sniper Rifle");
+                            killsList.Add("The Ornamental SMG");
+                            killsList.Add("The Ornamental Shotgun");
+                            killsList.Add("The Ornamental Katana");
+                            killsList.Add("The Ornamental Assault Rifle");
+                            killsList.Add("The Ornamental Pistol");
+                            additions = additions + 8;
+                        }
+                        else if (masteryLevel >= 40)
+                        {
+                            killsList.Add("The Ancestral Pistol");
+                            killsList.Add("The Ornamental Sniper Rifle");
+                            killsList.Add("The Ornamental SMG");
+                            killsList.Add("The Ornamental Shotgun");
+                            killsList.Add("The Ornamental Katana");
+                            killsList.Add("The Ornamental Assault Rifle");
+                            killsList.Add("The Ornamental Pistol");
+                            additions = additions + 7;
+                        }
+                        else if (masteryLevel >= 30)
+                        {
+                            killsList.Add("The Ornamental Sniper Rifle");
+                            killsList.Add("The Ornamental SMG");
+                            killsList.Add("The Ornamental Shotgun");
+                            killsList.Add("The Ornamental Katana");
+                            killsList.Add("The Ornamental Assault Rifle");
+                            killsList.Add("The Ornamental Pistol");
+                            additions = additions + 6;
+                        }
+                        else if (masteryLevel >= 25)
+                        {
+                            killsList.Add("The Ornamental SMG");
+                            killsList.Add("The Ornamental Shotgun");
+                            killsList.Add("The Ornamental Katana");
+                            killsList.Add("The Ornamental Assault Rifle");
+                            killsList.Add("The Ornamental Pistol");
+                            additions = additions + 5;
+                        }
+                        else if (masteryLevel >= 20)
+                        {
+                            killsList.Add("The Ornamental Shotgun");
+                            killsList.Add("The Ornamental Katana");
+                            killsList.Add("The Ornamental Assault Rifle");
+                            killsList.Add("The Ornamental Pistol");
+                            additions = additions + 4;
+                        }
+                        else if (masteryLevel >= 15)
+                        {
+                            killsList.Add("The Ornamental Katana");
+                            killsList.Add("The Ornamental Assault Rifle");
+                            killsList.Add("The Ornamental Pistol");
+                            additions = additions + 3;
+                        }
+                        else if (masteryLevel >= 10)
+                        {
+                            killsList.Add("The Ornamental Assault Rifle");
+                            killsList.Add("The Ornamental Pistol");
+                            additions = additions + 2;
+                        }
+                        else if (masteryLevel >= 5)
+                        {
+                            killsList.Add("The Ornamental Pistol");
+                            additions = additions + 1;
+                        }
+                    }
                     counterMap++;
                 }
 
@@ -801,12 +921,15 @@ class Randomization
                 }
 
                 Targets();
-                Console.WriteLine($"With The Method '{killChosen}'");
+                Console.Write($"With The Method ");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"{killChosen}");
+                Console.ForegroundColor = ConsoleColor.Gray;
                 Disguises();
 
                 killsIssued++;
             }
-            if (broadOrNot == false)
+            if (broad == false)
             {
                 int lineCount = File.ReadLines($"../../txt/Kills{mapInt}.txt").Count();
 
@@ -825,7 +948,10 @@ class Randomization
                 }
 
                 Targets();
-                Console.WriteLine($"With The Method '{killChosen}'");
+                Console.Write($"With The Method ");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"{killChosen}");
+                Console.ForegroundColor = ConsoleColor.Gray;
                 Disguises();
 
                 killsIssued++;
@@ -845,7 +971,10 @@ class Randomization
             int disgChosenInt = randomNumber.Next(lineCount);
             String disgChosen = disguisesList[disgChosenInt];
 
-            Console.WriteLine($"While Wearing The Disguise '{disgChosen}'\n");
+            Console.Write($"While Wearing The Disguise ");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"'{disgChosen}'\n");
+            Console.ForegroundColor = ConsoleColor.Gray;
         }
 
         void Targets()
@@ -866,7 +995,10 @@ class Randomization
 
             previousTarget.Add(targetChosen);
 
-            Console.WriteLine($"Eliminate '{targetChosen}'");
+            Console.Write($"Eliminate ");
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.WriteLine($"'{targetChosen}'");
+            Console.ForegroundColor = ConsoleColor.Gray;
         }
 
         string CheckUniqueDisguises(ref string targetChosen, ref int targetInt, ref int lineCount)

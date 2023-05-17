@@ -30,7 +30,7 @@ class MasteryAndContent
             int counter = 0;
             StreamReader readerContent = new StreamReader($"../../txt/Profiles/{username}_Content.txt");
 
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < 4; i++)
             {
                 counter++;
 
@@ -129,7 +129,7 @@ class MasteryAndContent
 
         StreamReader readerMapMastery = new StreamReader("../../txt/AllMapsMastery.txt");
 
-        for (int i = 0; i < 22; i++)
+        for (int i = 0; i < 23; i++)
         {
             string data = readerMapMastery.ReadLine();
             allMaps.Add(data);
@@ -140,7 +140,7 @@ class MasteryAndContent
         {
             StreamReader readerMastery = new StreamReader($"../../txt/Profiles/{username}_Mastery.txt");
 
-            for (int i = 0; i < 22; i++)
+            for (int i = 0; i < 23; i++)
             {
                 string data = readerMastery.ReadLine();
                 int dataInt = Convert.ToInt32(data);
@@ -153,14 +153,33 @@ class MasteryAndContent
         {
             StreamWriter writerMastery = new StreamWriter($"../../txt/Profiles/{username}_Mastery.txt");
 
+            int counterMap = 0;
+
             for (int i = 0; i < allMaps.Count(); i++)
             {
                 Console.WriteLine($"What Is Your Mastery Level On {allMaps[i]}?");
+                counterMap++;
 
                 float masteryLevelNew = Convert.ToInt32(Console.ReadLine());
                 writerMastery.WriteLine(masteryLevelNew);
 
-                if (masteryLevelNew > 20)
+                if (counterMap == 7 || counterMap == 21)
+                {
+                    if (masteryLevelNew > 5)
+                    {
+                        Console.WriteLine("On This Map, Mastery Can't Be Higher Than 5");
+                        Environment.Exit(0);
+                    }
+                }
+                else if (counterMap == 23)
+                {
+                    if (masteryLevelNew > 100)
+                    {
+                        Console.WriteLine("In Freelancer, Mastery Can't Be Higher Than 100");
+                        Environment.Exit(0);
+                    }
+                }
+                else if (masteryLevelNew > 20 && counterMap != 23)
                 {
                     Console.WriteLine("Can't Be Higher Than 20");
                     Environment.Exit(0);
@@ -176,7 +195,7 @@ class MasteryAndContent
         List<int> masteryLevel = new List<int>();
         StreamReader readerMastery = new StreamReader($"../../txt/Profiles/{usernamePassed}_Mastery.txt");
 
-        for (int i = 0; i < 22; i++)
+        for (int i = 0; i < 23; i++)
         {
             string data = readerMastery.ReadLine();
             int dataInt = Convert.ToInt32(data);
