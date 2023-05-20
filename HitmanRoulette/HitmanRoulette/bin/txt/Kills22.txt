@@ -15,4 +15,3 @@ Scissors
 Screwdriver
 Tanto
 Letterbomb Parcel
-Lethal Pills

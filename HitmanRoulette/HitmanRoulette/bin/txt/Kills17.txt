@@ -13,3 +13,4 @@ Scissors
 Screwdriver
 Starfish
 Car Bomb
+Fire

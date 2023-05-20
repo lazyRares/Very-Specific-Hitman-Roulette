@@ -23,6 +23,6 @@ Screwdriver
 Viking Axe
 Broadsword
 Nitroglycerin
-Botulinum Toxin
 Portcullis
 Gibbet
+Fire

@@ -8,3 +8,4 @@ Folding Knife
 Kitchen Knife
 Scissors
 Screwdriver
+Fire

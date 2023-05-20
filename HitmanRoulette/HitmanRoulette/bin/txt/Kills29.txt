@@ -22,8 +22,9 @@ Sapper's Axe
 Screwdriver
 Shears
 Remote CX Demo Block MK II
-Lethal Poison Pill Jar
 Cannon
 Grape Crusher
 Grape Shredder
 Wine Vat
+Fire
+Garden Shredder

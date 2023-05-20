@@ -4,3 +4,4 @@ Cleaver
 Fire Axe
 Kitchen Knife
 Screwdriver
+Fire

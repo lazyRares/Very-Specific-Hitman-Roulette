@@ -19,5 +19,3 @@ Scissors
 Screwdriver
 Car Bomb
 Remote CX Demo Block
-Lethal Poisonous Frog
-Lethal Pills

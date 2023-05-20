@@ -7,3 +7,4 @@ Katana
 Kitchen Knife
 Scalpel
 Scissors
+Fire

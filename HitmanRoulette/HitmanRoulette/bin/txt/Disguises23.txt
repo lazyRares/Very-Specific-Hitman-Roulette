@@ -1,5 +1,5 @@
 Boat Captain
-Bodyguard
+Tyson's Bodyguard
 Butler
 Chef
 Doctor
@@ -15,6 +15,5 @@ Tech Crew
 Villa Guard
 Villa Staff
 Waiter
-The Tropical Islander
 Suit
 Any Disguise

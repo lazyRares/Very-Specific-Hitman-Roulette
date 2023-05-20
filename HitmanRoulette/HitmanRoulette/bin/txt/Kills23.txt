@@ -18,5 +18,3 @@ Screwdriver
 Seashell
 Starfish
 Stethoscope
-Lethal Poisonous Frog
-Lethal Poison Pill Jar

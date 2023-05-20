@@ -11,3 +11,4 @@ Kitchen Knife
 Letter Opener
 Sapper's Axe
 Screwdriver
+Fire

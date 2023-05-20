@@ -72,7 +72,7 @@ class Randomization
         {
             targetAmount = 1;
         }
-        else if (targetAmount > 10)
+        else if (targetAmount > 15)
         {
             targetAmount = 5;
         }
@@ -1078,6 +1078,10 @@ class Randomization
             {
                 targetChosen = ("Civillian");
             }
+            if (targetChosen.Equals("Swimwear"))
+            {
+                targetChosen = ("Civillian");
+            }
             if (targetChosen.Equals("Knight's Armour"))
             {
                 targetChosen = ("Elite Guard");
@@ -1086,10 +1090,6 @@ class Randomization
             {
                 targetChosen = ("Tech Crew");
             }
-            if (targetChosen.Equals("The Tropical Islander"))
-            {
-                targetChosen = ("Lifeguard");
-            }
             if (targetChosen.Equals("Skydiving Suit"))
             {
                 targetChosen = ("Event Staff");
@@ -1097,7 +1097,7 @@ class Randomization
             if (targetChosen.Equals("Rave On Suit"))
             {
                 targetChosen = ("Civillian");
-            }
+            }            
             if (targetChosen.Equals("47's Signature Suit with Gloves"))
             {
                 targetChosen = ("Gaucho");

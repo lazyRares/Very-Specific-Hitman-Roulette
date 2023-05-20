@@ -12,3 +12,4 @@ Letter Opener
 Saber
 Scissors
 Screwdriver
+Fire

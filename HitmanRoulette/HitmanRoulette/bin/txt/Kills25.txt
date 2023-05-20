@@ -14,6 +14,4 @@ Scissors
 Screwdriver
 Shears
 Unicorn Horn
-Lethal Poison Pill Jar
-Lethal Posion Vial
 Garden Shredder
