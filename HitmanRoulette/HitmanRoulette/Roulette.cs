@@ -17,7 +17,7 @@ class Roulette
 
             if (spinInput.Equals("Y", StringComparison.OrdinalIgnoreCase))
             {
-                Console.WriteLine("Do You Want To See Your Profile, Or Create One? (Y/N)");
+                Console.WriteLine("Do You Want To Create A Profile? (Y/N)");
                 string answerProfile = Console.ReadLine();
 
                 if (answerProfile.Equals("Y", StringComparison.OrdinalIgnoreCase))

@@ -27,4 +27,3 @@ Grape Crusher
 Grape Shredder
 Wine Vat
 Fire
-Garden Shredder

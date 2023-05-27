@@ -8,3 +8,4 @@ Kitchen Knife
 Scalpel
 Scissors
 Fire
+Modern Lethal Syringe
