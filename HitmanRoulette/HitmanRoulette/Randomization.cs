@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
@@ -71,6 +72,15 @@ class Randomization
         Console.WriteLine("\nDo You Only Want ANY/ANY Kills? (Y/N)");
         String anyOnly = Console.ReadLine();
 
+        String freeRemove = "N";
+
+        if (!anyOnly.Equals("Y", StringComparison.OrdinalIgnoreCase))
+        {
+            Console.WriteLine("\nDo You Want To Remove Free Items From The Possible Kills? (Y/N)");
+            freeRemove = Console.ReadLine();
+
+        }
+
         if (targetAmount == 0)
         {
             targetAmount = 1;
@@ -105,29 +115,46 @@ class Randomization
 
         masteryList = mastery.ReturnMastery(username);
 
+        int lineCount = File.ReadLines($"../../txt/Kills{mapInt}.txt").Count();
+
+        int mapItemAmount = 0;
+
+        for (int i = 0; i < 21; i++)
+        {
+            String data = readerKillsBroad.ReadLine();
+            killsList.Add(data);
+        }
+
+        for (int i = 0; i < lineCount; i++)
+        {
+            String data = readerKills.ReadLine();
+            killsList.Add(data);
+            mapItemAmount++;
+        }
+
         while (killsIssued < targetAmount)
         {
+
             if (!anyOnly.Equals("Y", StringComparison.OrdinalIgnoreCase))
             {
-                int broadint = randomNumber.Next(2);
+                int broadint = randomNumber.Next(0, 1);
                 bool broad;
-
                 if (broadint == 1)
                 {
                     broad = true;
-                    killsMastery++;
                 }
                 else
                 {
                     broad = false;
+                    killsMastery++;
                 }
                 if (mapInt == 1 || mapInt == 0)
                 {
-                    broad = false;
+                    broad = true;
                 }
                 if (killsMastery > 2)
                 {
-                    broad = false;
+                    broad = true;
                 }
 
                 //LISTS FOR CONDITIONS
@@ -135,12 +162,31 @@ class Randomization
                 if (broad == true)
                 {
 
-                    for (int i = 0; i < 21; i++)
+                    int killChosenInt = randomNumber.Next(21 + mapItemAmount);
+                    String killChosen = killsList[killChosenInt];
+
+                    killsList = killsList.Where(s => !string.IsNullOrWhiteSpace(s)).Distinct().ToList();
+
+                    if (killChosen == null || killChosen.Equals("") || killChosen.Equals("Suit"))
                     {
-                        String data = readerKillsBroad.ReadLine();
-                        killsList.Add(data);
+                        while (killChosen == null || killChosen.Equals("") || killChosen.Equals("Suit"))
+                        {
+                            killChosenInt = randomNumber.Next(21);
+                            killChosen = killsList[killChosenInt];
+                        }
                     }
 
+                    Targets();
+                    Console.Write($"With The Method ");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine($"{killChosen}");
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    Disguises();
+
+                    killsIssued++;
+                }
+                if (broad == false)
+                {
                     for (int i = 0; i < 23; i++)
                     {
                         int masteryLevel = masteryList[i];
@@ -890,37 +936,44 @@ class Randomization
                         additions = additions + 5;
                     }
 
-                    killsList.Add("Sieger 300 Ghost");
-                    killsList.Add("Floral Baller");
-                    killsList.Add("Fiber Wire Classic");
-                    killsList.Add("ICA Bartoli Woodsman Hunting Rifle Covert");
-                    killsList.Add("TAC-4 AR Desert");
-                    killsList.Add("Earphones");
-                    killsList.Add("ICA19");
-                    killsList.Add("ICA19 Classicballer");
-                    killsList.Add("TAC-4 S/A Jungle");
-                    killsList.Add("Measuring Tape");
-                    killsList.Add("Krugermeier 2-2 Dark");
-                    killsList.Add("Sieger AR552 Tactical");
-                    killsList.Add("Striker V3");
-                    killsList.Add("The Ducky Gun");
-                    killsList.Add("The Iridescent Katana");
-                    killsList.Add("The White Ruby Rude 300 Sniper Rifle");
-                    killsList.Add("IO Elite S2VP Earphones");
-                    killsList.Add("Piton");
-                    killsList.Add("Quickdraw");
-                    killsList.Add("Ice Pick");
-                    killsList.Add("Nitroglycerin");
-                    killsList.Add("Remote Explosive Present");
-                    killsList.Add("Ancestral Fountain Pen");
-                    killsList.Add("ICA19 Iceballer");
-                    killsList.Add("Shashka A33 Gold");
-                    killsList.Add("Explosive Pen");
-                    killsList.Add("Proffesional Screwdriver");
-                    additions = additions + 27;
+                    if (!freeRemove.Equals("Y", StringComparison.OrdinalIgnoreCase))
+                    {
+                        killsList.Add("Sieger 300 Ghost");
+                        killsList.Add("Floral Baller");
+                        killsList.Add("Fiber Wire Classic");
+                        killsList.Add("ICA Bartoli Woodsman Hunting Rifle Covert");
+                        killsList.Add("TAC-4 AR Desert");
+                        killsList.Add("Earphones");
+                        killsList.Add("ICA19");
+                        killsList.Add("ICA19 Classicballer");
+                        killsList.Add("TAC-4 S/A Jungle");
+                        killsList.Add("Measuring Tape");
+                        killsList.Add("Krugermeier 2-2 Dark");
+                        killsList.Add("Sieger AR552 Tactical");
+                        killsList.Add("Striker V3");
+                        killsList.Add("The Ducky Gun");
+                        killsList.Add("The Iridescent Katana");
+                        killsList.Add("The White Ruby Rude 300 Sniper Rifle");
+                        killsList.Add("IO Elite S2VP Earphones");
+                        killsList.Add("Piton");
+                        killsList.Add("Quickdraw");
+                        killsList.Add("Ice Pick");
+                        killsList.Add("Nitroglycerin");
+                        killsList.Add("Remote Explosive Present");
+                        killsList.Add("Ancestral Fountain Pen");
+                        killsList.Add("ICA19 Iceballer");
+                        killsList.Add("Shashka A33 Gold");
+                        killsList.Add("Explosive Pen");
+                        killsList.Add("Proffesional Screwdriver");
 
-                    int killChosenInt = randomNumber.Next(21 + additions);
+                        additions = additions + 27;
+                    }
+
+                    int valueList = killsList.Count();
+                    int killChosenInt = randomNumber.Next(valueList);
                     String killChosen = killsList[killChosenInt];
+
+                    killsList = killsList.Where(s => !string.IsNullOrWhiteSpace(s)).Distinct().ToList();
 
                     if (killChosen == null || killChosen.Equals("") || killChosen.Equals("Suit"))
                     {
@@ -929,33 +982,6 @@ class Randomization
                             killChosenInt = randomNumber.Next(21 + additions);
                             killChosen = killsList[killChosenInt];
                         }
-                    }
-
-                    Targets();
-                    Console.Write($"With The Method ");
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine($"{killChosen}");
-                    Console.ForegroundColor = ConsoleColor.Gray;
-                    Disguises();
-
-                    killsIssued++;
-                }
-                if (broad == false)
-                {
-                    int lineCount = File.ReadLines($"../../txt/Kills{mapInt}.txt").Count();
-
-                    for (int i = 0; i < lineCount; i++)
-                    {
-                        String data = readerKills.ReadLine();
-                        killsList.Add(data);
-                    }
-
-                    int killChosenInt = randomNumber.Next(lineCount);
-                    String killChosen = killsList[killChosenInt];
-
-                    if (killChosen.Equals(null) || killChosen.Equals(""))
-                    {
-                        killChosen = "Any Method";
                     }
 
                     Targets();

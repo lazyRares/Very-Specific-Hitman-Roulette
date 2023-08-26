@@ -1,7 +1,7 @@
 Bodyguard
 Food Vendor
 Fortune Teller
-Handyman
+Handyman (House On Sand)
 Soldier
 Shopkeeper
 Waiter
