@@ -21,3 +21,4 @@ Remote Semtex Demo Block MK III
 Remote CX Demo Block
 Modern Lethal Syringe
 Fire
+Exploding Vehicle

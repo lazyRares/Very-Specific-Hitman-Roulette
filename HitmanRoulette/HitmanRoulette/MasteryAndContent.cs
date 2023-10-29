@@ -22,6 +22,7 @@ class MasteryAndContent
         bool deluxe = false;
         bool concreteArt = false;
         bool makeshiftPack = false;
+        bool trinityPack = false;
 
 
         if (File.Exists($"../../txt/Profiles/{username}_Content.txt"))
@@ -30,7 +31,7 @@ class MasteryAndContent
             int counter = 0;
             StreamReader readerContent = new StreamReader($"../../txt/Profiles/{username}_Content.txt");
 
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < 5; i++)
             {
                 counter++;
 
@@ -52,6 +53,10 @@ class MasteryAndContent
                 if (counter == 4)
                 {
                     contentType = "Makeshift Weaponry Content Pack";
+                }
+                if (counter == 5)
+                {
+                    contentType = "Trinity Pack";
                 }
 
                 contentList.Add(dataBool);
@@ -108,6 +113,18 @@ class MasteryAndContent
                 makeshiftPack = false;
             }
 
+            Console.WriteLine("Do you have the Trinity Pack? (Y/N)");
+            string trinityString = Console.ReadLine();
+
+            if (trinityString.Equals("Y", StringComparison.OrdinalIgnoreCase))
+            {
+                trinityPack = true;
+            }
+            else
+            {
+                trinityPack = false;
+            }
+
 
             for (int i = 0; i < 2; i++)
             {
@@ -117,6 +134,7 @@ class MasteryAndContent
                 writerContent.WriteLine(deluxe);
                 writerContent.WriteLine(concreteArt);
                 writerContent.WriteLine(makeshiftPack);
+                writerContent.WriteLine(trinityPack);
 
                 writerContent.Close();
             }
@@ -146,7 +164,14 @@ class MasteryAndContent
                 int dataInt = Convert.ToInt32(data);
 
                 masteryLevel.Add(dataInt);
-                Console.WriteLine($"Your Mastery on {allMaps[i]} is {masteryLevel[i]}!");
+                Console.Write($"Your Mastery on ");
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write($"{allMaps[i]} ");
+                Console.ForegroundColor = ConsoleColor.Gray;
+                Console.Write($"is ");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"{masteryLevel[i]}!");
+                Console.ForegroundColor = ConsoleColor.Gray;
             }
         }
         else
@@ -211,7 +236,7 @@ class MasteryAndContent
         List<bool> contentList = new List<bool>();
         StreamReader readerContent = new StreamReader($"../../txt/Profiles/{usernamePassed}_Content.txt");
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 5; i++)
         {
             string data = readerContent.ReadLine();
             bool dataBool = Convert.ToBoolean(data);

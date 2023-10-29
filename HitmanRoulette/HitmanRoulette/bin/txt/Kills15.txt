@@ -9,3 +9,4 @@ Scalpel
 Scissors
 Fire
 Modern Lethal Syringe
+Exploding Vehicle

@@ -5,3 +5,4 @@ Fire Axe
 Kitchen Knife
 Screwdriver
 Fire
+Exploding Vehicle

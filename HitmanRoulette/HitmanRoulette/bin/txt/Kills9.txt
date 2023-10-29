@@ -9,3 +9,4 @@ Kitchen Knife
 Scissors
 Screwdriver
 Fire
+Exploding Vehicle

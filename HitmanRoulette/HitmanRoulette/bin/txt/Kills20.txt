@@ -19,3 +19,4 @@ Scissors
 Screwdriver
 Car Bomb
 Remote CX Demo Block
+Exploding Vehicle

@@ -12,3 +12,4 @@ Letter Opener
 Sapper's Axe
 Screwdriver
 Fire
+Exploding Vehicle

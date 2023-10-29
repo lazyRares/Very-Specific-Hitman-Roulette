@@ -10,3 +10,4 @@ Scissors
 Screwdriver
 Fire
 Icicle
+Exploding Vehicle

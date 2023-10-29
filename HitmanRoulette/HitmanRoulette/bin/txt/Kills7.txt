@@ -10,3 +10,4 @@ Saber
 Scissors
 Screwdriver
 Church Bell
+Exploding Vehicle

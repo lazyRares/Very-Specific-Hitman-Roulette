@@ -19,3 +19,4 @@ Scrap Sword
 Screwdriver
 Stethoscope
 Tanto
+Exploding Vehicle

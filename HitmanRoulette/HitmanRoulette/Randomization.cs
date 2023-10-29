@@ -185,6 +185,9 @@ class Randomization
 
                     killsIssued++;
                 }
+
+                // --------------- Kill List ---------------
+                #region Kills
                 if (broad == false)
                 {
                     for (int i = 0; i < 23; i++)
@@ -894,6 +897,7 @@ class Randomization
                     bool deluxe = contentList[1];
                     bool concreteArt = contentList[2];
                     bool makeshiftPack = contentList[3];
+                    bool trinityPack = contentList[4];
 
                     if (sevenDeadly == true)
                     {
@@ -935,6 +939,13 @@ class Randomization
                         killsList.Add("White Katana");
                         additions = additions + 5;
                     }
+                    if (trinityPack == true)
+                    {
+                        killsList.Add("ICA19 White Trinity");
+                        killsList.Add("ICA19 Red Trinity");
+                        killsList.Add("ICA19 Black Trinity");
+                        additions = additions + 3;
+                    }
 
                     if (!freeRemove.Equals("Y", StringComparison.OrdinalIgnoreCase))
                     {
@@ -964,10 +975,12 @@ class Randomization
                         killsList.Add("ICA19 Iceballer");
                         killsList.Add("Shashka A33 Gold");
                         killsList.Add("Explosive Pen");
-                        killsList.Add("Proffesional Screwdriver");
+                        killsList.Add("Professional Screwdriver");
 
                         additions = additions + 27;
                     }
+
+                    #endregion
 
                     int valueList = killsList.Count();
                     int killChosenInt = randomNumber.Next(valueList);
@@ -1089,6 +1102,8 @@ class Randomization
                 targetChosen = CheckUniqueDisguises(ref targetChosen, ref targetInt, ref lineCount);
 
             }
+
+            #region Disguise Replacements
             if (targetChosen.Equals("Vampire Magician"))
             {
                 targetChosen = ("Cameraman");
@@ -1136,14 +1151,14 @@ class Randomization
             if (targetChosen.Equals("Skydiving Suit"))
             {
                 targetChosen = ("Event Staff");
-            }
-            if (targetChosen.Equals("Rave On Suit"))
-            {
-                targetChosen = ("Civillian");
-            }            
+            }        
             if (targetChosen.Equals("47's Signature Suit with Gloves"))
             {
                 targetChosen = ("Gaucho");
+            }
+            if (targetChosen.Equals("Pale Rider"))
+            {
+                targetChosen = ("Event Security");
             }
             if (targetChosen.Equals("The Buccaneer"))
             {
@@ -1157,6 +1172,7 @@ class Randomization
             {
                 targetChosen = ("Architect");
             }
+            #endregion
 
             return targetChosen;
         }

@@ -2,7 +2,6 @@ Accidental Explosion
 Accidental Fall
 Electrocution
 Falling Object
-Exploding Vehicle
 Drowning
 Unarmed
 Fiber Wire

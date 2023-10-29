@@ -3,4 +3,5 @@ Kitchen Knife
 Scissors
 Screwdriver
 Church Bell
+Exploding Vehicle
 

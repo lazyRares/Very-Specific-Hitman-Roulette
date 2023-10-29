@@ -12,3 +12,4 @@ Pistol
 Loud Assault Rifle
 Loud Pistol
 Any Method
+Exploding Vehicle

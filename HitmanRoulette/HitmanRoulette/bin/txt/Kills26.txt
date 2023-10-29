@@ -6,3 +6,4 @@ Screwdriver
 Shears
 Unicorn Horn
 Garden Shredder
+Exploding Vehicle

@@ -2,7 +2,7 @@ Bodyguard
 Food Vendor
 Fortune Teller
 Handyman (House On Sand)
-Soldier
+Military Soldier
 Shopkeeper
 Waiter
 Suit

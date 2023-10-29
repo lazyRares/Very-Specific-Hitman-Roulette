@@ -12,3 +12,4 @@ Scissors
 Screwdriver
 Shuriken
 Fragmentation Grenade
+Exploding Vehicle

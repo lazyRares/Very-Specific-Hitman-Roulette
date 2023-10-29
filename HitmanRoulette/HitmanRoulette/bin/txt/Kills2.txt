@@ -3,7 +3,6 @@ Fusil G2
 HX-10
 Bartoli 12G
 Tactical Bartoli 12G
-Explosive Device
 Battle Axe
 Cleaver
 Fire Axe
@@ -15,3 +14,4 @@ Scissors
 Screwdriver
 Remote Explosive
 Fire
+Exploding Vehicle

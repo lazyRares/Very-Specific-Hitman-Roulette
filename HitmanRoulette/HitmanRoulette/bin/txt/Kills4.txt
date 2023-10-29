@@ -20,3 +20,4 @@ Screwdriver
 Falling Stalactite
 Church Bell
 Cannon
+Exploding Vehicle

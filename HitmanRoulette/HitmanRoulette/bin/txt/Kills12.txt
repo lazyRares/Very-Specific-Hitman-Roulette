@@ -10,3 +10,4 @@ Old Axe
 Screwdriver
 Nitroglycerin
 Fire
+Exploding Vehicle
