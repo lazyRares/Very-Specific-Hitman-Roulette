@@ -3,7 +3,6 @@ C:\Users\rares\source\repos\HitmanRoulette\HitmanRoulette\bin\Debug\net6.0\Hitma
 C:\Users\rares\source\repos\HitmanRoulette\HitmanRoulette\bin\Debug\net6.0\HitmanRoulette.runtimeconfig.json
 C:\Users\rares\source\repos\HitmanRoulette\HitmanRoulette\bin\Debug\net6.0\HitmanRoulette.dll
 C:\Users\rares\source\repos\HitmanRoulette\HitmanRoulette\bin\Debug\net6.0\HitmanRoulette.pdb
-C:\Users\rares\source\repos\HitmanRoulette\HitmanRoulette\obj\Debug\net6.0\HitmanRoulette.csproj.AssemblyReference.cache
 C:\Users\rares\source\repos\HitmanRoulette\HitmanRoulette\obj\Debug\net6.0\HitmanRoulette.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\rares\source\repos\HitmanRoulette\HitmanRoulette\obj\Debug\net6.0\HitmanRoulette.AssemblyInfoInputs.cache
 C:\Users\rares\source\repos\HitmanRoulette\HitmanRoulette\obj\Debug\net6.0\HitmanRoulette.AssemblyInfo.cs

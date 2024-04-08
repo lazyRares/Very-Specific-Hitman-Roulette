@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "0o+61kCTeAc9bEph6hNgLad1oPyRAFoLOHx3qlnBwnE2YvYQsC+RANtMVkg2vjyCOaukAm02jbWq1xeVKdQKiw==",
+  "dgSpecHash": "mkf4s168c9pmF01pAFyU9ybzkibXmaAluV7C5QkvVfsP+M81cVGFU66zhotR3JxvoJ0JQazFAkUH270QEFGSag==",
   "success": true,
-  "projectFilePath": "C:\\Users\\rares\\source\\repos\\HitmanRoulette\\HitmanRoulette\\HitmanRoulette.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\Rares\\source\\repos\\HitmanRoulette\\HitmanRoulette\\HitmanRoulette.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Rares\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.27\\microsoft.windowsdesktop.app.ref.6.0.27.nupkg.sha512",
+    "C:\\Users\\Rares\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.27\\microsoft.netcore.app.ref.6.0.27.nupkg.sha512",
+    "C:\\Users\\Rares\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.27\\microsoft.aspnetcore.app.ref.6.0.27.nupkg.sha512",
+    "C:\\Users\\Rares\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\6.0.27\\microsoft.netcore.app.host.win-x64.6.0.27.nupkg.sha512"
+  ],
   "logs": []
 }

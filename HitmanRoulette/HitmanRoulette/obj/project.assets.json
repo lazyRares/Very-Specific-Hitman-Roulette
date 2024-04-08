@@ -8,24 +8,19 @@
     "net6.0": []
   },
   "packageFolders": {
-    "C:\\Users\\rares\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\Rares\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\rares\\source\\repos\\HitmanRoulette\\HitmanRoulette\\HitmanRoulette.csproj",
+      "projectUniqueName": "C:\\Users\\Rares\\source\\repos\\HitmanRoulette\\HitmanRoulette\\HitmanRoulette.csproj",
       "projectName": "HitmanRoulette",
-      "projectPath": "C:\\Users\\rares\\source\\repos\\HitmanRoulette\\HitmanRoulette\\HitmanRoulette.csproj",
-      "packagesPath": "C:\\Users\\rares\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\rares\\source\\repos\\HitmanRoulette\\HitmanRoulette\\obj\\",
+      "projectPath": "C:\\Users\\Rares\\source\\repos\\HitmanRoulette\\HitmanRoulette\\HitmanRoulette.csproj",
+      "packagesPath": "C:\\Users\\Rares\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Rares\\source\\repos\\HitmanRoulette\\HitmanRoulette\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\rares\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\Rares\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -45,6 +40,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -61,12 +61,30 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[6.0.27, 6.0.27]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[6.0.27, 6.0.27]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[6.0.27, 6.0.27]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[6.0.27, 6.0.27]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200\\RuntimeIdentifierGraph.json"
       }
     }
   }

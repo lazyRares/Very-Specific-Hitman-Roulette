@@ -23,6 +23,7 @@ class MasteryAndContent
         bool concreteArt = false;
         bool makeshiftPack = false;
         bool trinityPack = false;
+        bool undyingPack = false;
 
 
         if (File.Exists($"../../txt/Profiles/{username}_Content.txt"))
@@ -31,7 +32,7 @@ class MasteryAndContent
             int counter = 0;
             StreamReader readerContent = new StreamReader($"../../txt/Profiles/{username}_Content.txt");
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 6; i++)
             {
                 counter++;
 
@@ -57,6 +58,10 @@ class MasteryAndContent
                 if (counter == 5)
                 {
                     contentType = "Trinity Pack";
+                }
+                if (counter == 6)
+                {
+                    contentType = "The Undying Pack";
                 }
 
                 contentList.Add(dataBool);
@@ -125,6 +130,19 @@ class MasteryAndContent
                 trinityPack = false;
             }
 
+            Console.WriteLine("Do you have The Undying Pack? (Y/N)");
+            string undyingString = Console.ReadLine();
+
+            if (undyingString.Equals("Y", StringComparison.OrdinalIgnoreCase))
+            {
+                undyingPack = true;
+            }
+            else
+            {
+                undyingPack = false;
+            }
+
+
 
             for (int i = 0; i < 2; i++)
             {
@@ -135,6 +153,7 @@ class MasteryAndContent
                 writerContent.WriteLine(concreteArt);
                 writerContent.WriteLine(makeshiftPack);
                 writerContent.WriteLine(trinityPack);
+                writerContent.WriteLine(undyingPack);
 
                 writerContent.Close();
             }
@@ -236,7 +255,7 @@ class MasteryAndContent
         List<bool> contentList = new List<bool>();
         StreamReader readerContent = new StreamReader($"../../txt/Profiles/{usernamePassed}_Content.txt");
 
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 6; i++)
         {
             string data = readerContent.ReadLine();
             bool dataBool = Convert.ToBoolean(data);

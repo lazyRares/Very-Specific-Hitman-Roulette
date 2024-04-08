@@ -7,8 +7,10 @@ class Roulette
 {
     public static void Main(String[] args)
     {
+        string answerProfile = "";
 
         bool finished = false;
+        bool once = false;
 
         while (finished == false)
         {
@@ -17,9 +19,13 @@ class Roulette
 
             if (spinInput.Equals("Y", StringComparison.OrdinalIgnoreCase))
             {
-                Console.WriteLine("Do You Want To Create A Profile? (Y/N)");
-                string answerProfile = Console.ReadLine();
+                if (once == false)
+                {
+                    Console.WriteLine("Do You Want To Create A Profile? (Y/N)");
+                    answerProfile = Console.ReadLine();
+                    once = true;
 
+                }
                 if (answerProfile.Equals("Y", StringComparison.OrdinalIgnoreCase))
                 {
                     MasteryAndContent mastery = new MasteryAndContent();
