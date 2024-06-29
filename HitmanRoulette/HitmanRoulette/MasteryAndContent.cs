@@ -5,8 +5,20 @@ class MasteryAndContent
 {
     public string Username()
     {
-        Console.WriteLine("Enter your Username\n");
-        String username = Console.ReadLine();
+        String username = "";
+        try
+        {
+            Console.WriteLine("Enter your Username");
+            username = Console.ReadLine();
+            if (username.Equals("", StringComparison.OrdinalIgnoreCase))
+            {
+                username = "None";
+            }
+        }
+        catch
+        {
+            username = "None";
+        }
 
         return username;
     }
@@ -24,6 +36,7 @@ class MasteryAndContent
         bool makeshiftPack = false;
         bool trinityPack = false;
         bool undyingPack = false;
+        bool disruptorPack = false;
 
 
         if (File.Exists($"../../txt/Profiles/{username}_Content.txt"))
@@ -32,7 +45,7 @@ class MasteryAndContent
             int counter = 0;
             StreamReader readerContent = new StreamReader($"../../txt/Profiles/{username}_Content.txt");
 
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < 7; i++)
             {
                 counter++;
 
@@ -62,6 +75,10 @@ class MasteryAndContent
                 if (counter == 6)
                 {
                     contentType = "The Undying Pack";
+                }
+                if (counter == 7)
+                {
+                    contentType = "The Disruptor Pack";
                 }
 
                 contentList.Add(dataBool);
@@ -142,6 +159,18 @@ class MasteryAndContent
                 undyingPack = false;
             }
 
+            Console.WriteLine("Do you have The Disruptor Pack? (Y/N)");
+            string disruptorString = Console.ReadLine();
+
+            if (disruptorString.Equals("Y", StringComparison.OrdinalIgnoreCase))
+            {
+                disruptorPack = true;
+            }
+            else
+            {
+                disruptorPack = false;
+            }
+
 
 
             for (int i = 0; i < 2; i++)
@@ -154,6 +183,7 @@ class MasteryAndContent
                 writerContent.WriteLine(makeshiftPack);
                 writerContent.WriteLine(trinityPack);
                 writerContent.WriteLine(undyingPack);
+                writerContent.WriteLine(disruptorPack);
 
                 writerContent.Close();
             }
@@ -255,7 +285,7 @@ class MasteryAndContent
         List<bool> contentList = new List<bool>();
         StreamReader readerContent = new StreamReader($"../../txt/Profiles/{usernamePassed}_Content.txt");
 
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < 7; i++)
         {
             string data = readerContent.ReadLine();
             bool dataBool = Convert.ToBoolean(data);

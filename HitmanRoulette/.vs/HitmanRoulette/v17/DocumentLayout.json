@@ -7,12 +7,12 @@
       "RelativeMoniker": "D:0:0:{6F039763-9CBA-48EF-A9F3-7B99E8996D52}|HitmanRoulette\\HitmanRoulette.csproj|solutionrelative:hitmanroulette\\randomization.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6F039763-9CBA-48EF-A9F3-7B99E8996D52}|HitmanRoulette\\HitmanRoulette.csproj|c:\\users\\rares\\source\\repos\\hitmanroulette\\hitmanroulette\\roulette.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6F039763-9CBA-48EF-A9F3-7B99E8996D52}|HitmanRoulette\\HitmanRoulette.csproj|solutionrelative:hitmanroulette\\roulette.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{6F039763-9CBA-48EF-A9F3-7B99E8996D52}|HitmanRoulette\\HitmanRoulette.csproj|c:\\users\\rares\\source\\repos\\hitmanroulette\\hitmanroulette\\masteryandcontent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6F039763-9CBA-48EF-A9F3-7B99E8996D52}|HitmanRoulette\\HitmanRoulette.csproj|solutionrelative:hitmanroulette\\masteryandcontent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6F039763-9CBA-48EF-A9F3-7B99E8996D52}|HitmanRoulette\\HitmanRoulette.csproj|c:\\users\\rares\\source\\repos\\hitmanroulette\\hitmanroulette\\roulette.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6F039763-9CBA-48EF-A9F3-7B99E8996D52}|HitmanRoulette\\HitmanRoulette.csproj|solutionrelative:hitmanroulette\\roulette.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,26 +26,25 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Roulette.cs",
               "DocumentMoniker": "C:\\Users\\Rares\\source\\repos\\HitmanRoulette\\HitmanRoulette\\Roulette.cs",
               "RelativeDocumentMoniker": "HitmanRoulette\\Roulette.cs",
               "ToolTip": "C:\\Users\\Rares\\source\\repos\\HitmanRoulette\\HitmanRoulette\\Roulette.cs",
               "RelativeToolTip": "HitmanRoulette\\Roulette.cs",
-              "ViewState": "AQIAABkAAAAAAAAAAAA0wCIAAAA8AAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABoAAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-08T23:31:18.978Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-08T23:31:18.978Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "MasteryAndContent.cs",
               "DocumentMoniker": "C:\\Users\\Rares\\source\\repos\\HitmanRoulette\\HitmanRoulette\\MasteryAndContent.cs",
               "RelativeDocumentMoniker": "HitmanRoulette\\MasteryAndContent.cs",
               "ToolTip": "C:\\Users\\Rares\\source\\repos\\HitmanRoulette\\HitmanRoulette\\MasteryAndContent.cs",
               "RelativeToolTip": "HitmanRoulette\\MasteryAndContent.cs",
-              "ViewState": "AQIAACUAAAAAAAAAAAAAAPgAAAAJAAAA",
+              "ViewState": "AQIAABIBAAAAAAAAAADwvxcBAAAcAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-08T23:31:18.996Z",
               "EditorCaption": ""
@@ -58,7 +57,7 @@
               "RelativeDocumentMoniker": "HitmanRoulette\\Randomization.cs",
               "ToolTip": "C:\\Users\\Rares\\source\\repos\\HitmanRoulette\\HitmanRoulette\\Randomization.cs",
               "RelativeToolTip": "HitmanRoulette\\Randomization.cs",
-              "ViewState": "AQIAAB8AAAAAAAAAAAArwC4AAAAcAAAA",
+              "ViewState": "AQIAAGEAAAAAAAAAAAAkwG4AAAA0AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-08T23:31:18.998Z",
               "EditorCaption": ""

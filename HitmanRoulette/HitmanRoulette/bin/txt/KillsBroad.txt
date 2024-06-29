@@ -12,9 +12,20 @@ SMG
 Assault Rifle
 Pistol
 Sniper Rifle
+Silenced SMG
+Silenced Assault Rifle
+Silenced Pistol
+Silenced Sniper Rifle
+Silenced Shotgun
+Loud Shotgun
 Loud SMG
 Loud Assault Rifle
 Loud Pistol
+Loud SMG
 Loud Sniper Rifle
 Any Method
 Explosive Device
+Axe
+Sword
+Machete
+Knife

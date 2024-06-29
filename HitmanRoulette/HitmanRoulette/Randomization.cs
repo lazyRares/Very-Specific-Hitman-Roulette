@@ -42,7 +42,19 @@ class Randomization
         Console.WriteLine("1. Elusive Targets");
         Console.WriteLine("2. Regular");
         Console.ForegroundColor = ConsoleColor.Gray;
-        int modeSelect = Int32.Parse(Console.ReadLine());
+        int modeSelect;
+        try
+        {
+            modeSelect = Int32.Parse(Console.ReadLine());
+            if (modeSelect > 2)
+            {
+                modeSelect = 2;
+            }
+        }
+        catch (Exception e)
+        {
+            modeSelect = 2;
+        }
         // -------------------------------------------------------------------------- ELUSIVE MODE SELECT
         if (modeSelect == 1)
         {
@@ -52,21 +64,30 @@ class Randomization
             StreamReader elusiveMapReader = new StreamReader($"../../txt/Elusives/ElusiveMapList.txt");
             StreamReader elusiveReader = new StreamReader($"../../txt/Elusives/Elusives.txt");
 
-            for (int i = 0; i < 42; i++)
+            for (int i = 0; i < 43; i++)
             {
                 String data = elusiveMapReader.ReadLine();
                 elusiveMapList.Add(data);
             }
-            for (int i = 0; i < 42; i++)
+            for (int i = 0; i < 43; i++)
             {
                 String data = elusiveReader.ReadLine();
                 elusiveList.Add(data);
             }
 
             Console.WriteLine("Would You Like To Choose an Elusive? (Y/N)");
-            String manualElusive = Console.ReadLine();
+            String manualElusive = "";
 
-            int elusiveInt= 0;
+            try
+            {
+                  manualElusive = Console.ReadLine();
+            }
+            catch ( Exception e)
+            {
+                manualElusive = "N";
+            }
+
+            int elusiveInt = 0;
 
             if (manualElusive.Equals("Y", StringComparison.OrdinalIgnoreCase))
             {
@@ -74,7 +95,7 @@ class Randomization
                 Console.WriteLine("Which Elusive Would You Like? Type the respective number");
                 Console.WriteLine("Available Elusive Targets are: \n");
 
-                for (int i = 0; i < 42; i++)
+                for (int i = 0; i < 43; i++)
                 {
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine($"{i}: {elusiveList[i]}");
@@ -91,7 +112,7 @@ class Randomization
             }
             if (manualElusive.Equals("N", StringComparison.OrdinalIgnoreCase))
             {
-                elusiveInt = randomNumber.Next(42);
+                elusiveInt = randomNumber.Next(0, 44);
                 elusiveChosen = elusiveList[elusiveInt];
                 mapIntElusive = Int32.Parse(elusiveMapList[elusiveInt]);
                 mapChosen = mapsList[mapIntElusive];
@@ -245,6 +266,7 @@ class Randomization
                     break;
 
                 case "The Politician":
+                    disguisesList.Add("Bodyguard Leader");
                     elusiveName = "Dame Barbara Elizabeth Keating";
                     break;
 
@@ -300,10 +322,25 @@ class Randomization
                 case "The Deceivers":
                     elusiveName = "Anthony L. Troutt";
                     break;
+
+                case "The Disruptor":
+                    elusiveName = "The Disruptor";
+                    disguisesList.Add("Tim Quinn");
+                    break;
             }
 
-            Console.WriteLine("\nDo You Want To Remove Free Items From The Possible Kills? (Y/N)");
-            freeRemove = Console.ReadLine();
+            try
+            {
+                Console.WriteLine("\nDo You Want To Remove Free Items From The Possible Kills? (Y/N)");
+                freeRemove = Console.ReadLine();
+            }
+            catch (Exception e)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Invalid, Defaulting To NO. ");
+                Console.ForegroundColor = ConsoleColor.Gray;
+                freeRemove = "N";
+            }
 
             Console.WriteLine($"You Will Have {elusiveTargetAmount} Target(s)!\n");
 
@@ -329,7 +366,7 @@ class Randomization
             int lineCount = File.ReadLines($"../../txt/Kills{mapInt}.txt").Count();
 
             int mapItemAmount = 0;
-            for (int i = 0; i < 21; i++)
+            for (int i = 0; i < 31; i++)
             {
                 String data = readerKillsBroad.ReadLine();
                 killsList.Add(data);
@@ -344,7 +381,7 @@ class Randomization
 
             while (killsIssued < elusiveTargetAmount)
             {
-                int broadint = randomNumber.Next(0, 1);
+                int broadint = randomNumber.Next(0, 2);
                 bool broad;
                 if (broadint == 1)
                 {
@@ -355,17 +392,86 @@ class Randomization
                     broad = false;
                     killsMastery++;
                 }
-                if (killsMastery > 2)
+                if (killsMastery >= 2)
                 {
                     broad = true;
+                    killsList.Remove("Fiber Wire");
+                    killsList.Remove("Poison");
+                    killsList.Remove("Injected Poison");
+                    killsList.Remove("SMG");
+                    killsList.Remove("Assault Rifle");
+                    killsList.Remove("Sniper Rifle");
+                    killsList.Remove("Silenced SMG");
+                    killsList.Remove("Silenced Assault Rifle");
+                    killsList.Remove("Silenced Pistol");
+                    killsList.Remove("Silenced Sniper Rifle");
+                    killsList.Remove("Silenced Shotgun");
+                    killsList.Remove("Loud Shotgun");
+                    killsList.Remove("Loud SMG");
+                    killsList.Remove("Loud Assault Rifle");
+                    killsList.Remove("Loud SMG");
+                    killsList.Remove("Loud Sniper Rifle");
+                    killsList.Remove("Explosive Device");
+                    killsList.Remove("Axe");
+                    killsList.Remove("Sword");
+                    killsList.Remove("Machete");
+                    killsList.Remove("Knife");
+                    freeRemove = "Y";
                 }
 
                 //LISTS FOR CONDITIONS
 
                 if (broad == true)
                 {
+                    int killChosenInt = randomNumber.Next(9 + mapItemAmount);
+                    if (mapInt == 1 || mapInt == 0)
+                    {
+                        killsList.Remove("Electrocution");
+                        killsList.Remove("Poison");
+                        killsList.Remove("Injected Poison");
+                        killsList.Remove("SMG");
+                        killsList.Remove("Assault Rifle");
+                        killsList.Remove("Sniper Rifle");
+                        killsList.Remove("Silenced SMG");
+                        killsList.Remove("Silenced Assault Rifle");
+                        killsList.Remove("Silenced Sniper Rifle");
+                        killsList.Remove("Silenced Shotgun");
+                        killsList.Remove("Loud Shotgun");
+                        killsList.Remove("Loud SMG");
+                        killsList.Remove("Loud Assault Rifle");
+                        killsList.Remove("Loud SMG");
+                        killsList.Remove("Loud Sniper Rifle");
+                        killsList.Remove("Explosive Device");
+                        killsList.Remove("Axe");
+                        killsList.Remove("Sword");
+                        killsList.Remove("Machete");
+                        killsList.Remove("Knife");
 
-                    int killChosenInt = randomNumber.Next(21 + mapItemAmount);
+                        killsList.Add("Silenced Pistol");
+                        killsList.Add("Fiber Wire");
+
+                        if (mapInt == 1)
+                        {
+                            killsList.Add("Loud Assault Rifle");
+                            killsList.Add("Assault Rifle");
+                        }
+
+
+                        killChosenInt = randomNumber.Next(2 + mapItemAmount);
+                    }
+                    else if (killsMastery > 2 && mapInt != 1 || mapInt != 0)
+                    {
+                        killChosenInt = randomNumber.Next(9 + mapItemAmount);
+                    }
+                    else if (killsMastery < 2 && mapInt != 1 || mapInt != 0)
+                    {
+                        killChosenInt = randomNumber.Next(30 + mapItemAmount);
+                    }
+
+                    if (killChosenInt != 0)
+                    {
+                        killChosenInt--;
+                    }
                     String killChosen = killsList[killChosenInt];
 
                     killsList = killsList.Where(s => !string.IsNullOrWhiteSpace(s)).Distinct().ToList();
@@ -374,7 +480,7 @@ class Randomization
                     {
                         while (killChosen == null || killChosen.Equals("") || killChosen.Equals("Suit"))
                         {
-                            killChosenInt = randomNumber.Next(21);
+                            killChosenInt = randomNumber.Next(32);
                             killChosen = killsList[killChosenInt];
                         }
                     }
@@ -392,6 +498,10 @@ class Randomization
                         else if (elusiveChosen.Equals("The Deceivers"))
                         {
                             elusiveName = "Richard J. Magee";
+                        }
+                        else if (elusiveChosen.Equals("The Procurers"))
+                        {
+                            elusiveName = "Robert Burk";
                         }
                     }
                     Console.Write($"Eliminate ");
@@ -1120,6 +1230,7 @@ class Randomization
                     bool makeshiftPack = contentList[3];
                     bool trinityPack = contentList[4];
                     bool undyingPack = contentList[5];
+                    bool disruptorPack = contentList[6];
 
                     if (sevenDeadly == true)
                     {
@@ -1174,6 +1285,11 @@ class Randomization
                         killsList.Add("Krondstadt Explosive Pen (Gen 2)");
                         additions = additions + 2;
                     }
+                    if (disruptorPack == true)
+                    {
+                        killsList.Add("The Disruptor Resistance Band");
+                        additions = additions + 1;
+                    }
 
                     if (!freeRemove.Equals("Y", StringComparison.OrdinalIgnoreCase))
                     {
@@ -1222,7 +1338,7 @@ class Randomization
                     {
                         while (killChosen == null || killChosen.Equals("") || killChosen.Equals("Suit"))
                         {
-                            killChosenInt = randomNumber.Next(21 + additions);
+                            killChosenInt = randomNumber.Next(30 + additions);
                             killChosen = killsList[killChosenInt];
                         }
                     }
@@ -1252,6 +1368,55 @@ class Randomization
                     Console.ForegroundColor = ConsoleColor.Gray;
                     Disguises(readerDisg);
 
+                    if (elusiveChosen.Equals("The Stowaway"))
+                    {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine($"'Retrieve Dictaphone'");
+                        Console.ForegroundColor = ConsoleColor.Gray;
+                    }
+
+                    if (elusiveChosen.Equals("The Warlord"))
+                    {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine($"'Retrieve Files'");
+                        Console.ForegroundColor = ConsoleColor.Gray;
+                    }
+
+                    if (elusiveChosen.Equals("The Entertainer"))
+                    {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine($"'Retrieve Guest List'");
+                        Console.ForegroundColor = ConsoleColor.Gray;
+                    }
+
+                    if (elusiveChosen.Equals("The Fixer"))
+                    {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine($"'Retrieve The Diamonds'");
+                        Console.ForegroundColor = ConsoleColor.Gray;
+                    }
+
+                    if (elusiveChosen.Equals("The Collector"))
+                    {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine($"'Retrieve Painting'");
+                        Console.ForegroundColor = ConsoleColor.Gray;
+                    }
+
+                    if (elusiveChosen.Equals("The Broker"))
+                    {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine($"'Retrieve The Ivory White'");
+                        Console.ForegroundColor = ConsoleColor.Gray;
+                    }
+
+                    if (elusiveChosen.Equals("The Fixer"))
+                    {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine($"'Retrieve The Diamonds'");
+                        Console.ForegroundColor = ConsoleColor.Gray;
+                    }
+
                     killsIssued++;
                 }
             }
@@ -1259,8 +1424,21 @@ class Randomization
         // --------------------------------------------------------------------------REGULAR 
         if (modeSelect == 2)
         {
-            Console.WriteLine("Would You Like To Choose a map? (Y/N)");
-            String manualMap = Console.ReadLine();
+            String manualMap = "";
+            try
+            {
+                Console.WriteLine("Would You Like To Choose a map? (Y/N)");
+                manualMap = Console.ReadLine();
+                if (!manualMap.Equals("Y", StringComparison.OrdinalIgnoreCase) && !manualMap.Equals("N", StringComparison.OrdinalIgnoreCase))
+                {
+                    manualMap = "N";
+                }
+            }
+            catch (Exception ex)
+            {
+                manualMap = "N";
+            }
+
 
             mapInt = 0;
 
@@ -1284,7 +1462,7 @@ class Randomization
             }
             if (manualMap.Equals("N", StringComparison.OrdinalIgnoreCase))
             {
-                mapInt = randomNumber.Next(27);
+                mapInt = randomNumber.Next(32);
                 mapChosen = mapsList[mapInt];
             }
 
@@ -1295,28 +1473,71 @@ class Randomization
 
             //RANDOM KILLS
 
-            Console.WriteLine("How Many Targets Do You Want? ");
-            float targetAmount = Convert.ToInt32(Console.ReadLine());
+            float targetAmount = 5;
 
-            Console.WriteLine("\nDo You Only Want ANY/ANY Kills? (Y/N)");
-            String anyOnly = Console.ReadLine();
+            try
+            {
+                Console.WriteLine("How Many Targets Do You Want? ");
+                targetAmount = Convert.ToInt32(Console.ReadLine());
+            }
+            catch (Exception e)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("None Chosen, Defaulting To 5. ");
+                Console.ForegroundColor = ConsoleColor.Gray;
+                targetAmount = 5;
+            }
 
+            String anyOnly = "";
+
+            try
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("\nDo You Only Want ANY/ANY Kills? (Y/N)");
+                Console.ForegroundColor = ConsoleColor.Gray;
+                anyOnly = Console.ReadLine();
+            }
+            catch (Exception e)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Invalid, Defaulting To NO. ");
+                Console.ForegroundColor = ConsoleColor.Gray;
+                anyOnly = "N";
+            }
             freeRemove = "N";
 
-            if (!anyOnly.Equals("Y", StringComparison.OrdinalIgnoreCase))
+            try
             {
-                Console.WriteLine("\nDo You Want To Remove Free Items From The Possible Kills? (Y/N)");
-                freeRemove = Console.ReadLine();
+                if (!anyOnly.Equals("Y", StringComparison.OrdinalIgnoreCase))
+                {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("Do You Want To Remove Free Items From The Possible Kills? (Y/N)");
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    freeRemove = Console.ReadLine();
 
+                }
+            }
+            catch (Exception e)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Invalid, Defaulting To NO. ");
+                Console.ForegroundColor = ConsoleColor.Gray;
+                freeRemove = "N";
             }
 
             if (targetAmount == 0)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Not Enough Targets Chosen. Defaulting To 1.");
+                Console.ForegroundColor = ConsoleColor.Gray;
                 targetAmount = 1;
             }
             else if (targetAmount > 15)
             {
-                targetAmount = 5;
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Too Many Targets Chosen, Lowering To 15.");
+                Console.ForegroundColor = ConsoleColor.Gray;
+                targetAmount = 15;
             }
 
             Console.WriteLine($"You Will Have {targetAmount} Target(s)!\n");
@@ -1348,7 +1569,7 @@ class Randomization
 
             int mapItemAmount = 0;
 
-            for (int i = 0; i < 21; i++)
+            for (int i = 0; i < 31; i++)
             {
                 String data = readerKillsBroad.ReadLine();
                 killsList.Add(data);
@@ -1366,7 +1587,7 @@ class Randomization
 
                 if (!anyOnly.Equals("Y", StringComparison.OrdinalIgnoreCase))
                 {
-                    int broadint = randomNumber.Next(0, 1);
+                    int broadint = randomNumber.Next(0, 2);
                     bool broad;
                     if (broadint == 1)
                     {
@@ -1384,14 +1605,82 @@ class Randomization
                     if (killsMastery > 2)
                     {
                         broad = true;
+                        killsList.Remove("Fiber Wire");
+                        killsList.Remove("Poison");
+                        killsList.Remove("Injected Poison");
+                        killsList.Remove("SMG");
+                        killsList.Remove("Assault Rifle");
+                        killsList.Remove("Sniper Rifle");
+                        killsList.Remove("Silenced SMG");
+                        killsList.Remove("Silenced Assault Rifle");
+                        killsList.Remove("Silenced Pistol");
+                        killsList.Remove("Silenced Sniper Rifle");
+                        killsList.Remove("Silenced Shotgun");
+                        killsList.Remove("Loud Shotgun");
+                        killsList.Remove("Loud SMG");
+                        killsList.Remove("Loud Assault Rifle");
+                        killsList.Remove("Loud SMG");
+                        killsList.Remove("Loud Sniper Rifle");
+                        killsList.Remove("Explosive Device");
+                        killsList.Remove("Axe");
+                        killsList.Remove("Sword");
+                        killsList.Remove("Machete");
+                        killsList.Remove("Knife");
                     }
 
                     //LISTS FOR CONDITIONS
 
                     if (broad == true)
                     {
+                        int killChosenInt = randomNumber.Next(9 + mapItemAmount);
+                        if (mapInt == 1 || mapInt == 0)
+                        {
+                            killsList.Remove("Electrocution");
+                            killsList.Remove("Poison");
+                            killsList.Remove("Injected Poison");
+                            killsList.Remove("SMG");
+                            killsList.Remove("Assault Rifle");
+                            killsList.Remove("Sniper Rifle");
+                            killsList.Remove("Silenced SMG");
+                            killsList.Remove("Silenced Assault Rifle");
+                            killsList.Remove("Silenced Sniper Rifle");
+                            killsList.Remove("Silenced Shotgun");
+                            killsList.Remove("Loud Shotgun");
+                            killsList.Remove("Loud SMG");
+                            killsList.Remove("Loud Assault Rifle");
+                            killsList.Remove("Loud SMG");
+                            killsList.Remove("Loud Sniper Rifle");
+                            killsList.Remove("Explosive Device");
+                            killsList.Remove("Axe");
+                            killsList.Remove("Sword");
+                            killsList.Remove("Machete");
+                            killsList.Remove("Knife");
 
-                        int killChosenInt = randomNumber.Next(21 + mapItemAmount);
+                            killsList.Add("Silenced Pistol");
+                            killsList.Add("Fiber Wire");
+
+                            if (mapInt == 1)
+                            {
+                                killsList.Add("Loud Assault Rifle");
+                                killsList.Add("Assault Rifle");
+                            }
+
+
+                            killChosenInt = randomNumber.Next(2 + mapItemAmount);
+                        }
+                        else if (killsMastery > 2 && mapInt != 1 || mapInt != 0)
+                        {
+                            killChosenInt = randomNumber.Next(9 + mapItemAmount);
+                        }
+                        else if (killsMastery < 2 && mapInt != 1 || mapInt != 0)
+                        {
+                            killChosenInt = randomNumber.Next(30 + mapItemAmount);
+                        }
+
+                        if (killChosenInt != 0)
+                        {
+                            killChosenInt--;
+                        }
                         String killChosen = killsList[killChosenInt];
 
                         killsList = killsList.Where(s => !string.IsNullOrWhiteSpace(s)).Distinct().ToList();
@@ -1400,7 +1689,7 @@ class Randomization
                         {
                             while (killChosen == null || killChosen.Equals("") || killChosen.Equals("Suit"))
                             {
-                                killChosenInt = randomNumber.Next(21);
+                                killChosenInt = randomNumber.Next(32);
                                 killChosen = killsList[killChosenInt];
                             }
                         }
@@ -2128,6 +2417,7 @@ class Randomization
                         bool makeshiftPack = contentList[3];
                         bool trinityPack = contentList[4];
                         bool undyingPack = contentList[5];
+                        bool disruptorPack = contentList[6];
 
                         if (sevenDeadly == true)
                         {
@@ -2182,6 +2472,11 @@ class Randomization
                             killsList.Add("Krondstadt Explosive Pen (Gen 2)");
                             additions = additions + 2;
                         }
+                        if (disruptorPack == true)
+                        {
+                            killsList.Add("The Disruptor Resistance Band");
+                            additions = additions + 1;
+                        }
 
                         if (!freeRemove.Equals("Y", StringComparison.OrdinalIgnoreCase))
                         {
@@ -2215,7 +2510,7 @@ class Randomization
                             killsList.Add("Burial Dagger");
                             killsList.Add("Golden Sawed Off Bartoli 12G");
 
-                            additions = additions + 27;
+                            additions = additions + 29;
                         }
 
                         #endregion
@@ -2230,7 +2525,7 @@ class Randomization
                         {
                             while (killChosen == null || killChosen.Equals("") || killChosen.Equals("Suit"))
                             {
-                                killChosenInt = randomNumber.Next(21 + additions);
+                                killChosenInt = randomNumber.Next(30 + additions);
                                 killChosen = killsList[killChosenInt];
                             }
                         }
@@ -2286,7 +2581,7 @@ class Randomization
             String targetChosen= targetList[targetInt];
 
             targetChosen = CheckInvalidDisguises(ref targetChosen, ref targetInt, ref lineCount);
-            targetChosen = CheckUniqueDisguises(ref targetChosen, ref targetInt, ref lineCount);
+            targetChosen = CheckUniqueDisguises(ref targetChosen, ref targetInt, ref lineCount, mapInt);
 
             previousTarget.Add(targetChosen);
 
@@ -2296,12 +2591,35 @@ class Randomization
             Console.ForegroundColor = ConsoleColor.Gray;
         }
 
-        string CheckUniqueDisguises(ref string targetChosen, ref int targetInt, ref int lineCount)
+        void AddToUniqueList(ref List<String> uniqueList, string targetRetrieved)
+        {
+            targetRetrieved = targetRetrieved.Trim();
+            uniqueList.Add(targetRetrieved);
+        }
+
+        string CheckUniqueDisguises(ref string targetChosen, ref int targetInt, ref int lineCount, int mapID)
         {
             int lineCountUnique = File.ReadLines($"../../txt/UniqueKills.txt").Count();
 
             StreamReader readerUnique = new StreamReader($"../../txt/UniqueKills.txt");
             List<String> uniqueList = new List<String>();
+            if (mapID == 6)
+            {
+                AddToUniqueList(ref uniqueList, "Mansion Chef");
+                AddToUniqueList(ref uniqueList, "Housekeeper");
+            }
+           else  if (mapID == 8)
+            {
+                AddToUniqueList(ref uniqueList, "Bodyguard");
+            }
+            else if (mapID == 9)
+            {
+                AddToUniqueList(ref uniqueList, "Handyman");
+            }
+            else if (mapID == 23)
+            {
+                AddToUniqueList(ref uniqueList, "Bodyguard");
+            }
 
             for (int i = 0; i < lineCountUnique; i++)
             {
@@ -2321,7 +2639,7 @@ class Randomization
                             targetInt = randomNumber.Next(lineCount);
                             targetChosen = targetList[targetInt];
                             targetChosen = CheckInvalidDisguises(ref targetChosen, ref targetInt, ref lineCount);
-                            targetChosen = CheckUniqueDisguises(ref targetChosen, ref targetInt, ref lineCount);
+                            targetChosen = CheckUniqueDisguises(ref targetChosen, ref targetInt, ref lineCount, mapInt);
                             return targetChosen;
                         }
                     }
@@ -2338,7 +2656,7 @@ class Randomization
                 targetInt = randomNumber.Next(lineCount);
                 targetChosen = targetList[targetInt];
                 targetChosen = CheckInvalidDisguises(ref targetChosen, ref targetInt, ref lineCount);
-                targetChosen = CheckUniqueDisguises(ref targetChosen, ref targetInt, ref lineCount);
+                targetChosen = CheckUniqueDisguises(ref targetChosen, ref targetInt, ref lineCount, mapInt);
 
             }
 

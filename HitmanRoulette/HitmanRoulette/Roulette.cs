@@ -14,17 +14,38 @@ class Roulette
 
         while (finished == false)
         {
-            Console.WriteLine("Would You Like To Spin ? (Y/N)");
-            String spinInput = Console.ReadLine();
+            String spinInput = "";
+
+            try
+            {
+                Console.WriteLine("Would You Like To Spin ? (Y/N)");
+                spinInput = Console.ReadLine();
+                if (!spinInput.Equals("Y", StringComparison.OrdinalIgnoreCase) && !spinInput.Equals("N", StringComparison.OrdinalIgnoreCase))
+                {
+                    spinInput = "Y";
+                }
+            }
+            catch (Exception e)
+            {
+                spinInput = "Y";
+            }
+
 
             if (spinInput.Equals("Y", StringComparison.OrdinalIgnoreCase))
             {
                 if (once == false)
                 {
-                    Console.WriteLine("Do You Want To Create A Profile? (Y/N)");
-                    answerProfile = Console.ReadLine();
+                    try
+                    {
+                        Console.WriteLine("Do You Want To Create A Profile? (Y/N)");
+                        answerProfile = Console.ReadLine();
+                        
+                    }
+                    catch (Exception e)
+                    {
+                        answerProfile = "N";
+                    }
                     once = true;
-
                 }
                 if (answerProfile.Equals("Y", StringComparison.OrdinalIgnoreCase))
                 {
