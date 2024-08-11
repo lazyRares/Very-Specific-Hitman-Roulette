@@ -23,6 +23,4 @@ Screwdriver
 Viking Axe
 Broadsword
 Nitroglycerin
-Portcullis
-Gibbet
 Fire

@@ -25,7 +25,7 @@ Loud SMG
 Loud Sniper Rifle
 Any Method
 Explosive Device
-Axe
-Sword
-Machete
-Knife
+Any Axe
+Any Sword
+Any Machete
+Any Knife

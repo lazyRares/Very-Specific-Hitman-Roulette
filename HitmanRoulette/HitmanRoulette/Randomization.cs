@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -28,7 +29,7 @@ class Randomization
     public void ChooseSpin()
     {
         string mapChosen = "";
-        
+
         StreamReader readerMaps = new StreamReader($"../../txt/AllMaps.txt");
 
         for (int i = 0; i < 31; i++)
@@ -55,6 +56,7 @@ class Randomization
         {
             modeSelect = 2;
         }
+
         // -------------------------------------------------------------------------- ELUSIVE MODE SELECT
         if (modeSelect == 1)
         {
@@ -80,9 +82,13 @@ class Randomization
 
             try
             {
-                  manualElusive = Console.ReadLine();
+                manualElusive = Console.ReadLine();
+                if (!manualElusive.Equals("N", StringComparison.OrdinalIgnoreCase) || !manualElusive.Equals("Y", StringComparison.OrdinalIgnoreCase))
+                {
+                    manualElusive = "N";
+                }
             }
-            catch ( Exception e)
+            catch (Exception e)
             {
                 manualElusive = "N";
             }
@@ -129,7 +135,7 @@ class Randomization
 
             int elusiveTargetAmount = 0;
 
-            if (elusiveChosen.Equals("The Ex-Dictator") || elusiveChosen.Equals("The Surgeons") || elusiveChosen.Equals("The Deceivers"))
+            if (elusiveChosen.Equals("The Ex-Dictator") || elusiveChosen.Equals("The Surgeons") || elusiveChosen.Equals("The Deceivers") || elusiveChosen.Equals("The Procurers"))
             {
                 elusiveTargetAmount = 2;
             }
@@ -299,7 +305,8 @@ class Randomization
                     break;
 
                 case "The Procurers":
-                    elusiveName = "Jack Roe / Robert Burk";
+                    elusiveName = "Jack Roe";
+                    disguisesList.Remove("Private Investigator");
                     break;
 
                 case "The Ascensionist":
@@ -412,10 +419,10 @@ class Randomization
                     killsList.Remove("Loud SMG");
                     killsList.Remove("Loud Sniper Rifle");
                     killsList.Remove("Explosive Device");
-                    killsList.Remove("Axe");
-                    killsList.Remove("Sword");
-                    killsList.Remove("Machete");
-                    killsList.Remove("Knife");
+                    killsList.Remove("Any Axe");
+                    killsList.Remove("Any Sword");
+                    killsList.Remove("Any Machete");
+                    killsList.Remove("Any Knife");
                     freeRemove = "Y";
                 }
 
@@ -442,10 +449,10 @@ class Randomization
                         killsList.Remove("Loud SMG");
                         killsList.Remove("Loud Sniper Rifle");
                         killsList.Remove("Explosive Device");
-                        killsList.Remove("Axe");
-                        killsList.Remove("Sword");
-                        killsList.Remove("Machete");
-                        killsList.Remove("Knife");
+                        killsList.Remove("Any Axe");
+                        killsList.Remove("Any Sword");
+                        killsList.Remove("Any Machete");
+                        killsList.Remove("Any Knife");
 
                         killsList.Add("Silenced Pistol");
                         killsList.Add("Fiber Wire");
@@ -502,6 +509,7 @@ class Randomization
                         else if (elusiveChosen.Equals("The Procurers"))
                         {
                             elusiveName = "Robert Burk";
+                            disguisesList.Remove("Private Investigator");
                         }
                     }
                     Console.Write($"Eliminate ");
@@ -816,7 +824,7 @@ class Randomization
                             {
                                 killsList.Add("ICA19 Silverballer MK II");
                                 killsList.Add("Bartoli 12G Short H");
-                                killsList.Add("DAK X2 Covert");
+                                killsList.Add("DAK X2 Covert Special");
                                 killsList.Add("Antique Curved Knife");
                                 killsList.Add("Druzhina 34");
                                 additions = additions + 5;
@@ -825,7 +833,7 @@ class Randomization
                             {
                                 killsList.Add("ICA19 Silverballer MK II");
                                 killsList.Add("Bartoli 12G Short H");
-                                killsList.Add("DAK X2 Covert");
+                                killsList.Add("DAK X2 Covert Special");
                                 killsList.Add("Antique Curved Knife");
                                 additions = additions + 4;
                             }
@@ -833,7 +841,7 @@ class Randomization
                             {
                                 killsList.Add("ICA19 Silverballer MK II");
                                 killsList.Add("Bartoli 12G Short H");
-                                killsList.Add("DAK X2 Covert");
+                                killsList.Add("DAK X2 Covert Special");
                                 additions = additions + 3;
                             }
                             else if (masteryLevel >= 5)
@@ -1313,6 +1321,7 @@ class Randomization
                         killsList.Add("Piton");
                         killsList.Add("Quickdraw");
                         killsList.Add("Ice Pick");
+                        killsList.Add("Ice Axe");
                         killsList.Add("Nitroglycerin");
                         killsList.Add("Remote Explosive Present");
                         killsList.Add("Ancestral Fountain Pen");
@@ -1439,26 +1448,35 @@ class Randomization
                 manualMap = "N";
             }
 
-
             mapInt = 0;
 
             if (manualMap.Equals("Y", StringComparison.OrdinalIgnoreCase))
             {
-
-                Console.WriteLine("Which Map Would You Like? Type the respective number");
-                Console.WriteLine("Available Maps are: \n");
-
-                for (int i = 0; i < 31; i++)
+                try
                 {
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine($"{i}: {mapsList[i]}");
-                    Console.ForegroundColor = ConsoleColor.Gray;
+                    Console.WriteLine("Which Map Would You Like? Type the respective number");
+                    Console.WriteLine("Available Maps are: \n");
+
+                    for (int i = 0; i < 31; i++)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine($"{i}: {mapsList[i]}");
+                        Console.ForegroundColor = ConsoleColor.Gray;
+                    }
+
+                    Console.WriteLine("\n");
+
+                    mapInt = Convert.ToInt32(Console.ReadLine());
+                    mapChosen = mapsList[mapInt];
                 }
-
-                Console.WriteLine("\n");
-
-                mapInt = Convert.ToInt32(Console.ReadLine());
-                mapChosen = mapsList[mapInt];
+                catch (Exception e)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("None Chosen, Choosing Random... ");
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    mapInt = randomNumber.Next(32);
+                    mapChosen = mapsList[mapInt];
+                }
             }
             if (manualMap.Equals("N", StringComparison.OrdinalIgnoreCase))
             {
@@ -1488,23 +1506,65 @@ class Randomization
                 targetAmount = 5;
             }
 
-            String anyOnly = "";
+            int modifierSelect;
 
-            try
-            {
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("\nDo You Only Want ANY/ANY Kills? (Y/N)");
-                Console.ForegroundColor = ConsoleColor.Gray;
-                anyOnly = Console.ReadLine();
-            }
-            catch (Exception e)
+            if (mapInt == 1 || mapInt == 0)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Invalid, Defaulting To NO. ");
+                Console.WriteLine("No Modifiers on ICA Maps! Sorry.");
                 Console.ForegroundColor = ConsoleColor.Gray;
-                anyOnly = "N";
+                modifierSelect = 1;
             }
-            freeRemove = "N";
+            else
+            {
+                Console.WriteLine("\nModifier Selection:");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("1. None");
+                Console.WriteLine("2. Axe-Faced Lunatic");
+                Console.WriteLine("3. ICA Medieval Division");
+
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("\nWARNING: Modifier Spins Are Not Guranteed To Be Completable:");
+                Console.ForegroundColor = ConsoleColor.Gray;
+                try
+                {
+                    modifierSelect = Int32.Parse(Console.ReadLine());
+                    if (modifierSelect > 4)
+                    {
+                        modifierSelect = 1;
+                    }
+                }
+                catch (Exception e)
+                {
+                    modifierSelect = 1;
+                }
+            }
+
+
+            // --------------------------------------------------------------------------MODIFIERS
+
+
+
+            String anyOnly = "";
+
+            if (modifierSelect == 1)
+            {
+                try
+                {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("\nDo You Only Want ANY/ANY Kills? (Y/N)");
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    anyOnly = Console.ReadLine();
+                }
+                catch (Exception e)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Invalid, Defaulting To NO. ");
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    anyOnly = "N";
+                }
+                freeRemove = "N";
+            }
 
             try
             {
@@ -1580,6 +1640,24 @@ class Randomization
                 String data = readerKills.ReadLine();
                 killsList.Add(data);
                 mapItemAmount++;
+                switch (modifierSelect)
+                {
+                    case 2:
+                        killsList.RemoveAll(item =>
+                        !item.Contains("axe", StringComparison.OrdinalIgnoreCase) &&
+                        !item.Contains("hatchet", StringComparison.OrdinalIgnoreCase));
+                        break;
+                    case 3:
+                        killsList.RemoveAll(item =>
+                            !item.Contains("axe", StringComparison.OrdinalIgnoreCase) &&
+                            !item.Contains("sword", StringComparison.OrdinalIgnoreCase) &&
+                            !item.Contains("broad", StringComparison.OrdinalIgnoreCase) &&
+                            !item.Contains("saber", StringComparison.OrdinalIgnoreCase) &&
+                            !item.Contains("scrap", StringComparison.OrdinalIgnoreCase) &&
+                            !item.Contains("knife", StringComparison.OrdinalIgnoreCase) &&
+                            !item.Contains("dagger", StringComparison.OrdinalIgnoreCase));
+                        break;
+                }
             }
 
             while (killsIssued < targetAmount)
@@ -1608,6 +1686,7 @@ class Randomization
                         killsList.Remove("Fiber Wire");
                         killsList.Remove("Poison");
                         killsList.Remove("Injected Poison");
+                        killsList.Remove("Explosive Device");
                         killsList.Remove("SMG");
                         killsList.Remove("Assault Rifle");
                         killsList.Remove("Sniper Rifle");
@@ -1621,11 +1700,11 @@ class Randomization
                         killsList.Remove("Loud Assault Rifle");
                         killsList.Remove("Loud SMG");
                         killsList.Remove("Loud Sniper Rifle");
-                        killsList.Remove("Explosive Device");
-                        killsList.Remove("Axe");
-                        killsList.Remove("Sword");
-                        killsList.Remove("Machete");
-                        killsList.Remove("Knife");
+                        killsList.Remove("Any Axe");
+                        killsList.Remove("Any Sword");
+                        killsList.Remove("Any Knife");
+                        killsList.Remove("Any Machete");
+
                     }
 
                     //LISTS FOR CONDITIONS
@@ -1651,10 +1730,10 @@ class Randomization
                             killsList.Remove("Loud SMG");
                             killsList.Remove("Loud Sniper Rifle");
                             killsList.Remove("Explosive Device");
-                            killsList.Remove("Axe");
-                            killsList.Remove("Sword");
-                            killsList.Remove("Machete");
-                            killsList.Remove("Knife");
+                            killsList.Remove("Any Axe");
+                            killsList.Remove("Any Sword");
+                            killsList.Remove("Any Machete");
+                            killsList.Remove("Any Knife");
 
                             killsList.Add("Silenced Pistol");
                             killsList.Add("Fiber Wire");
@@ -1665,16 +1744,55 @@ class Randomization
                                 killsList.Add("Assault Rifle");
                             }
 
-
                             killChosenInt = randomNumber.Next(2 + mapItemAmount);
                         }
                         else if (killsMastery > 2 && mapInt != 1 || mapInt != 0)
                         {
-                            killChosenInt = randomNumber.Next(9 + mapItemAmount);
+                            if (modifierSelect != 1)
+                            {
+                                int listAmountModifier = killsList.Count();
+                                killsList.Remove("White Katana");
+                                killsList.Remove("Masamune");
+                                killsList.Remove("The Proud Swashbuckler");
+                                killsList.Remove("The Iridescent Katana");
+                                killsList.Remove("The Cat's Claw");
+                                killsList.Remove("Ice Axe");
+                                killsList.Remove("The Ornamental Katana");
+                                killsList.Remove("The Black Almond's Dagger");
+                                killsList.Remove("The Makeshift Katana");
+                                killsList.Remove("Hobby Knife");
+                                killsList.Remove("Tanto");
+                                killsList.Remove("Concealable Knife");
+                                if (mapInt != 21)
+                                {
+                                    killsList.Remove("Broadsword");
+                                }
+                                if (mapInt != 30 && mapInt != 23)
+                                {
+                                    killsList.Remove("Jarl's Pirate Saber");
+                                }
+                                if (listAmountModifier > killsList.Count())
+                                {
+                                    listAmountModifier = killsList.Count() -1;
+                                }
+                                killChosenInt = randomNumber.Next(listAmountModifier);
+                            }
+                            else
+                            {
+                                killChosenInt = randomNumber.Next(9 + mapItemAmount);
+                            }
                         }
                         else if (killsMastery < 2 && mapInt != 1 || mapInt != 0)
                         {
-                            killChosenInt = randomNumber.Next(30 + mapItemAmount);
+                            if (modifierSelect != 1)
+                            {
+                                int listAmountModifier = killsList.Count();
+                                killChosenInt = randomNumber.Next(listAmountModifier);
+                            }
+                            else
+                            {
+                                killChosenInt = randomNumber.Next(30 + mapItemAmount);
+                            }
                         }
 
                         if (killChosenInt != 0)
@@ -2003,7 +2121,7 @@ class Randomization
                                 {
                                     killsList.Add("ICA19 Silverballer MK II");
                                     killsList.Add("Bartoli 12G Short H");
-                                    killsList.Add("DAK X2 Covert");
+                                    killsList.Add("DAK X2 Covert Special");
                                     killsList.Add("Antique Curved Knife");
                                     killsList.Add("Druzhina 34");
                                     additions = additions + 5;
@@ -2012,7 +2130,7 @@ class Randomization
                                 {
                                     killsList.Add("ICA19 Silverballer MK II");
                                     killsList.Add("Bartoli 12G Short H");
-                                    killsList.Add("DAK X2 Covert");
+                                    killsList.Add("DAK X2 Covert Special");
                                     killsList.Add("Antique Curved Knife");
                                     additions = additions + 4;
                                 }
@@ -2020,7 +2138,7 @@ class Randomization
                                 {
                                     killsList.Add("ICA19 Silverballer MK II");
                                     killsList.Add("Bartoli 12G Short H");
-                                    killsList.Add("DAK X2 Covert");
+                                    killsList.Add("DAK X2 Covert Special");
                                     additions = additions + 3;
                                 }
                                 else if (masteryLevel >= 5)
@@ -2500,6 +2618,7 @@ class Randomization
                             killsList.Add("Piton");
                             killsList.Add("Quickdraw");
                             killsList.Add("Ice Pick");
+                            killsList.Add("Ice Axe");
                             killsList.Add("Nitroglycerin");
                             killsList.Add("Remote Explosive Present");
                             killsList.Add("Ancestral Fountain Pen");
@@ -2515,6 +2634,29 @@ class Randomization
 
                         #endregion
 
+                        if (modifierSelect != 1)
+                        {
+                            switch (modifierSelect)
+                            {
+                                case 2:
+                                    killsList.RemoveAll(item => !item.Contains("axe", StringComparison.OrdinalIgnoreCase));
+                                    break;
+                                case 3:
+                                    killsList.RemoveAll(item =>
+                                        !item.Contains("axe", StringComparison.OrdinalIgnoreCase) &&
+                                        !item.Contains("sword", StringComparison.OrdinalIgnoreCase) &&
+                                        !item.Contains("broad", StringComparison.OrdinalIgnoreCase) &&
+                                        !item.Contains("saber", StringComparison.OrdinalIgnoreCase) &&
+                                        !item.Contains("swashbuckler", StringComparison.OrdinalIgnoreCase) &&
+                                        !item.Contains("claw", StringComparison.OrdinalIgnoreCase) &&
+                                        !item.Contains("katana", StringComparison.OrdinalIgnoreCase) &&
+                                        !item.Contains("tanto", StringComparison.OrdinalIgnoreCase) &&
+                                        !item.Contains("masamune", StringComparison.OrdinalIgnoreCase) &&
+                                        !item.Contains("dagger", StringComparison.OrdinalIgnoreCase));
+                                    break;
+                            }
+                        }
+
                         int valueList = killsList.Count();
                         int killChosenInt = randomNumber.Next(valueList);
                         String killChosen = killsList[killChosenInt];
@@ -2525,10 +2667,35 @@ class Randomization
                         {
                             while (killChosen == null || killChosen.Equals("") || killChosen.Equals("Suit"))
                             {
-                                killChosenInt = randomNumber.Next(30 + additions);
-                                killChosen = killsList[killChosenInt];
+                                if (modifierSelect == 1)
+                                {
+                                    killChosenInt = randomNumber.Next(30 + additions);
+                                    killChosen = killsList[killChosenInt];
+                                }
+                                else
+                                {
+                                    switch (modifierSelect)
+                                    {
+                                        case 2:
+                                            killsList.RemoveAll(item => !item.Contains("axe", StringComparison.OrdinalIgnoreCase));
+                                            break;
+                                        case 3:
+                                            killsList.RemoveAll(item =>
+                                                !item.Contains("axe", StringComparison.OrdinalIgnoreCase) &&
+                                                !item.Contains("sword", StringComparison.OrdinalIgnoreCase) &&
+                                                !item.Contains("broad", StringComparison.OrdinalIgnoreCase) &&
+                                                !item.Contains("scrap", StringComparison.OrdinalIgnoreCase) &&
+                                                !item.Contains("saber", StringComparison.OrdinalIgnoreCase) &&
+                                                !item.Contains("knife", StringComparison.OrdinalIgnoreCase) &&
+                                                !item.Contains("dagger", StringComparison.OrdinalIgnoreCase));
+                                            break;
+                                    }
+                                    killChosenInt = randomNumber.Next(valueList);
+                                    killChosen = killsList[killChosenInt];
+                                }
                             }
                         }
+
 
                         Targets(readerTarget);
                         Console.Write($"With The Method ");
@@ -2566,7 +2733,6 @@ class Randomization
             Console.WriteLine($"'{disgChosen}'\n");
             Console.ForegroundColor = ConsoleColor.Gray;
         }
-
         void Targets(StreamReader readerTarget)
         {
             int lineCount = File.ReadLines($"../../txt/Disguises{mapInt}.txt").Count();
@@ -2578,7 +2744,7 @@ class Randomization
             }
 
             int targetInt = randomNumber.Next(lineCount);
-            String targetChosen= targetList[targetInt];
+            String targetChosen = targetList[targetInt];
 
             targetChosen = CheckInvalidDisguises(ref targetChosen, ref targetInt, ref lineCount);
             targetChosen = CheckUniqueDisguises(ref targetChosen, ref targetInt, ref lineCount, mapInt);
@@ -2608,7 +2774,7 @@ class Randomization
                 AddToUniqueList(ref uniqueList, "Mansion Chef");
                 AddToUniqueList(ref uniqueList, "Housekeeper");
             }
-           else  if (mapID == 8)
+            else if (mapID == 8)
             {
                 AddToUniqueList(ref uniqueList, "Bodyguard");
             }
@@ -2708,7 +2874,7 @@ class Randomization
             if (targetChosen.Equals("Skydiving Suit"))
             {
                 targetChosen = ("Event Staff");
-            }        
+            }
             if (targetChosen.Equals("47's Signature Suit with Gloves"))
             {
                 targetChosen = ("Gaucho");
