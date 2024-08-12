@@ -83,7 +83,7 @@ class Randomization
             try
             {
                 manualElusive = Console.ReadLine();
-                if (!manualElusive.Equals("N", StringComparison.OrdinalIgnoreCase) || !manualElusive.Equals("Y", StringComparison.OrdinalIgnoreCase))
+                if (!manualElusive.Equals("N", StringComparison.OrdinalIgnoreCase) && !manualElusive.Equals("Y", StringComparison.OrdinalIgnoreCase))
                 {
                     manualElusive = "N";
                 }
