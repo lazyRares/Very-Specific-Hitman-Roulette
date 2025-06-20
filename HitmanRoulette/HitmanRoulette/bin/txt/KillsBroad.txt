@@ -5,6 +5,11 @@ Falling Object
 Drowning
 Unarmed
 Fiber Wire
+Loud Pistol Elimination
+Silenced Pistol Elimination
+Loud SMG Elimination
+Silenced SMG Elimination
+SMG Elimination
 Pistol Elimination
 Poison
 Injected Poison

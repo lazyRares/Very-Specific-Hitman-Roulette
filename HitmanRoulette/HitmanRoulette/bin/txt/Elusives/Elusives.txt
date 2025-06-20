@@ -41,3 +41,5 @@ The Ascensionist
 The Rage
 The Drop
 The Disruptor
+The Splitter
+The Banker

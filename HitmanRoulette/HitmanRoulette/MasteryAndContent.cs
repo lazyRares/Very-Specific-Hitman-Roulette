@@ -15,7 +15,7 @@ class MasteryAndContent
                 username = "None";
             }
         }
-        catch
+        catch (Exception ex)
         {
             username = "None";
         }
@@ -37,6 +37,9 @@ class MasteryAndContent
         bool trinityPack = false;
         bool undyingPack = false;
         bool disruptorPack = false;
+        bool dropPack = false;
+        bool splitterPack = false;
+        bool bankerPack = false;
 
 
         if (File.Exists($"../../txt/Profiles/{username}_Content.txt"))
@@ -45,7 +48,7 @@ class MasteryAndContent
             int counter = 0;
             StreamReader readerContent = new StreamReader($"../../txt/Profiles/{username}_Content.txt");
 
-            for (int i = 0; i < 7; i++)
+            for (int i = 0; i < 10; i++)
             {
                 counter++;
 
@@ -79,6 +82,18 @@ class MasteryAndContent
                 if (counter == 7)
                 {
                     contentType = "The Disruptor Pack";
+                }
+                if (counter == 8)
+                {
+                    contentType = "The Drop Pack";
+                }
+                if (counter == 9)
+                {
+                    contentType = "The Splitter Pack";
+                }
+                if (counter == 10)
+                {
+                    contentType = "The Banker Pack";
                 }
 
                 contentList.Add(dataBool);
@@ -171,6 +186,42 @@ class MasteryAndContent
                 disruptorPack = false;
             }
 
+            Console.WriteLine("Do you have The Drop Pack? (Y/N)");
+            string dropString = Console.ReadLine();
+
+            if (dropString.Equals("Y", StringComparison.OrdinalIgnoreCase))
+            {
+                dropPack = true;
+            }
+            else
+            {
+                dropPack = false;
+            }
+
+            Console.WriteLine("Do you have The Splitter Pack? (Y/N)");
+            string splitterString = Console.ReadLine();
+
+            if (dropString.Equals("Y", StringComparison.OrdinalIgnoreCase))
+            {
+                splitterPack = true;
+            }
+            else
+            {
+                splitterPack = false;
+            }
+
+            Console.WriteLine("Do you have The Banker Pack? (Y/N)");
+            string bankerString = Console.ReadLine();
+
+            if (bankerString.Equals("Y", StringComparison.OrdinalIgnoreCase))
+            {
+                bankerPack = true;
+            }
+            else
+            {
+                bankerPack = false;
+            }
+
 
 
             for (int i = 0; i < 2; i++)
@@ -184,6 +235,9 @@ class MasteryAndContent
                 writerContent.WriteLine(trinityPack);
                 writerContent.WriteLine(undyingPack);
                 writerContent.WriteLine(disruptorPack);
+                writerContent.WriteLine(dropPack);
+                writerContent.WriteLine(splitterPack);
+                writerContent.WriteLine(bankerPack);
 
                 writerContent.Close();
             }
@@ -285,7 +339,7 @@ class MasteryAndContent
         List<bool> contentList = new List<bool>();
         StreamReader readerContent = new StreamReader($"../../txt/Profiles/{usernamePassed}_Content.txt");
 
-        for (int i = 0; i < 7; i++)
+        for (int i = 0; i < 10; i++)
         {
             string data = readerContent.ReadLine();
             bool dataBool = Convert.ToBoolean(data);
