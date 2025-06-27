@@ -358,12 +358,15 @@ class Randomization
                 case "The Banker":
                     elusiveName = "Le Chiffre";
 
+                    killsList.Add("The Banker Rope");
+                    killsList.Add("Scalpel");
+
                     disguisesList.Remove("Helmut Kruger");
                     disguisesList.Remove("Sheikh");
                     disguisesList.Remove("Stylist");
 
                     disguisesList.Add("Croupier");
-                    disguisesList.Add("Agent Smith's Suit");
+                    disguisesList.Add("Agent Smith's Tuxedo");
                     disguisesList.Add("Murillo Bodyguard");
                     break;
             }
@@ -584,10 +587,12 @@ class Randomization
 
                         // Not Sure But Safe Guesses
                         disguisesList.Remove("Facility Analyst");
+                        disguisesList.Remove("Facility Analyst");
                         disguisesList.Remove("Perfect Test Subject");
                         disguisesList.Remove("Block Guard");
 
                         killsList.Remove("Fusil X2000 Stealth");
+                        killsList.Add("HX-7 Covert");
                     }
                     Console.Write($"Eliminate ");
                     Console.ForegroundColor = ConsoleColor.Magenta;
@@ -1476,58 +1481,92 @@ class Randomization
                     Console.WriteLine($"{killChosen}");
                     Console.ForegroundColor = ConsoleColor.Gray;
                     Disguises(readerDisg);
-
-                    if (elusiveChosen.Equals("The Stowaway"))
-                    {
-                        Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.WriteLine($"'Retrieve Dictaphone'");
-                        Console.ForegroundColor = ConsoleColor.Gray;
-                    }
-
-                    if (elusiveChosen.Equals("The Warlord"))
-                    {
-                        Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.WriteLine($"'Retrieve Files'");
-                        Console.ForegroundColor = ConsoleColor.Gray;
-                    }
-
-                    if (elusiveChosen.Equals("The Entertainer"))
-                    {
-                        Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.WriteLine($"'Retrieve Guest List'");
-                        Console.ForegroundColor = ConsoleColor.Gray;
-                    }
-
-                    if (elusiveChosen.Equals("The Fixer"))
-                    {
-                        Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.WriteLine($"'Retrieve The Diamonds'");
-                        Console.ForegroundColor = ConsoleColor.Gray;
-                    }
-
-                    if (elusiveChosen.Equals("The Collector"))
-                    {
-                        Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.WriteLine($"'Retrieve Painting'");
-                        Console.ForegroundColor = ConsoleColor.Gray;
-                    }
-
-                    if (elusiveChosen.Equals("The Broker"))
-                    {
-                        Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.WriteLine($"'Retrieve The Ivory White'");
-                        Console.ForegroundColor = ConsoleColor.Gray;
-                    }
-
-                    if (elusiveChosen.Equals("The Fixer"))
-                    {
-                        Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.WriteLine($"'Retrieve The Diamonds'");
-                        Console.ForegroundColor = ConsoleColor.Gray;
-                    }
-
                     killsIssued++;
                 }
+            }
+            switch (elusiveChosen)
+            {
+                case "The Stowaway":
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine($"'Retrieve Dictaphone'");
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    break;
+
+                case "The Warlord":
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine($"'Retrieve Files'");
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    break;
+
+                case "The Entertainer":
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine($"'Retrieve Guest List'");
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    break;
+
+                case "The Fixer":
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine($"'Retrieve The Diamonds'");
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    break;
+
+                case "The Collector":
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine($"'Retrieve Painting'");
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    break;
+
+                case "The Broker":
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine($"'Retrieve The Ivory White'");
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    break;
+
+                case "The Banker":
+                    string optionalTarget = "Oliver Winding";
+                    int includeOliver = randomNumber.Next(0, 2);
+
+                    if (includeOliver == 0)
+                    {
+
+                        int valueList = killsList.Count();
+                        int killChosenInt = randomNumber.Next(valueList);
+                        String killChosen = killsList[killChosenInt];
+
+                        killsList = killsList.Where(s => !string.IsNullOrWhiteSpace(s)).Distinct().ToList();
+
+                        if (killChosen == null || killChosen.Equals("") || killChosen.Equals("Suit"))
+                        {
+                            while (killChosen == null || killChosen.Equals("") || killChosen.Equals("Suit"))
+                            {
+                                killChosenInt = randomNumber.Next(30 + additions);
+                                killChosen = killsList[killChosenInt];
+                            }
+                        }
+                        Console.Write($"Eliminate ");
+                        Console.ForegroundColor = ConsoleColor.Magenta;
+                        Console.WriteLine($"'{optionalTarget}'");
+                        Console.ForegroundColor = ConsoleColor.Gray;
+                        Console.Write($"With The Method ");
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine($"{killChosen}");
+                        Console.ForegroundColor = ConsoleColor.Gray;
+
+                        killsList.Add("The Banker Rope");
+                        killsList.Add("Scalpel");
+
+                        disguisesList.Remove("Helmut Kruger");
+                        disguisesList.Remove("Sheikh");
+                        disguisesList.Remove("Stylist");
+                        disguisesList.Remove("Agent Smith's Tuxedo");
+
+                        disguisesList.Add("Croupier");
+                        disguisesList.Add("Agent Smith's Tuxedo");
+                        disguisesList.Add("Murillo Bodyguard");
+
+                        Disguises(readerDisg);
+                    }
+                    break;
             }
         }
         // --------------------------------------------------------------------------REGULAR 
@@ -2869,6 +2908,23 @@ class Randomization
             Console.WriteLine($"'{disgChosen}'\n");
             Console.ForegroundColor = ConsoleColor.Gray;
         }
+
+        string ReturnDisguise(StreamReader readerDisg)
+        {
+            int lineCount = File.ReadLines($"../../txt/Disguises{mapInt}.txt").Count();
+
+            for (int i = 0; i < lineCount; i++)
+            {
+                String data = readerDisg.ReadLine();
+                disguisesList.Add(data);
+            }
+
+            int disgChosenInt = randomNumber.Next(lineCount);
+            String disgChosen = disguisesList[disgChosenInt];
+
+            return disgChosen;
+        }
+
         void Targets(StreamReader readerTarget)
         {
             int lineCount = File.ReadLines($"../../txt/Disguises{mapInt}.txt").Count();
@@ -2892,6 +2948,7 @@ class Randomization
             Console.WriteLine($"'{targetChosen}'");
             Console.ForegroundColor = ConsoleColor.Gray;
         }
+
 
         void AddToUniqueList(ref List<String> uniqueList, string targetRetrieved)
         {

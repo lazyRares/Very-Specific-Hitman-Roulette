@@ -6,4 +6,5 @@ Screwdriver
 Shears
 Unicorn Horn
 Garden Shredder
+Bartoli Woodsman Hunting Rifle
 Exploding Vehicle
