@@ -40,6 +40,7 @@ class MasteryAndContent
         bool dropPack = false;
         bool splitterPack = false;
         bool bankerPack = false;
+        bool bruceLeePack = false;
 
 
         if (File.Exists($"../../txt/Profiles/{username}_Content.txt"))
@@ -48,7 +49,7 @@ class MasteryAndContent
             int counter = 0;
             StreamReader readerContent = new StreamReader($"../../txt/Profiles/{username}_Content.txt");
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 11; i++)
             {
                 counter++;
 
@@ -94,6 +95,10 @@ class MasteryAndContent
                 if (counter == 10)
                 {
                     contentType = "The Banker Pack";
+                }
+                if (counter == 11)
+                {
+                    contentType = "The Bruce Lee Pack";
                 }
 
                 contentList.Add(dataBool);
@@ -222,6 +227,18 @@ class MasteryAndContent
                 bankerPack = false;
             }
 
+            Console.WriteLine("Do you have The Bruce Lee Pack? (Y/N)");
+            string bruceLeeString = Console.ReadLine();
+
+            if (bruceLeeString.Equals("Y", StringComparison.OrdinalIgnoreCase))
+            {
+                bruceLeePack = true;
+            }
+            else
+            {
+                bruceLeePack = false;
+            }
+
 
 
             for (int i = 0; i < 2; i++)
@@ -238,6 +255,7 @@ class MasteryAndContent
                 writerContent.WriteLine(dropPack);
                 writerContent.WriteLine(splitterPack);
                 writerContent.WriteLine(bankerPack);
+                writerContent.WriteLine(bruceLeePack);
 
                 writerContent.Close();
             }

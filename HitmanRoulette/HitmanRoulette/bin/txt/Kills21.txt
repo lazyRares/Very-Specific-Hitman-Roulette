@@ -20,6 +20,7 @@ Sacrificial Knife
 Sapper's Axe
 Scalpel
 Screwdriver
+Starfish
 Viking Axe
 Broadsword
 Nitroglycerin

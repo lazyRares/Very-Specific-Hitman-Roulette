@@ -1324,6 +1324,7 @@ class Randomization
                     bool dropPack = contentList[7];
                     bool splitterPack = contentList[8];
                     bool bankerPack = contentList[9];
+                    bool bruceLeePack = contentList[10];
 
                     if (sevenDeadly == true)
                     {
@@ -1396,6 +1397,13 @@ class Randomization
                     }
 
                     if (bankerPack == true)
+                    {
+                        killsList.Add("The Banker Silenced Pistol");
+                        killsList.Add("The Banker Rope");
+                        additions = additions + 2;
+                    }
+
+                    if (bruceLeePack == true)
                     {
                         killsList.Add("The Banker Silenced Pistol");
                         killsList.Add("The Banker Rope");
@@ -1523,8 +1531,9 @@ class Randomization
                     break;
 
                 case "The Banker":
+
                     string optionalTarget = "Oliver Winding";
-                    int includeOliver = randomNumber.Next(0, 2);
+                    int includeOliver = randomNumber.Next(0, 6);
 
                     if (includeOliver == 0)
                     {
@@ -2691,7 +2700,8 @@ class Randomization
                         bool disruptorPack = contentList[6];
                         bool dropPack = contentList[7];
                         bool splitterPack = contentList[8];
-                        bool bankerPack = contentList[8];
+                        bool bankerPack = contentList[9];
+                        bool bruceLeePack = contentList[10];
 
                         if (sevenDeadly == true)
                         {
@@ -2767,6 +2777,13 @@ class Randomization
                         {
                             killsList.Add("The Banker Silenced Pistol");
                             killsList.Add("The Banker Rope");
+                            additions = additions + 2;
+                        }
+
+                        if (bruceLeePack == true)
+                        {
+                            killsList.Add("Jade Dagger");
+                            killsList.Add("Golden Dragon Scissors");
                             additions = additions + 2;
                         }
 
