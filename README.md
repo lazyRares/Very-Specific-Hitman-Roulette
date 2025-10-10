@@ -14,11 +14,10 @@ Features
 
 ## Recent Updates!
 
-- Added Le Chiffre and entire Banker DLC package support.
-- 'The Banker' elusive target has a 1 in 5 chance to give Oliver Winding (The optional target given by Agent Smith) as part of the current spin.
-- Fixed secondary non-target tasks in Elusive Targets not showing up. 
-- Added the Bartoli Woodsman Hunting Rifle to Dartmoor Garden Show.
-- Corrected missing 'The Banker Rope' & 'Scalpel' in the possible kills for 'The Banker'
+- Added Starfish To Sgail.
+- Added The Bruce Lee Pack DLC Support.
+(Elusive Target will come down the line)
+- Fixed minor logic issues.
 
 # USE:
 
