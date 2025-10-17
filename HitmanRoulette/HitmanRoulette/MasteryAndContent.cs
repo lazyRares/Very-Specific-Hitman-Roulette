@@ -357,7 +357,7 @@ class MasteryAndContent
         List<bool> contentList = new List<bool>();
         StreamReader readerContent = new StreamReader($"../../txt/Profiles/{usernamePassed}_Content.txt");
 
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 11; i++)
         {
             string data = readerContent.ReadLine();
             bool dataBool = Convert.ToBoolean(data);
