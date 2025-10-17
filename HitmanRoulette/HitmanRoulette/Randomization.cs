@@ -69,12 +69,12 @@ class Randomization
             StreamReader elusiveMapReader = new StreamReader($"../../txt/Elusives/ElusiveMapList.txt");
             StreamReader elusiveReader = new StreamReader($"../../txt/Elusives/Elusives.txt");
 
-            for (int i = 0; i < 45; i++)
+            for (int i = 0; i < 46; i++)
             {
                 String data = elusiveMapReader.ReadLine();
                 elusiveMapList.Add(data);
             }
-            for (int i = 0; i < 45; i++)
+            for (int i = 0; i < 46; i++)
             {
                 String data = elusiveReader.ReadLine();
                 elusiveList.Add(data);
@@ -104,7 +104,7 @@ class Randomization
                 Console.WriteLine("Which Elusive Would You Like? Type the respective number");
                 Console.WriteLine("Available Elusive Targets are: \n");
 
-                for (int i = 0; i < 45; i++)
+                for (int i = 0; i < 46; i++)
                 {
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine($"{i}: {elusiveList[i]}");
@@ -121,7 +121,7 @@ class Randomization
             }
             if (manualElusive.Equals("N", StringComparison.OrdinalIgnoreCase))
             {
-                elusiveInt = randomNumber.Next(0, 45);
+                elusiveInt = randomNumber.Next(0, 46);
                 elusiveChosen = elusiveList[elusiveInt];
                 mapIntElusive = Int32.Parse(elusiveMapList[elusiveInt]);
                 mapChosen = mapsList[mapIntElusive];
@@ -146,6 +146,10 @@ class Randomization
             {
                 elusiveTargetAmount = 1;
                 valiantClones = 7;
+            }
+            else if (elusiveChosen.Equals("The Dragon"))
+            {
+                elusiveTargetAmount = 4;
             }
             else
             {
@@ -369,6 +373,22 @@ class Randomization
                     disguisesList.Add("Agent Smith's Tuxedo");
                     disguisesList.Add("Murillo Bodyguard");
                     break;
+
+                case "The Dragon":
+                    elusiveName = "Jiaolong Wu";
+                    break;
+
+                    killsList.Add("Barber Razor");
+
+                    disguisesList.Add("Concord Union Guard");
+                    disguisesList.Add("Concord Union Bodyguard");
+                    disguisesList.Add("Rory Cutmore");
+                    disguisesList.Add("Tournament Judge");
+
+                    disguisesList.Remove("Abel De Silva");
+                    disguisesList.Remove("Recording Crew");
+                    disguisesList.Remove("'Jordon Cross' Bodyguard");
+                    disguisesList.Remove("Exterminator");
             }
 
             try
@@ -432,38 +452,78 @@ class Randomization
             int lineCount = File.ReadLines($"../../txt/Kills{mapInt}.txt").Count();
 
             int mapItemAmount = 0;
+
+            List<String> listBroadOnly = new List<String>();
+            List<String> listMapItems = new List<String>();
+
             for (int i = 0; i < 36; i++)
             {
                 String data = readerKillsBroad.ReadLine();
-                killsList.Add(data);
+                listBroadOnly.Add(data);
             }
 
             for (int i = 0; i < lineCount; i++)
             {
                 String data = readerKills.ReadLine();
-                killsList.Add(data);
+                listMapItems.Add(data);
                 mapItemAmount++;
             }
 
+
             while (killsIssued < elusiveTargetAmount)
             {
-                int broadint = randomNumber.Next(0, 2);
-                bool broad;
-                if (broadint == 1)
+
+                killsList.Clear();
+
+                for (int i = 0; i < listBroadOnly.Count(); i++)
                 {
-                    broad = true;
+                    killsList.Add(listBroadOnly[i]);
                 }
-                else
+
+                int broadint = randomNumber.Next(0, 4);
+                bool broad = (broadint == 3); // Only true 25% of the time
+                if (!broad)
                 {
-                    broad = false;
                     killsMastery++;
                 }
+
+                // Trying without this for now, kills were getting way too stale. not sure if it'll be balanced or not. But we'll see I suppose.
+
+                if (killsMastery > 2)
+                {
+                    broad = true;
+                    killsList.Remove("Fiber Wire");
+                    killsList.Remove("Poison");
+                    killsList.Remove("Injected Poison");
+                    killsList.Remove("Explosive Device");
+                    killsList.Remove("SMG");
+                    killsList.Remove("Assault Rifle");
+                    killsList.Remove("Sniper Rifle");
+                    killsList.Remove("Silenced SMG");
+                    killsList.Remove("Silenced Assault Rifle");
+                    killsList.Remove("Silenced Pistol");
+                    killsList.Remove("Silenced Sniper Rifle");
+                    killsList.Remove("Silenced Shotgun");
+                    killsList.Remove("Loud Shotgun");
+                    killsList.Remove("Loud SMG");
+                    killsList.Remove("Loud Assault Rifle");
+                    killsList.Remove("Loud SMG");
+                    killsList.Remove("Loud Sniper Rifle");
+                    killsList.Remove("Any Axe");
+                    killsList.Remove("Any Sword");
+                    killsList.Remove("Any Knife");
+                    killsList.Remove("Any Machete");
+                }
+
+                // DEBUG PRINT
+                //Console.WriteLine(broad);
 
                 //LISTS FOR CONDITIONS
 
                 if (broad == true)
                 {
-                    int killChosenInt = randomNumber.Next(9 + mapItemAmount);
+                    int killChosenInt;
+
                     if (mapInt == 1 || mapInt == 0)
                     {
                         killsList.Remove("Electrocution");
@@ -479,11 +539,11 @@ class Randomization
                         killsList.Remove("Loud Shotgun");
                         killsList.Remove("Loud SMG");
                         killsList.Remove("Loud Assault Rifle");
-                        killsList.Remove("Loud SMG");
                         killsList.Remove("Loud Pistol Elimination");
                         killsList.Remove("Silenced Pistol Elimination");
                         killsList.Remove("Loud SMG Elimination");
                         killsList.Remove("Silenced SMG Elimination");
+                        killsList.Remove("SMG Elimination");
                         killsList.Remove("Loud Sniper Rifle");
                         killsList.Remove("Explosive Device");
                         killsList.Remove("Any Axe");
@@ -496,54 +556,33 @@ class Randomization
 
                         if (mapInt == 1)
                         {
-                            killsList.Add("Loud Pistol Elimination");
                             killsList.Add("Silenced Pistol Elimination");
+                            killsList.Add("Loud Pistol Elimination");
                             killsList.Add("Loud Assault Rifle");
                             killsList.Add("Assault Rifle");
                         }
 
-                        if (killsMastery > 2)
+                        killChosenInt = randomNumber.Next(killsList.Count);
+                    }
+                    else if (killsMastery > 2)
+                    {
+                        for (int i = 0; i < listMapItems.Count(); i++)
                         {
-                            broad = true;
-                            killsList.Remove("Fiber Wire");
-                            killsList.Remove("Poison");
-                            killsList.Remove("Injected Poison");
-                            killsList.Remove("Explosive Device");
-                            killsList.Remove("SMG");
-                            killsList.Remove("Assault Rifle");
-                            killsList.Remove("Sniper Rifle");
-                            killsList.Remove("Silenced SMG");
-                            killsList.Remove("Silenced Assault Rifle");
-                            killsList.Remove("Silenced Pistol");
-                            killsList.Remove("Silenced Sniper Rifle");
-                            killsList.Remove("Silenced Shotgun");
-                            killsList.Remove("Loud Shotgun");
-                            killsList.Remove("Loud SMG");
-                            killsList.Remove("Loud Assault Rifle");
-                            killsList.Remove("Loud SMG");
-                            killsList.Remove("Loud Sniper Rifle");
-                            killsList.Remove("Any Axe");
-                            killsList.Remove("Any Sword");
-                            killsList.Remove("Any Knife");
-                            killsList.Remove("Any Machete");
-
+                            killsList.Add(listMapItems[i]);
                         }
-
-                        killChosenInt = randomNumber.Next(2 + mapItemAmount);
+                        killChosenInt = randomNumber.Next(killsList.Count);
                     }
-                    else if (killsMastery > maxMasteryKills && mapInt != 1 || mapInt != 0)
+                    else
                     {
-                        killChosenInt = randomNumber.Next(9 + mapItemAmount);
-                    }
-                    else if (killsMastery < maxMasteryKills && mapInt != 1 || mapInt != 0)
-                    {
-                        killChosenInt = randomNumber.Next(30 + mapItemAmount);
+                        // Fallback case
+                        killChosenInt = randomNumber.Next(Math.Min(36, killsList.Count));
                     }
 
                     if (killChosenInt != 0)
                     {
                         killChosenInt--;
                     }
+
                     String killChosen = killsList[killChosenInt];
 
                     killsList = killsList.Where(s => !string.IsNullOrWhiteSpace(s)).Distinct().ToList();
@@ -575,6 +614,65 @@ class Randomization
                         {
                             elusiveName = "Robert Burk";
                             disguisesList.Remove("Private Investigator");
+                        }
+                        else if (elusiveChosen.Equals("The Splitter"))
+                        {
+                            elusiveName = "Max Vallient Clone";
+                        }
+                        else if (elusiveChosen.Equals("The Dragon"))
+                        {
+                            elusiveName = "Xiang Weishang";
+                            killsList.Add("Barber Razor");
+
+                            disguisesList.Add("Concord Union Guard");
+                            disguisesList.Add("Concord Union Bodyguard");
+                            disguisesList.Add("Rory Cutmore");
+                            disguisesList.Add("Tournament Judge");
+
+                            disguisesList.Remove("Abel De Silva");
+                            disguisesList.Remove("Recording Crew");
+                            disguisesList.Remove("'Jordon Cross' Bodyguard");
+                            disguisesList.Remove("Exterminator");
+
+                        }
+                    }
+
+                    // Currently only used for The Dragon but may be useful in the future.
+                    if (killsIssued == 2)
+                    {
+                        if (elusiveChosen.Equals("The Dragon"))
+                        {
+                            elusiveName = "Roland Chau";
+                            killsList.Add("Barber Razor");
+
+                            disguisesList.Add("Concord Union Guard");
+                            disguisesList.Add("Concord Union Bodyguard");
+                            disguisesList.Add("Rory Cutmore");
+                            disguisesList.Add("Tournament Judge");
+
+                            disguisesList.Remove("Abel De Silva");
+                            disguisesList.Remove("Recording Crew");
+                            disguisesList.Remove("'Jordon Cross' Bodyguard");
+                            disguisesList.Remove("Exterminator");
+                        }
+                    }
+
+                    if (killsIssued == 3)
+                    {
+                        if (elusiveChosen.Equals("The Dragon"))
+                        {
+                            elusiveName = "Xiao Hu";
+                            killsList.Add("Barber Razor");
+
+                            disguisesList.Add("Concord Union Guard");
+                            disguisesList.Add("Concord Union Bodyguard");
+                            disguisesList.Add("Rory Cutmore");
+                            disguisesList.Add("Tournament Judge");
+
+                            disguisesList.Remove("Abel De Silva");
+                            disguisesList.Remove("Recording Crew");
+                            disguisesList.Remove("'Jordon Cross' Bodyguard");
+                            disguisesList.Remove("Exterminator");
                         }
                     }
 
@@ -611,6 +709,53 @@ class Randomization
                 #region Kills
                 if (broad == false)
                 {
+                    killsList.Remove("Accidental Explosion");
+                    killsList.Remove("Accidental Fall");
+                    killsList.Remove("Electrocution");
+                    killsList.Remove("Falling Object");
+                    killsList.Remove("Drowning");
+                    killsList.Remove("Unarmed");
+                    killsList.Remove("Fiber Wire");
+                    killsList.Remove("Loud Pistol Elimination");
+                    killsList.Remove("Silenced Pistol Elimination");
+                    killsList.Remove("Loud SMG Elimination");
+                    killsList.Remove("Silenced SMG Elimination");
+                    killsList.Remove("SMG Elimination");
+                    killsList.Remove("Pistol Elimination");
+                    killsList.Remove("Poison");
+                    killsList.Remove("Injected Poison");
+                    killsList.Remove("SMG");
+                    killsList.Remove("Assault Rifle");
+                    killsList.Remove("Pistol");
+                    killsList.Remove("Sniper Rifle");
+                    killsList.Remove("Silenced SMG");
+                    killsList.Remove("Silenced Assault Rifle");
+                    killsList.Remove("Silenced Pistol");
+                    killsList.Remove("Silenced Sniper Rifle");
+                    killsList.Remove("Silenced Shotgun");
+                    killsList.Remove("Loud Shotgun");
+                    killsList.Remove("Loud SMG");
+                    killsList.Remove("Loud Assault Rifle");
+                    killsList.Remove("Loud Pistol");
+                    killsList.Remove("Loud Sniper Rifle");
+                    killsList.Remove("Any Method");
+                    killsList.Remove("Explosive Device");
+                    killsList.Remove("Any Axe");
+                    killsList.Remove("Any Sword");
+                    killsList.Remove("Any Machete");
+                    killsList.Remove("Any Knife");
+
+                    for (int i = 0; i < listMapItems.Count(); i++)
+                    {
+                        killsList.Remove("Loud SMG");
+                        killsList.Add(listMapItems[i]);
+                    }
+
+                    // DEBUG PRINT
+                    // Console.WriteLine("Done Adding Items");
+
+                    List<String> listMasteryItemsToAdd = new List<String>();
+
                     for (int i = 0; i < 23; i++)
                     {
                         int masteryLevel = masteryList[i];
@@ -620,37 +765,37 @@ class Randomization
                         {
                             if (masteryLevel == 20)
                             {
-                                killsList.Add("Jaeger 7");
-                                killsList.Add("HWK21");
-                                killsList.Add("ICA19 Silverballer");
-                                killsList.Add("TAC-SMG");
-                                killsList.Add("HWK21 Covert");
+                                listMasteryItemsToAdd.Add("Jaeger 7");
+                                listMasteryItemsToAdd.Add("HWK21");
+                                listMasteryItemsToAdd.Add("ICA19 Silverballer");
+                                listMasteryItemsToAdd.Add("TAC-SMG");
+                                listMasteryItemsToAdd.Add("HWK21 Covert");
                                 additions = additions + 5;
                             }
                             else if (masteryLevel >= 12)
                             {
-                                killsList.Add("Jaeger 7");
-                                killsList.Add("HWK21");
-                                killsList.Add("ICA19 Silverballer");
-                                killsList.Add("TAC-SMG");
+                                listMasteryItemsToAdd.Add("Jaeger 7");
+                                listMasteryItemsToAdd.Add("HWK21");
+                                listMasteryItemsToAdd.Add("ICA19 Silverballer");
+                                listMasteryItemsToAdd.Add("TAC-SMG");
                                 additions = additions + 4;
                             }
                             else if (masteryLevel >= 11)
                             {
-                                killsList.Add("Jaeger 7");
-                                killsList.Add("HWK21");
-                                killsList.Add("ICA19 Silverballer");
+                                listMasteryItemsToAdd.Add("Jaeger 7");
+                                listMasteryItemsToAdd.Add("HWK21");
+                                listMasteryItemsToAdd.Add("ICA19 Silverballer");
                                 additions = additions + 3;
                             }
                             else if (masteryLevel >= 7)
                             {
-                                killsList.Add("Jaeger 7");
-                                killsList.Add("HWK21");
+                                listMasteryItemsToAdd.Add("Jaeger 7");
+                                listMasteryItemsToAdd.Add("HWK21");
                                 additions = additions + 2;
                             }
                             else if (masteryLevel >= 5)
                             {
-                                killsList.Add("Jaeger 7");
+                                listMasteryItemsToAdd.Add("Jaeger 7");
                                 additions = additions + 1;
                             }
                         }
@@ -659,28 +804,28 @@ class Randomization
                         {
                             if (masteryLevel == 20)
                             {
-                                killsList.Add("TAC4-AR Auto");
-                                killsList.Add("Combat Knife");
-                                killsList.Add("Enram HV");
-                                killsList.Add("Jaeger 7 Lancer");
+                                listMasteryItemsToAdd.Add("TAC4-AR Auto");
+                                listMasteryItemsToAdd.Add("Combat Knife");
+                                listMasteryItemsToAdd.Add("Enram HV");
+                                listMasteryItemsToAdd.Add("Jaeger 7 Lancer");
                                 additions = additions + 4;
                             }
                             else if (masteryLevel >= 12)
                             {
-                                killsList.Add("TAC4-AR Auto");
-                                killsList.Add("Combat Knife");
-                                killsList.Add("Enram HV");
+                                listMasteryItemsToAdd.Add("TAC4-AR Auto");
+                                listMasteryItemsToAdd.Add("Combat Knife");
+                                listMasteryItemsToAdd.Add("Enram HV");
                                 additions = additions + 3;
                             }
                             else if (masteryLevel >= 7)
                             {
-                                killsList.Add("TAC4-AR Auto");
-                                killsList.Add("Combat Knife");
+                                listMasteryItemsToAdd.Add("TAC4-AR Auto");
+                                listMasteryItemsToAdd.Add("Combat Knife");
                                 additions = additions + 2;
                             }
                             else if (masteryLevel >= 5)
                             {
-                                killsList.Add("TAC4-AR Auto");
+                                listMasteryItemsToAdd.Add("TAC4-AR Auto");
                                 additions = additions + 1;
                             }
 
@@ -690,28 +835,28 @@ class Randomization
                         {
                             if (masteryLevel == 20)
                             {
-                                killsList.Add("ICA19 F/A");
-                                killsList.Add("Janbiya");
-                                killsList.Add("Enram HV CM");
-                                killsList.Add("TAC4-AR Stealth");
+                                listMasteryItemsToAdd.Add("ICA19 F/A");
+                                listMasteryItemsToAdd.Add("Janbiya");
+                                listMasteryItemsToAdd.Add("Enram HV CM");
+                                listMasteryItemsToAdd.Add("TAC4-AR Stealth");
                                 additions = additions + 4;
                             }
                             else if (masteryLevel >= 12)
                             {
-                                killsList.Add("ICA19 F/A");
-                                killsList.Add("Janbiya");
-                                killsList.Add("Enram HV CM");
+                                listMasteryItemsToAdd.Add("ICA19 F/A");
+                                listMasteryItemsToAdd.Add("Janbiya");
+                                listMasteryItemsToAdd.Add("Enram HV CM");
                                 additions = additions + 3;
                             }
                             else if (masteryLevel >= 10)
                             {
-                                killsList.Add("ICA19 F/A");
-                                killsList.Add("Janbiya");
+                                listMasteryItemsToAdd.Add("ICA19 F/A");
+                                listMasteryItemsToAdd.Add("Janbiya");
                                 additions = additions + 2;
                             }
                             else if (masteryLevel >= 5)
                             {
-                                killsList.Add("ICA19 F/A");
+                                listMasteryItemsToAdd.Add("ICA19 F/A");
                                 additions = additions + 1;
                             }
 
@@ -721,37 +866,37 @@ class Randomization
                         {
                             if (masteryLevel == 20)
                             {
-                                killsList.Add("Nne Obara's Machete");
-                                killsList.Add("Enram HV Covert");
-                                killsList.Add("TAC-SMG S");
-                                killsList.Add("Jaeger 7 Tiger");
-                                killsList.Add("Krugermeier 2-2");
+                                listMasteryItemsToAdd.Add("Nne Obara's Machete");
+                                listMasteryItemsToAdd.Add("Enram HV Covert");
+                                listMasteryItemsToAdd.Add("TAC-SMG S");
+                                listMasteryItemsToAdd.Add("Jaeger 7 Tiger");
+                                listMasteryItemsToAdd.Add("Krugermeier 2-2");
                                 additions = additions + 5;
                             }
                             else if (masteryLevel >= 15)
                             {
-                                killsList.Add("Nne Obara's Machete");
-                                killsList.Add("Enram HV Covert");
-                                killsList.Add("TAC-SMG S");
-                                killsList.Add("Jaeger 7 Tiger");
+                                listMasteryItemsToAdd.Add("Nne Obara's Machete");
+                                listMasteryItemsToAdd.Add("Enram HV Covert");
+                                listMasteryItemsToAdd.Add("TAC-SMG S");
+                                listMasteryItemsToAdd.Add("Jaeger 7 Tiger");
                                 additions = additions + 4;
                             }
                             else if (masteryLevel >= 7)
                             {
-                                killsList.Add("Nne Obara's Machete");
-                                killsList.Add("Enram HV Covert");
-                                killsList.Add("TAC-SMG S");
+                                listMasteryItemsToAdd.Add("Nne Obara's Machete");
+                                listMasteryItemsToAdd.Add("Enram HV Covert");
+                                listMasteryItemsToAdd.Add("TAC-SMG S");
                                 additions = additions + 3;
                             }
                             else if (masteryLevel >= 5)
                             {
-                                killsList.Add("Nne Obara's Machete");
-                                killsList.Add("Enram HV Covert");
+                                listMasteryItemsToAdd.Add("Nne Obara's Machete");
+                                listMasteryItemsToAdd.Add("Enram HV Covert");
                                 additions = additions + 2;
                             }
                             else if (masteryLevel >= 2)
                             {
-                                killsList.Add("Nne Obara's Machete");
+                                listMasteryItemsToAdd.Add("Nne Obara's Machete");
                                 additions = additions + 1;
                             }
 
@@ -762,37 +907,37 @@ class Randomization
                         {
                             if (masteryLevel == 20)
                             {
-                                killsList.Add("RS-15");
-                                killsList.Add("TAC4 S/A");
-                                killsList.Add("ICA19 F/A Stealth");
-                                killsList.Add("Sieger 300");
-                                killsList.Add("Remote CX Demo Block");
+                                listMasteryItemsToAdd.Add("RS-15");
+                                listMasteryItemsToAdd.Add("TAC4 S/A");
+                                listMasteryItemsToAdd.Add("ICA19 F/A Stealth");
+                                listMasteryItemsToAdd.Add("Sieger 300");
+                                listMasteryItemsToAdd.Add("Remote CX Demo Block");
                                 additions = additions + 5;
                             }
                             else if (masteryLevel >= 15)
                             {
-                                killsList.Add("RS-15");
-                                killsList.Add("TAC4 S/A");
-                                killsList.Add("ICA19 F/A Stealth");
-                                killsList.Add("Sieger 300");
+                                listMasteryItemsToAdd.Add("RS-15");
+                                listMasteryItemsToAdd.Add("TAC4 S/A");
+                                listMasteryItemsToAdd.Add("ICA19 F/A Stealth");
+                                listMasteryItemsToAdd.Add("Sieger 300");
                                 additions = additions + 4;
                             }
                             else if (masteryLevel >= 10)
                             {
-                                killsList.Add("RS-15");
-                                killsList.Add("TAC4 S/A");
-                                killsList.Add("ICA19 F/A Stealth");
+                                listMasteryItemsToAdd.Add("RS-15");
+                                listMasteryItemsToAdd.Add("TAC4 S/A");
+                                listMasteryItemsToAdd.Add("ICA19 F/A Stealth");
                                 additions = additions + 3;
                             }
                             else if (masteryLevel >= 5)
                             {
-                                killsList.Add("RS-15");
-                                killsList.Add("TAC4 S/A");
+                                listMasteryItemsToAdd.Add("RS-15");
+                                listMasteryItemsToAdd.Add("TAC4 S/A");
                                 additions = additions + 2;
                             }
                             else if (masteryLevel >= 2)
                             {
-                                killsList.Add("RS-15");
+                                listMasteryItemsToAdd.Add("RS-15");
                                 additions = additions + 1;
                             }
 
@@ -802,37 +947,37 @@ class Randomization
                         {
                             if (masteryLevel == 20)
                             {
-                                killsList.Add("Shuriken");
-                                killsList.Add("Custom 5mm");
-                                killsList.Add("Masamune");
-                                killsList.Add("Concealable Knife");
-                                killsList.Add("Sieger 300 Advanced");
+                                listMasteryItemsToAdd.Add("Shuriken");
+                                listMasteryItemsToAdd.Add("Custom 5mm");
+                                listMasteryItemsToAdd.Add("Masamune");
+                                listMasteryItemsToAdd.Add("Concealable Knife");
+                                listMasteryItemsToAdd.Add("Sieger 300 Advanced");
                                 additions = additions + 5;
                             }
                             else if (masteryLevel >= 12)
                             {
-                                killsList.Add("Shuriken");
-                                killsList.Add("Custom 5mm");
-                                killsList.Add("Masamune");
-                                killsList.Add("Concealable Knife");
+                                listMasteryItemsToAdd.Add("Shuriken");
+                                listMasteryItemsToAdd.Add("Custom 5mm");
+                                listMasteryItemsToAdd.Add("Masamune");
+                                listMasteryItemsToAdd.Add("Concealable Knife");
                                 additions = additions + 4;
                             }
                             else if (masteryLevel >= 7)
                             {
-                                killsList.Add("Shuriken");
-                                killsList.Add("Custom 5mm");
-                                killsList.Add("Masamune");
+                                listMasteryItemsToAdd.Add("Shuriken");
+                                listMasteryItemsToAdd.Add("Custom 5mm");
+                                listMasteryItemsToAdd.Add("Masamune");
                                 additions = additions + 3;
                             }
                             else if (masteryLevel >= 5)
                             {
-                                killsList.Add("Shuriken");
-                                killsList.Add("Custom 5mm");
+                                listMasteryItemsToAdd.Add("Shuriken");
+                                listMasteryItemsToAdd.Add("Custom 5mm");
                                 additions = additions + 2;
                             }
                             else if (masteryLevel >= 2)
                             {
-                                killsList.Add("Shuriken");
+                                listMasteryItemsToAdd.Add("Shuriken");
                                 additions = additions + 1;
                             }
 
@@ -842,7 +987,7 @@ class Randomization
                         {
                             if (masteryLevel == 5)
                             {
-                                killsList.Add("Tanto");
+                                listMasteryItemsToAdd.Add("Tanto");
                                 additions = additions + 1;
                             }
                         }
@@ -851,28 +996,28 @@ class Randomization
                         {
                             if (masteryLevel >= 16)
                             {
-                                killsList.Add("Jaeger Seven MK II");
-                                killsList.Add("HWK 21 MK II");
-                                killsList.Add("Concept 5");
-                                killsList.Add("Fishing Line");
+                                listMasteryItemsToAdd.Add("Jaeger Seven MK II");
+                                listMasteryItemsToAdd.Add("HWK 21 MK II");
+                                listMasteryItemsToAdd.Add("Concept 5");
+                                listMasteryItemsToAdd.Add("Fishing Line");
                                 additions = additions + 4;
                             }
                             else if (masteryLevel >= 15)
                             {
-                                killsList.Add("Jaeger Seven MK II");
-                                killsList.Add("HWK 21 MK II");
-                                killsList.Add("Concept 5");
+                                listMasteryItemsToAdd.Add("Jaeger Seven MK II");
+                                listMasteryItemsToAdd.Add("HWK 21 MK II");
+                                listMasteryItemsToAdd.Add("Concept 5");
                                 additions = additions + 3;
                             }
                             else if (masteryLevel >= 7)
                             {
-                                killsList.Add("Jaeger Seven MK II");
-                                killsList.Add("HWK 21 MK II");
+                                listMasteryItemsToAdd.Add("Jaeger Seven MK II");
+                                listMasteryItemsToAdd.Add("HWK 21 MK II");
                                 additions = additions + 2;
                             }
                             else if (masteryLevel >= 5)
                             {
-                                killsList.Add("Jaeger Seven MK II");
+                                listMasteryItemsToAdd.Add("Jaeger Seven MK II");
                                 additions = additions + 1;
                             }
                         }
@@ -881,20 +1026,20 @@ class Randomization
                         {
                             if (masteryLevel >= 16)
                             {
-                                killsList.Add("Shaskha A33 H");
-                                killsList.Add("TAC-SMG MK II");
-                                killsList.Add("Sacrifical Knife");
+                                listMasteryItemsToAdd.Add("Shaskha A33 H");
+                                listMasteryItemsToAdd.Add("TAC-SMG MK II");
+                                listMasteryItemsToAdd.Add("Sacrifical Knife");
                                 additions = additions + 3;
                             }
                             else if (masteryLevel >= 13)
                             {
-                                killsList.Add("Shaskha A33 H");
-                                killsList.Add("TAC-SMG MK II");
+                                listMasteryItemsToAdd.Add("Shaskha A33 H");
+                                listMasteryItemsToAdd.Add("TAC-SMG MK II");
                                 additions = additions + 2;
                             }
                             else if (masteryLevel >= 10)
                             {
-                                killsList.Add("Shaskha A33 H");
+                                listMasteryItemsToAdd.Add("Shaskha A33 H");
                                 additions = additions + 1;
                             }
 
@@ -904,37 +1049,37 @@ class Randomization
                         {
                             if (masteryLevel == 20)
                             {
-                                killsList.Add("ICA19 Silverballer MK II");
-                                killsList.Add("Bartoli 12G Short H");
-                                killsList.Add("DAK X2 Covert Special");
-                                killsList.Add("Antique Curved Knife");
-                                killsList.Add("Druzhina 34");
+                                listMasteryItemsToAdd.Add("ICA19 Silverballer MK II");
+                                listMasteryItemsToAdd.Add("Bartoli 12G Short H");
+                                listMasteryItemsToAdd.Add("DAK X2 Covert Special");
+                                listMasteryItemsToAdd.Add("Antique Curved Knife");
+                                listMasteryItemsToAdd.Add("Druzhina 34");
                                 additions = additions + 5;
                             }
                             else if (masteryLevel >= 18)
                             {
-                                killsList.Add("ICA19 Silverballer MK II");
-                                killsList.Add("Bartoli 12G Short H");
-                                killsList.Add("DAK X2 Covert Special");
-                                killsList.Add("Antique Curved Knife");
+                                listMasteryItemsToAdd.Add("ICA19 Silverballer MK II");
+                                listMasteryItemsToAdd.Add("Bartoli 12G Short H");
+                                listMasteryItemsToAdd.Add("DAK X2 Covert Special");
+                                listMasteryItemsToAdd.Add("Antique Curved Knife");
                                 additions = additions + 4;
                             }
                             else if (masteryLevel >= 15)
                             {
-                                killsList.Add("ICA19 Silverballer MK II");
-                                killsList.Add("Bartoli 12G Short H");
-                                killsList.Add("DAK X2 Covert Special");
+                                listMasteryItemsToAdd.Add("ICA19 Silverballer MK II");
+                                listMasteryItemsToAdd.Add("Bartoli 12G Short H");
+                                listMasteryItemsToAdd.Add("DAK X2 Covert Special");
                                 additions = additions + 3;
                             }
                             else if (masteryLevel >= 5)
                             {
-                                killsList.Add("ICA19 Silverballer MK II");
-                                killsList.Add("Bartoli 12G Short H");
+                                listMasteryItemsToAdd.Add("ICA19 Silverballer MK II");
+                                listMasteryItemsToAdd.Add("Bartoli 12G Short H");
                                 additions = additions + 2;
                             }
                             else if (masteryLevel >= 2)
                             {
-                                killsList.Add("ICA19 Silverballer MK II");
+                                listMasteryItemsToAdd.Add("ICA19 Silverballer MK II");
                                 additions = additions + 1;
                             }
 
@@ -944,13 +1089,13 @@ class Randomization
                         {
                             if (masteryLevel >= 15)
                             {
-                                killsList.Add("TAC-4 AR MK II");
-                                killsList.Add("Rude Ruby");
+                                listMasteryItemsToAdd.Add("TAC-4 AR MK II");
+                                listMasteryItemsToAdd.Add("Rude Ruby");
                                 additions = additions + 2;
                             }
                             else if (masteryLevel >= 2)
                             {
-                                killsList.Add("TAC-4 AR MK II");
+                                listMasteryItemsToAdd.Add("TAC-4 AR MK II");
                                 additions = additions + 1;
                             }
 
@@ -960,20 +1105,20 @@ class Randomization
                         {
                             if (masteryLevel >= 18)
                             {
-                                killsList.Add("Sieger 300 Tactical");
-                                killsList.Add("Broadsword");
-                                killsList.Add("Enram HV Covert MK II");
+                                listMasteryItemsToAdd.Add("Sieger 300 Tactical");
+                                listMasteryItemsToAdd.Add("Broadsword");
+                                listMasteryItemsToAdd.Add("Enram HV Covert MK II");
                                 additions = additions + 3;
                             }
                             else if (masteryLevel >= 15)
                             {
-                                killsList.Add("Sieger 300 Tactical");
-                                killsList.Add("Broadsword");
+                                listMasteryItemsToAdd.Add("Sieger 300 Tactical");
+                                listMasteryItemsToAdd.Add("Broadsword");
                                 additions = additions + 2;
                             }
                             else if (masteryLevel >= 10)
                             {
-                                killsList.Add("Sieger 300 Tactical");
+                                listMasteryItemsToAdd.Add("Sieger 300 Tactical");
                                 additions = additions + 1;
                             }
 
@@ -983,7 +1128,7 @@ class Randomization
                         {
                             if (masteryLevel >= 13)
                             {
-                                killsList.Add("Sawed Off Bartoli 12G H");
+                                listMasteryItemsToAdd.Add("Sawed Off Bartoli 12G H");
                                 additions = additions + 1;
                             }
                         }
@@ -992,20 +1137,20 @@ class Randomization
                         {
                             if (masteryLevel == 20)
                             {
-                                killsList.Add("Jarl's Pirate Saber");
-                                killsList.Add("The Black Almond's Dagger");
-                                killsList.Add("Jaeger 7 Tuatara");
+                                listMasteryItemsToAdd.Add("Jarl's Pirate Saber");
+                                listMasteryItemsToAdd.Add("The Black Almond's Dagger");
+                                listMasteryItemsToAdd.Add("Jaeger 7 Tuatara");
                                 additions = additions + 3;
                             }
                             else if (masteryLevel >= 15)
                             {
-                                killsList.Add("Jarl's Pirate Saber");
-                                killsList.Add("The Black Almond's Dagger");
+                                listMasteryItemsToAdd.Add("Jarl's Pirate Saber");
+                                listMasteryItemsToAdd.Add("The Black Almond's Dagger");
                                 additions = additions + 2;
                             }
                             else if (masteryLevel >= 2)
                             {
-                                killsList.Add("Jarl's Pirate Saber");
+                                listMasteryItemsToAdd.Add("Jarl's Pirate Saber");
                                 additions = additions + 1;
                             }
 
@@ -1015,7 +1160,7 @@ class Randomization
                         {
                             if (masteryLevel == 20)
                             {
-                                killsList.Add("Druhzina 34 ICA Arctic");
+                                listMasteryItemsToAdd.Add("Druhzina 34 ICA Arctic");
                                 additions = additions + 1;
                             }
                         }
@@ -1024,13 +1169,13 @@ class Randomization
                         {
                             if (masteryLevel >= 15)
                             {
-                                killsList.Add("Ornate Scimitar");
-                                killsList.Add("Druhzina 34 DTI");
+                                listMasteryItemsToAdd.Add("Ornate Scimitar");
+                                listMasteryItemsToAdd.Add("Druhzina 34 DTI");
                                 additions = additions + 2;
                             }
                             else if (masteryLevel >= 13)
                             {
-                                killsList.Add("Ornate Scimitar");
+                                listMasteryItemsToAdd.Add("Ornate Scimitar");
                                 additions = additions + 1;
                             }
                         }
@@ -1039,20 +1184,20 @@ class Randomization
                         {
                             if (masteryLevel == 20)
                             {
-                                killsList.Add("ICA19 Shortballer");
-                                killsList.Add("Kukri Knife");
-                                killsList.Add("Bartoli Woodsman Hunting Rifle");
+                                listMasteryItemsToAdd.Add("ICA19 Shortballer");
+                                listMasteryItemsToAdd.Add("Kukri Knife");
+                                listMasteryItemsToAdd.Add("Bartoli Woodsman Hunting Rifle");
                                 additions = additions + 3;
                             }
                             else if (masteryLevel >= 13)
                             {
-                                killsList.Add("ICA19 Shortballer");
-                                killsList.Add("Kukri Knife");
+                                listMasteryItemsToAdd.Add("ICA19 Shortballer");
+                                listMasteryItemsToAdd.Add("Kukri Knife");
                                 additions = additions + 2;
                             }
                             else if (masteryLevel >= 5)
                             {
-                                killsList.Add("ICA19 Shortballer");
+                                listMasteryItemsToAdd.Add("ICA19 Shortballer");
                                 additions = additions + 1;
                             }
 
@@ -1062,7 +1207,7 @@ class Randomization
                         {
                             if (masteryLevel >= 7)
                             {
-                                killsList.Add("Custom 5mm DTI");
+                                listMasteryItemsToAdd.Add("Custom 5mm DTI");
                                 additions = additions + 1;
                             }
                         }
@@ -1071,20 +1216,20 @@ class Randomization
                         {
                             if (masteryLevel == 20)
                             {
-                                killsList.Add("ICA Tactical Shotgun");
-                                killsList.Add("ICA SMG Raptor Covert");
-                                killsList.Add("Hackl Leviathan Sniper Rifle Covert");
+                                listMasteryItemsToAdd.Add("ICA Tactical Shotgun");
+                                listMasteryItemsToAdd.Add("ICA SMG Raptor Covert");
+                                listMasteryItemsToAdd.Add("Hackl Leviathan Sniper Rifle Covert");
                                 additions = additions + 3;
                             }
                             else if (masteryLevel >= 15)
                             {
-                                killsList.Add("ICA Tactical Shotgun");
-                                killsList.Add("ICA SMG Raptor Covert");
+                                listMasteryItemsToAdd.Add("ICA Tactical Shotgun");
+                                listMasteryItemsToAdd.Add("ICA SMG Raptor Covert");
                                 additions = additions + 2;
                             }
                             else if (masteryLevel >= 10)
                             {
-                                killsList.Add("ICA Tactical Shotgun");
+                                listMasteryItemsToAdd.Add("ICA Tactical Shotgun");
                                 additions = additions + 1;
                             }
 
@@ -1094,37 +1239,37 @@ class Randomization
                         {
                             if (masteryLevel == 20)
                             {
-                                killsList.Add("ICA DTI Stealth");
-                                killsList.Add("ICA Combat Axe");
-                                killsList.Add("Krugermeier 2-2 Silver");
-                                killsList.Add("DAK Black Covert");
-                                killsList.Add("Sieger 300 Viper");
+                                listMasteryItemsToAdd.Add("ICA DTI Stealth");
+                                listMasteryItemsToAdd.Add("ICA Combat Axe");
+                                listMasteryItemsToAdd.Add("Krugermeier 2-2 Silver");
+                                listMasteryItemsToAdd.Add("DAK Black Covert");
+                                listMasteryItemsToAdd.Add("Sieger 300 Viper");
                                 additions = additions + 5;
                             }
                             else if (masteryLevel >= 15)
                             {
-                                killsList.Add("ICA DTI Stealth");
-                                killsList.Add("ICA Combat Axe");
-                                killsList.Add("Krugermeier 2-2 Silver");
-                                killsList.Add("DAK Black Covert");
+                                listMasteryItemsToAdd.Add("ICA DTI Stealth");
+                                listMasteryItemsToAdd.Add("ICA Combat Axe");
+                                listMasteryItemsToAdd.Add("Krugermeier 2-2 Silver");
+                                listMasteryItemsToAdd.Add("DAK Black Covert");
                                 additions = additions + 4;
                             }
                             else if (masteryLevel >= 10)
                             {
-                                killsList.Add("ICA DTI Stealth");
-                                killsList.Add("ICA Combat Axe");
-                                killsList.Add("Krugermeier 2-2 Silver");
+                                listMasteryItemsToAdd.Add("ICA DTI Stealth");
+                                listMasteryItemsToAdd.Add("ICA Combat Axe");
+                                listMasteryItemsToAdd.Add("Krugermeier 2-2 Silver");
                                 additions = additions + 3;
                             }
                             else if (masteryLevel >= 7)
                             {
-                                killsList.Add("ICA DTI Stealth");
-                                killsList.Add("ICA Combat Axe");
+                                listMasteryItemsToAdd.Add("ICA DTI Stealth");
+                                listMasteryItemsToAdd.Add("ICA Combat Axe");
                                 additions = additions + 2;
                             }
                             else if (masteryLevel >= 2)
                             {
-                                killsList.Add("ICA DTI Stealth");
+                                listMasteryItemsToAdd.Add("ICA DTI Stealth");
                                 additions = additions + 1;
                             }
 
@@ -1134,23 +1279,23 @@ class Randomization
                         {
                             if (masteryLevel == 5)
                             {
-                                killsList.Add("HWK Pale Homemade Silencer");
-                                killsList.Add("Goldballer");
-                                killsList.Add("Proximity Semtex Demo Block MK III");
-                                killsList.Add("ICA Tactical Shotgun Covert");
+                                listMasteryItemsToAdd.Add("HWK Pale Homemade Silencer");
+                                listMasteryItemsToAdd.Add("Goldballer");
+                                listMasteryItemsToAdd.Add("Proximity Semtex Demo Block MK III");
+                                listMasteryItemsToAdd.Add("ICA Tactical Shotgun Covert");
                                 additions = additions + 4;
                             }
                             else if (masteryLevel >= 4)
                             {
-                                killsList.Add("HWK Pale Homemade Silencer");
-                                killsList.Add("Goldballer");
-                                killsList.Add("Proximity Semtex Demo Block MK III");
+                                listMasteryItemsToAdd.Add("HWK Pale Homemade Silencer");
+                                listMasteryItemsToAdd.Add("Goldballer");
+                                listMasteryItemsToAdd.Add("Proximity Semtex Demo Block MK III");
                                 additions = additions + 3;
                             }
                             else if (masteryLevel >= 2)
                             {
-                                killsList.Add("HWK Pale Homemade Silencer");
-                                killsList.Add("Goldballer");
+                                listMasteryItemsToAdd.Add("HWK Pale Homemade Silencer");
+                                listMasteryItemsToAdd.Add("Goldballer");
                                 additions = additions + 2;
                             }
 
@@ -1160,37 +1305,37 @@ class Randomization
                         {
                             if (masteryLevel == 20)
                             {
-                                killsList.Add("Kukri Machete");
-                                killsList.Add("Brine Damaged SMG");
-                                killsList.Add("Hook");
-                                killsList.Add("Militia Issued HX-10 SMG");
-                                killsList.Add("Molotov Cocktail");
+                                listMasteryItemsToAdd.Add("Kukri Machete");
+                                listMasteryItemsToAdd.Add("Brine Damaged SMG");
+                                listMasteryItemsToAdd.Add("Hook");
+                                listMasteryItemsToAdd.Add("Militia Issued HX-10 SMG");
+                                listMasteryItemsToAdd.Add("Molotov Cocktail");
                                 additions = additions + 5;
                             }
                             else if (masteryLevel >= 13)
                             {
-                                killsList.Add("Kukri Machete");
-                                killsList.Add("Brine Damaged SMG");
-                                killsList.Add("Hook");
-                                killsList.Add("Militia Issued HX-10 SMG");
+                                listMasteryItemsToAdd.Add("Kukri Machete");
+                                listMasteryItemsToAdd.Add("Brine Damaged SMG");
+                                listMasteryItemsToAdd.Add("Hook");
+                                listMasteryItemsToAdd.Add("Militia Issued HX-10 SMG");
                                 additions = additions + 4;
                             }
                             else if (masteryLevel >= 10)
                             {
-                                killsList.Add("Kukri Machete");
-                                killsList.Add("Brine Damaged SMG");
-                                killsList.Add("Hook");
+                                listMasteryItemsToAdd.Add("Kukri Machete");
+                                listMasteryItemsToAdd.Add("Brine Damaged SMG");
+                                listMasteryItemsToAdd.Add("Hook");
                                 additions = additions + 3;
                             }
                             else if (masteryLevel >= 6)
                             {
-                                killsList.Add("Kukri Machete");
-                                killsList.Add("Brine Damaged SMG");
+                                listMasteryItemsToAdd.Add("Kukri Machete");
+                                listMasteryItemsToAdd.Add("Brine Damaged SMG");
                                 additions = additions + 2;
                             }
                             else if (masteryLevel >= 3)
                             {
-                                killsList.Add("Kukri Machete");
+                                listMasteryItemsToAdd.Add("Kukri Machete");
                                 additions = additions + 1;
                             }
 
@@ -1200,112 +1345,112 @@ class Randomization
                         {
                             if (masteryLevel >= 60)
                             {
-                                killsList.Add("The Ancestral Knife");
-                                killsList.Add("The Ancestral Sniper Rifle");
-                                killsList.Add("The Ancestral Assault Rifle");
-                                killsList.Add("The Ancestral Shotgun");
-                                killsList.Add("The Ancestral Pistol");
-                                killsList.Add("The Ornamental Sniper Rifle");
-                                killsList.Add("The Ornamental SMG");
-                                killsList.Add("The Ornamental Shotgun");
-                                killsList.Add("The Ornamental Katana");
-                                killsList.Add("The Ornamental Assault Rifle");
-                                killsList.Add("The Ornamental Pistol");
+                                listMasteryItemsToAdd.Add("The Ancestral Knife");
+                                listMasteryItemsToAdd.Add("The Ancestral Sniper Rifle");
+                                listMasteryItemsToAdd.Add("The Ancestral Assault Rifle");
+                                listMasteryItemsToAdd.Add("The Ancestral Shotgun");
+                                listMasteryItemsToAdd.Add("The Ancestral Pistol");
+                                listMasteryItemsToAdd.Add("The Ornamental Sniper Rifle");
+                                listMasteryItemsToAdd.Add("The Ornamental SMG");
+                                listMasteryItemsToAdd.Add("The Ornamental Shotgun");
+                                listMasteryItemsToAdd.Add("The Ornamental Katana");
+                                listMasteryItemsToAdd.Add("The Ornamental Assault Rifle");
+                                listMasteryItemsToAdd.Add("The Ornamental Pistol");
                                 additions = additions + 11;
                             }
                             else if (masteryLevel >= 55)
                             {
-                                killsList.Add("The Ancestral Sniper Rifle");
-                                killsList.Add("The Ancestral Assault Rifle");
-                                killsList.Add("The Ancestral Shotgun");
-                                killsList.Add("The Ancestral Pistol");
-                                killsList.Add("The Ornamental Sniper Rifle");
-                                killsList.Add("The Ornamental SMG");
-                                killsList.Add("The Ornamental Shotgun");
-                                killsList.Add("The Ornamental Katana");
-                                killsList.Add("The Ornamental Assault Rifle");
-                                killsList.Add("The Ornamental Pistol");
+                                listMasteryItemsToAdd.Add("The Ancestral Sniper Rifle");
+                                listMasteryItemsToAdd.Add("The Ancestral Assault Rifle");
+                                listMasteryItemsToAdd.Add("The Ancestral Shotgun");
+                                listMasteryItemsToAdd.Add("The Ancestral Pistol");
+                                listMasteryItemsToAdd.Add("The Ornamental Sniper Rifle");
+                                listMasteryItemsToAdd.Add("The Ornamental SMG");
+                                listMasteryItemsToAdd.Add("The Ornamental Shotgun");
+                                listMasteryItemsToAdd.Add("The Ornamental Katana");
+                                listMasteryItemsToAdd.Add("The Ornamental Assault Rifle");
+                                listMasteryItemsToAdd.Add("The Ornamental Pistol");
                                 additions = additions + 10;
                             }
                             else if (masteryLevel >= 50)
                             {
-                                killsList.Add("The Ancestral Assault Rifle");
-                                killsList.Add("The Ancestral Shotgun");
-                                killsList.Add("The Ancestral Pistol");
-                                killsList.Add("The Ornamental Sniper Rifle");
-                                killsList.Add("The Ornamental SMG");
-                                killsList.Add("The Ornamental Shotgun");
-                                killsList.Add("The Ornamental Katana");
-                                killsList.Add("The Ornamental Assault Rifle");
-                                killsList.Add("The Ornamental Pistol");
+                                listMasteryItemsToAdd.Add("The Ancestral Assault Rifle");
+                                listMasteryItemsToAdd.Add("The Ancestral Shotgun");
+                                listMasteryItemsToAdd.Add("The Ancestral Pistol");
+                                listMasteryItemsToAdd.Add("The Ornamental Sniper Rifle");
+                                listMasteryItemsToAdd.Add("The Ornamental SMG");
+                                listMasteryItemsToAdd.Add("The Ornamental Shotgun");
+                                listMasteryItemsToAdd.Add("The Ornamental Katana");
+                                listMasteryItemsToAdd.Add("The Ornamental Assault Rifle");
+                                listMasteryItemsToAdd.Add("The Ornamental Pistol");
                                 additions = additions + 9;
                             }
                             else if (masteryLevel >= 45)
                             {
-                                killsList.Add("The Ancestral Shotgun");
-                                killsList.Add("The Ancestral Pistol");
-                                killsList.Add("The Ornamental Sniper Rifle");
-                                killsList.Add("The Ornamental SMG");
-                                killsList.Add("The Ornamental Shotgun");
-                                killsList.Add("The Ornamental Katana");
-                                killsList.Add("The Ornamental Assault Rifle");
-                                killsList.Add("The Ornamental Pistol");
+                                listMasteryItemsToAdd.Add("The Ancestral Shotgun");
+                                listMasteryItemsToAdd.Add("The Ancestral Pistol");
+                                listMasteryItemsToAdd.Add("The Ornamental Sniper Rifle");
+                                listMasteryItemsToAdd.Add("The Ornamental SMG");
+                                listMasteryItemsToAdd.Add("The Ornamental Shotgun");
+                                listMasteryItemsToAdd.Add("The Ornamental Katana");
+                                listMasteryItemsToAdd.Add("The Ornamental Assault Rifle");
+                                listMasteryItemsToAdd.Add("The Ornamental Pistol");
                                 additions = additions + 8;
                             }
                             else if (masteryLevel >= 40)
                             {
-                                killsList.Add("The Ancestral Pistol");
-                                killsList.Add("The Ornamental Sniper Rifle");
-                                killsList.Add("The Ornamental SMG");
-                                killsList.Add("The Ornamental Shotgun");
-                                killsList.Add("The Ornamental Katana");
-                                killsList.Add("The Ornamental Assault Rifle");
-                                killsList.Add("The Ornamental Pistol");
+                                listMasteryItemsToAdd.Add("The Ancestral Pistol");
+                                listMasteryItemsToAdd.Add("The Ornamental Sniper Rifle");
+                                listMasteryItemsToAdd.Add("The Ornamental SMG");
+                                listMasteryItemsToAdd.Add("The Ornamental Shotgun");
+                                listMasteryItemsToAdd.Add("The Ornamental Katana");
+                                listMasteryItemsToAdd.Add("The Ornamental Assault Rifle");
+                                listMasteryItemsToAdd.Add("The Ornamental Pistol");
                                 additions = additions + 7;
                             }
                             else if (masteryLevel >= 30)
                             {
-                                killsList.Add("The Ornamental Sniper Rifle");
-                                killsList.Add("The Ornamental SMG");
-                                killsList.Add("The Ornamental Shotgun");
-                                killsList.Add("The Ornamental Katana");
-                                killsList.Add("The Ornamental Assault Rifle");
-                                killsList.Add("The Ornamental Pistol");
+                                listMasteryItemsToAdd.Add("The Ornamental Sniper Rifle");
+                                listMasteryItemsToAdd.Add("The Ornamental SMG");
+                                listMasteryItemsToAdd.Add("The Ornamental Shotgun");
+                                listMasteryItemsToAdd.Add("The Ornamental Katana");
+                                listMasteryItemsToAdd.Add("The Ornamental Assault Rifle");
+                                listMasteryItemsToAdd.Add("The Ornamental Pistol");
                                 additions = additions + 6;
                             }
                             else if (masteryLevel >= 25)
                             {
-                                killsList.Add("The Ornamental SMG");
-                                killsList.Add("The Ornamental Shotgun");
-                                killsList.Add("The Ornamental Katana");
-                                killsList.Add("The Ornamental Assault Rifle");
-                                killsList.Add("The Ornamental Pistol");
+                                listMasteryItemsToAdd.Add("The Ornamental SMG");
+                                listMasteryItemsToAdd.Add("The Ornamental Shotgun");
+                                listMasteryItemsToAdd.Add("The Ornamental Katana");
+                                listMasteryItemsToAdd.Add("The Ornamental Assault Rifle");
+                                listMasteryItemsToAdd.Add("The Ornamental Pistol");
                                 additions = additions + 5;
                             }
                             else if (masteryLevel >= 20)
                             {
-                                killsList.Add("The Ornamental Shotgun");
-                                killsList.Add("The Ornamental Katana");
-                                killsList.Add("The Ornamental Assault Rifle");
-                                killsList.Add("The Ornamental Pistol");
+                                listMasteryItemsToAdd.Add("The Ornamental Shotgun");
+                                listMasteryItemsToAdd.Add("The Ornamental Katana");
+                                listMasteryItemsToAdd.Add("The Ornamental Assault Rifle");
+                                listMasteryItemsToAdd.Add("The Ornamental Pistol");
                                 additions = additions + 4;
                             }
                             else if (masteryLevel >= 15)
                             {
-                                killsList.Add("The Ornamental Katana");
-                                killsList.Add("The Ornamental Assault Rifle");
-                                killsList.Add("The Ornamental Pistol");
+                                listMasteryItemsToAdd.Add("The Ornamental Katana");
+                                listMasteryItemsToAdd.Add("The Ornamental Assault Rifle");
+                                listMasteryItemsToAdd.Add("The Ornamental Pistol");
                                 additions = additions + 3;
                             }
                             else if (masteryLevel >= 10)
                             {
-                                killsList.Add("The Ornamental Assault Rifle");
-                                killsList.Add("The Ornamental Pistol");
+                                listMasteryItemsToAdd.Add("The Ornamental Assault Rifle");
+                                listMasteryItemsToAdd.Add("The Ornamental Pistol");
                                 additions = additions + 2;
                             }
                             else if (masteryLevel >= 5)
                             {
-                                killsList.Add("The Ornamental Pistol");
+                                listMasteryItemsToAdd.Add("The Ornamental Pistol");
                                 additions = additions + 1;
                             }
                         }
@@ -1328,121 +1473,121 @@ class Randomization
 
                     if (sevenDeadly == true)
                     {
-                        killsList.Add("The Proud Swashbuckler");
-                        killsList.Add("The Majestic");
-                        killsList.Add("Slapdash SMG");
-                        killsList.Add("Serpent's Bite");
-                        killsList.Add("The Maximalist Shotgun");
-                        killsList.Add("The Cat's Claw");
-                        killsList.Add("Jaeger 7 Green Eye");
-                        killsList.Add("The Shashka Beast");
+                        listMasteryItemsToAdd.Add("The Proud Swashbuckler");
+                        listMasteryItemsToAdd.Add("The Majestic");
+                        listMasteryItemsToAdd.Add("Slapdash SMG");
+                        listMasteryItemsToAdd.Add("Serpent's Bite");
+                        listMasteryItemsToAdd.Add("The Maximalist Shotgun");
+                        listMasteryItemsToAdd.Add("The Cat's Claw");
+                        listMasteryItemsToAdd.Add("Jaeger 7 Green Eye");
+                        listMasteryItemsToAdd.Add("The Shashka Beast");
                         additions = additions + 8;
                     }
                     if (concreteArt == true)
                     {
-                        killsList.Add("The Concrete Bunny Pistol");
-                        killsList.Add("The Concrete Shotgun");
-                        killsList.Add("The Shark SMG");
-                        killsList.Add("The Concrete Assault Rifle");
-                        killsList.Add("The Concrete Sniper Rifle");
+                        listMasteryItemsToAdd.Add("The Concrete Bunny Pistol");
+                        listMasteryItemsToAdd.Add("The Concrete Shotgun");
+                        listMasteryItemsToAdd.Add("The Shark SMG");
+                        listMasteryItemsToAdd.Add("The Concrete Assault Rifle");
+                        listMasteryItemsToAdd.Add("The Concrete Sniper Rifle");
                         additions = additions + 5;
                     }
                     if (makeshiftPack == true)
                     {
-                        killsList.Add("The Makeshift Katana");
-                        killsList.Add("The Scrap Gun");
-                        killsList.Add("The Makeshift Scrap Shotgun");
-                        killsList.Add("The Scrap SMG");
-                        killsList.Add("The Makeshift Scrap Assault Rifle");
-                        killsList.Add("The Scrappy Sniper Rifle");
+                        listMasteryItemsToAdd.Add("The Makeshift Katana");
+                        listMasteryItemsToAdd.Add("The Scrap Gun");
+                        listMasteryItemsToAdd.Add("The Makeshift Scrap Shotgun");
+                        listMasteryItemsToAdd.Add("The Scrap SMG");
+                        listMasteryItemsToAdd.Add("The Makeshift Scrap Assault Rifle");
+                        listMasteryItemsToAdd.Add("The Scrappy Sniper Rifle");
                         additions = additions + 5;
                     }
                     if (deluxe == true)
                     {
-                        killsList.Add("DAK Gold Covert");
-                        killsList.Add("Bartoli Hunting Shotgun Deluxe");
-                        killsList.Add("The Golden Dragon");
-                        killsList.Add("Sieger 300 Arctic");
-                        killsList.Add("White Katana");
+                        listMasteryItemsToAdd.Add("DAK Gold Covert");
+                        listMasteryItemsToAdd.Add("Bartoli Hunting Shotgun Deluxe");
+                        listMasteryItemsToAdd.Add("The Golden Dragon");
+                        listMasteryItemsToAdd.Add("Sieger 300 Arctic");
+                        listMasteryItemsToAdd.Add("White Katana");
                         additions = additions + 5;
                     }
                     if (trinityPack == true)
                     {
-                        killsList.Add("ICA19 White Trinity");
-                        killsList.Add("ICA19 Red Trinity");
-                        killsList.Add("ICA19 Black Trinity");
+                        listMasteryItemsToAdd.Add("ICA19 White Trinity");
+                        listMasteryItemsToAdd.Add("ICA19 Red Trinity");
+                        listMasteryItemsToAdd.Add("ICA19 Black Trinity");
                         additions = additions + 3;
                     }
                     if (undyingPack == true)
                     {
-                        killsList.Add("Krondstadt IOI-1998X Surround Earphones");
-                        killsList.Add("Krondstadt Explosive Pen (Gen 2)");
+                        listMasteryItemsToAdd.Add("Krondstadt IOI-1998X Surround Earphones");
+                        listMasteryItemsToAdd.Add("Krondstadt Explosive Pen (Gen 2)");
                         additions = additions + 2;
                     }
                     if (disruptorPack == true)
                     {
-                        killsList.Add("The Disruptor Resistance Band");
+                        listMasteryItemsToAdd.Add("The Disruptor Resistance Band");
                         additions = additions + 1;
                     }
                     if (dropPack == true)
                     {
-                        killsList.Add("The Club Boom 12\" Vinyl Sampler");
+                        listMasteryItemsToAdd.Add("The Club Boom 12\" Vinyl Sampler");
                         additions = additions + 1;
                     }
                     if (splitterPack == true)
                     {
-                        killsList.Add("The Splitter SMG");
-                        killsList.Add("The Splitter Kukri Knife");
+                        listMasteryItemsToAdd.Add("The Splitter SMG");
+                        listMasteryItemsToAdd.Add("The Splitter Kukri Knife");
                         additions = additions + 2;
                     }
 
                     if (bankerPack == true)
                     {
-                        killsList.Add("The Banker Silenced Pistol");
-                        killsList.Add("The Banker Rope");
+                        listMasteryItemsToAdd.Add("The Banker Silenced Pistol");
+                        listMasteryItemsToAdd.Add("The Banker Rope");
                         additions = additions + 2;
                     }
 
                     if (bruceLeePack == true)
                     {
-                        killsList.Add("The Banker Silenced Pistol");
-                        killsList.Add("The Banker Rope");
+                        listMasteryItemsToAdd.Add("The Banker Silenced Pistol");
+                        listMasteryItemsToAdd.Add("The Banker Rope");
                         additions = additions + 2;
                     }
 
                     if (freeRemove.Equals("N", StringComparison.OrdinalIgnoreCase))
                     {
-                        killsList.Add("Sieger 300 Ghost");
-                        killsList.Add("Floral Baller");
-                        killsList.Add("Fiber Wire Classic");
-                        killsList.Add("ICA Bartoli Woodsman Hunting Rifle Covert");
-                        killsList.Add("TAC-4 AR Desert");
-                        killsList.Add("Earphones");
-                        killsList.Add("ICA19");
-                        killsList.Add("ICA19 Classicballer");
-                        killsList.Add("TAC-4 S/A Jungle");
-                        killsList.Add("Measuring Tape");
-                        killsList.Add("Krugermeier 2-2 Dark");
-                        killsList.Add("Sieger AR552 Tactical");
-                        killsList.Add("Striker V3");
-                        killsList.Add("The Ducky Gun");
-                        killsList.Add("The Iridescent Katana");
-                        killsList.Add("The White Ruby Rude 300 Sniper Rifle");
-                        killsList.Add("IO Elite S2VP Earphones");
-                        killsList.Add("Piton");
-                        killsList.Add("Quickdraw");
-                        killsList.Add("Ice Pick");
-                        killsList.Add("Ice Axe");
-                        killsList.Add("Nitroglycerin");
-                        killsList.Add("Remote Explosive Present");
-                        killsList.Add("Ancestral Fountain Pen");
-                        killsList.Add("ICA19 Iceballer");
-                        killsList.Add("Shashka A33 Gold");
-                        killsList.Add("Explosive Pen");
-                        killsList.Add("Professional Screwdriver");
-                        killsList.Add("Burial Dagger");
-                        killsList.Add("Golden Sawed Off Bartoli 12G");
-                        killsList.Add("Purple Streak ICA19 Classic Baller");
+                        listMasteryItemsToAdd.Add("Sieger 300 Ghost");
+                        listMasteryItemsToAdd.Add("Floral Baller");
+                        listMasteryItemsToAdd.Add("Fiber Wire Classic");
+                        listMasteryItemsToAdd.Add("ICA Bartoli Woodsman Hunting Rifle Covert");
+                        listMasteryItemsToAdd.Add("TAC-4 AR Desert");
+                        listMasteryItemsToAdd.Add("Earphones");
+                        listMasteryItemsToAdd.Add("ICA19");
+                        listMasteryItemsToAdd.Add("ICA19 Classicballer");
+                        listMasteryItemsToAdd.Add("TAC-4 S/A Jungle");
+                        listMasteryItemsToAdd.Add("Measuring Tape");
+                        listMasteryItemsToAdd.Add("Krugermeier 2-2 Dark");
+                        listMasteryItemsToAdd.Add("Sieger AR552 Tactical");
+                        listMasteryItemsToAdd.Add("Striker V3");
+                        listMasteryItemsToAdd.Add("The Ducky Gun");
+                        listMasteryItemsToAdd.Add("The Iridescent Katana");
+                        listMasteryItemsToAdd.Add("The White Ruby Rude 300 Sniper Rifle");
+                        listMasteryItemsToAdd.Add("IO Elite S2VP Earphones");
+                        listMasteryItemsToAdd.Add("Piton");
+                        listMasteryItemsToAdd.Add("Quickdraw");
+                        listMasteryItemsToAdd.Add("Ice Pick");
+                        listMasteryItemsToAdd.Add("Ice Axe");
+                        listMasteryItemsToAdd.Add("Nitroglycerin");
+                        listMasteryItemsToAdd.Add("Remote Explosive Present");
+                        listMasteryItemsToAdd.Add("Ancestral Fountain Pen");
+                        listMasteryItemsToAdd.Add("ICA19 Iceballer");
+                        listMasteryItemsToAdd.Add("Shashka A33 Gold");
+                        listMasteryItemsToAdd.Add("Explosive Pen");
+                        listMasteryItemsToAdd.Add("Professional Screwdriver");
+                        listMasteryItemsToAdd.Add("Burial Dagger");
+                        listMasteryItemsToAdd.Add("Golden Sawed Off Bartoli 12G");
+                        listMasteryItemsToAdd.Add("Purple Streak ICA19 Classic Baller");
                         
 
                         additions = additions + 30;
@@ -1460,7 +1605,7 @@ class Randomization
                     {
                         while (killChosen == null || killChosen.Equals("") || killChosen.Equals("Suit"))
                         {
-                            killChosenInt = randomNumber.Next(30 + additions);
+                            killChosenInt = randomNumber.Next(killsList.Count() + additions);
                             killChosen = killsList[killChosenInt];
                         }
                     }
@@ -1479,6 +1624,93 @@ class Randomization
                         {
                             elusiveName = "Richard J. Magee";
                         }
+                        else if (elusiveChosen.Equals("The Procurers"))
+                        {
+                            elusiveName = "Robert Burk";
+                            disguisesList.Remove("Private Investigator");
+                        }
+                        else if (elusiveChosen.Equals("The Splitter"))
+                        {
+                            elusiveName = "Max Vallient Clone";
+                        }
+                        else if (elusiveChosen.Equals("The Dragon"))
+                        {
+                            elusiveName = "Xiang Weishang";
+                            killsList.Add("Barber Razor");
+
+                            disguisesList.Add("Concord Union Guard");
+                            disguisesList.Add("Concord Union Bodyguard");
+                            disguisesList.Add("Rory Cutmore");
+                            disguisesList.Add("Tournament Judge");
+
+                            disguisesList.Remove("Abel de Silva");
+                            disguisesList.Remove("Recording Crew");
+                            disguisesList.Remove("Jordan Cross' Bodyguard");
+                            disguisesList.Remove("Ken Morgan's Bodyguard");
+                            disguisesList.Remove("Stalker");
+                            disguisesList.Remove("Exterminator");
+
+                        }
+                    }
+
+                    // Currently only used for The Dragon but may be useful in the future.
+                    if (killsIssued == 2)
+                    {
+                        if (elusiveChosen.Equals("The Dragon"))
+                        {
+                            elusiveName = "Roland Chau";
+                            killsList.Add("Barber Razor");
+
+                            disguisesList.Add("Concord Union Guard");
+                            disguisesList.Add("Concord Union Bodyguard");
+                            disguisesList.Add("Rory Cutmore");
+                            disguisesList.Add("Tournament Judge");
+
+                            disguisesList.Remove("Abel de Silva");
+                            disguisesList.Remove("Recording Crew");
+                            disguisesList.Remove("Jordan Cross' Bodyguard");
+                            disguisesList.Remove("Ken Morgan's Bodyguard");
+                            disguisesList.Remove("Stalker");
+                            disguisesList.Remove("Exterminator");
+                        }
+                    }
+
+                    if (killsIssued == 3)
+                    {
+                        if (elusiveChosen.Equals("The Dragon"))
+                        {
+                            elusiveName = "Xiao Hu";
+                            killsList.Add("Barber Razor");
+
+                            disguisesList.Add("Concord Union Guard");
+                            disguisesList.Add("Concord Union Bodyguard");
+                            disguisesList.Add("Rory Cutmore");
+                            disguisesList.Add("Tournament Judge");
+
+                            disguisesList.Remove("Abel de Silva");
+                            disguisesList.Remove("Recording Crew");
+                            disguisesList.Remove("Jordan Cross' Bodyguard");
+                            disguisesList.Remove("Ken Morgan's Bodyguard");
+                            disguisesList.Remove("Stalker");
+                            disguisesList.Remove("Exterminator");
+                        }
+                    }
+
+                    if (killsIssued > 0 && elusiveChosen.Equals("The Splitter"))
+                    {
+                        elusiveName = "Max Vallient Clone";
+
+                        disguisesList.Remove("Facility Guard");
+                        disguisesList.Remove("Facility Security");
+
+                        // Not Sure But Safe Guesses
+                        disguisesList.Remove("Facility Analyst");
+                        disguisesList.Remove("Facility Analyst");
+                        disguisesList.Remove("Perfect Test Subject");
+                        disguisesList.Remove("Block Guard");
+
+                        killsList.Remove("Fusil X2000 Stealth");
+                        killsList.Add("HX-7 Covert");
                     }
                     Console.Write($"Eliminate ");
                     Console.ForegroundColor = ConsoleColor.Magenta;
@@ -1632,7 +1864,7 @@ class Randomization
                 mapChosen = mapsList[mapInt];
             }
 
-            Console.Write($"\nThe Map Chosen Was ");
+            Console.Write($"The Map Chosen Was ");
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine($"{mapChosen}!");
             Console.ForegroundColor = ConsoleColor.Gray;
@@ -1644,7 +1876,9 @@ class Randomization
             try
             {
                 Console.WriteLine("How Many Targets Do You Want? ");
-                Console.WriteLine("WARNING: Target Amounts Above 5 Not Guaranteed To Be Possible. ");
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("Target Amounts Above 5 Not Guaranteed To Be Possible.");
+                Console.ForegroundColor = ConsoleColor.Gray;
                 targetAmount = Convert.ToInt32(Console.ReadLine());
             }
             catch (Exception e)
@@ -1655,64 +1889,21 @@ class Randomization
                 targetAmount = 5;
             }
 
-            int modifierSelect;
-
-            if (mapInt == 1 || mapInt == 0)
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("No Extra Conditions s on ICA Maps! Sorry.");
-                Console.ForegroundColor = ConsoleColor.Gray;
-                modifierSelect = 1;
-            }
-            else
-            {
-                Console.WriteLine("\nModifier Selection:");
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("1. None");
-                Console.WriteLine("2. Axe-Faced Lunatic");
-                Console.WriteLine("3. ICA Medieval Division");
-
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("\nWARNING: Modifier Spins Are Not Guaranteed To Be Completable:");
-                Console.ForegroundColor = ConsoleColor.Gray;
-                try
-                {
-                    modifierSelect = Int32.Parse(Console.ReadLine());
-                    if (modifierSelect > 4)
-                    {
-                        modifierSelect = 1;
-                    }
-                }
-                catch (Exception e)
-                {
-                    modifierSelect = 1;
-                }
-
-            }
-
-
-            // --------------------------------------------------------------------------MODIFIERS
-
-
-
             String anyOnly = "";
 
-            if (modifierSelect == 1)
+            try
             {
-                try
-                {
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine("\nDo You Only Want ANY/ANY Kills? (Y/N)");
-                    Console.ForegroundColor = ConsoleColor.Gray;
-                    anyOnly = Console.ReadLine();
-                }
-                catch (Exception e)
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Invalid, Defaulting To NO. ");
-                    Console.ForegroundColor = ConsoleColor.Gray;
-                    anyOnly = "N";
-                }
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("\nDo You Only Want ANY/ANY Kills? (Y/N)");
+                Console.ForegroundColor = ConsoleColor.Gray;
+                anyOnly = Console.ReadLine();
+            }
+            catch (Exception e)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Invalid, Defaulting To NO. ");
+                Console.ForegroundColor = ConsoleColor.Gray;
+                anyOnly = "N";
             }
 
             try
@@ -1778,51 +1969,37 @@ class Randomization
 
             int mapItemAmount = 0;
 
+            List<String> listBroadOnly = new List<String>();
+            List<String> listMapItems = new List<String>();
+
             for (int i = 0; i < 36; i++)
             {
                 String data = readerKillsBroad.ReadLine();
-                killsList.Add(data);
+                listBroadOnly.Add(data);
             }
 
             for (int i = 0; i < lineCount; i++)
             {
                 String data = readerKills.ReadLine();
-                killsList.Add(data);
+                listMapItems.Add(data);
                 mapItemAmount++;
-                switch (modifierSelect)
-                {
-                    case 2:
-                        killsList.RemoveAll(item =>
-                        !item.Contains("axe", StringComparison.OrdinalIgnoreCase) &&
-                        !item.Contains("hatchet", StringComparison.OrdinalIgnoreCase));
-                        break;
-                    case 3:
-                        killsList.RemoveAll(item =>
-                            !item.Contains("axe", StringComparison.OrdinalIgnoreCase) &&
-                            !item.Contains("sword", StringComparison.OrdinalIgnoreCase) &&
-                            !item.Contains("broad", StringComparison.OrdinalIgnoreCase) &&
-                            !item.Contains("saber", StringComparison.OrdinalIgnoreCase) &&
-                            !item.Contains("scrap", StringComparison.OrdinalIgnoreCase) &&
-                            !item.Contains("knife", StringComparison.OrdinalIgnoreCase) &&
-                            !item.Contains("dagger", StringComparison.OrdinalIgnoreCase));
-                        break;
-                }
             }
 
             while (killsIssued < targetAmount)
             {
+                killsList.Clear();
+
+                for (int i = 0; i < listBroadOnly.Count(); i++)
+                {
+                    killsList.Add(listBroadOnly[i]);
+                }
 
                 if (!anyOnly.Equals("Y", StringComparison.OrdinalIgnoreCase))
                 {
-                    int broadint = randomNumber.Next(0, 2);
-                    bool broad;
-                    if (broadint == 1)
+                    int broadint = randomNumber.Next(0, 4);
+                    bool broad = (broadint == 3); // Only true 33% of the time
+                    if (!broad)
                     {
-                        broad = true;
-                    }
-                    else
-                    {
-                        broad = false;
                         killsMastery++;
                     }
                     if (mapInt == 1 || mapInt == 0)
@@ -1832,7 +2009,6 @@ class Randomization
 
                     // Trying without this for now, kills were getting way too stale. not sure if it'll be balanced or not. But we'll see I suppose.
 
-                    
                     if (killsMastery > 2)
                     {
                         broad = true;
@@ -1857,16 +2033,17 @@ class Randomization
                         killsList.Remove("Any Sword");
                         killsList.Remove("Any Knife");
                         killsList.Remove("Any Machete");
-
                     }
 
-                    
+                    // DEBUG PRINT
+                    //Console.WriteLine(broad);
 
                     //LISTS FOR CONDITIONS
 
                     if (broad == true)
                     {
-                        int killChosenInt = randomNumber.Next(9 + mapItemAmount);
+                        int killChosenInt;
+
                         if (mapInt == 1 || mapInt == 0)
                         {
                             killsList.Remove("Electrocution");
@@ -1882,7 +2059,6 @@ class Randomization
                             killsList.Remove("Loud Shotgun");
                             killsList.Remove("Loud SMG");
                             killsList.Remove("Loud Assault Rifle");
-                            killsList.Remove("Loud SMG");
                             killsList.Remove("Loud Pistol Elimination");
                             killsList.Remove("Silenced Pistol Elimination");
                             killsList.Remove("Loud SMG Elimination");
@@ -1900,67 +2076,33 @@ class Randomization
 
                             if (mapInt == 1)
                             {
-                                killsList.Remove("Silenced Pistol Elimination");
-                                killsList.Remove("Loud Pistol Elimination");
+                                killsList.Add("Silenced Pistol Elimination");
+                                killsList.Add("Loud Pistol Elimination");
                                 killsList.Add("Loud Assault Rifle");
                                 killsList.Add("Assault Rifle");
                             }
 
-                            killChosenInt = randomNumber.Next(2 + mapItemAmount);
+                            killChosenInt = randomNumber.Next(killsList.Count);
                         }
-                        else if (killsMastery > 2 && mapInt != 1 || mapInt != 0)
+                        else if (killsMastery > 2 && mapInt != 1 && mapInt != 0)
                         {
-                            if (modifierSelect != 1)
+                            for (int i = 0; i < listMapItems.Count(); i++)
                             {
-                                int listAmountModifier = killsList.Count();
-                                killsList.Remove("White Katana");
-                                killsList.Remove("Masamune");
-                                killsList.Remove("The Proud Swashbuckler");
-                                killsList.Remove("The Iridescent Katana");
-                                killsList.Remove("The Cat's Claw");
-                                killsList.Remove("Ice Axe");
-                                killsList.Remove("The Ornamental Katana");
-                                killsList.Remove("The Black Almond's Dagger");
-                                killsList.Remove("The Makeshift Katana");
-                                killsList.Remove("Hobby Knife");
-                                killsList.Remove("Tanto");
-                                killsList.Remove("Concealable Knife");
-                                if (mapInt != 21)
-                                {
-                                    killsList.Remove("Broadsword");
-                                }
-                                if (mapInt != 30 && mapInt != 23)
-                                {
-                                    killsList.Remove("Jarl's Pirate Saber");
-                                }
-                                if (listAmountModifier > killsList.Count())
-                                {
-                                    listAmountModifier = killsList.Count() -1;
-                                }
-                                killChosenInt = randomNumber.Next(listAmountModifier);
+                                killsList.Add(listMapItems[i]);
                             }
-                            else
-                            {
-                                killChosenInt = randomNumber.Next(9 + mapItemAmount);
-                            }
+                            killChosenInt = randomNumber.Next(killsList.Count);
                         }
-                        else if (killsMastery < 2 && mapInt != 1 || mapInt != 0)
+                        else
                         {
-                            if (modifierSelect != 1)
-                            {
-                                int listAmountModifier = killsList.Count();
-                                killChosenInt = randomNumber.Next(listAmountModifier);
-                            }
-                            else
-                            {
-                                killChosenInt = randomNumber.Next(30 + mapItemAmount);
-                            }
+                            // Fallback case
+                            killChosenInt = randomNumber.Next(Math.Min(36, killsList.Count));
                         }
 
                         if (killChosenInt != 0)
                         {
                             killChosenInt--;
                         }
+
                         String killChosen = killsList[killChosenInt];
 
                         killsList = killsList.Where(s => !string.IsNullOrWhiteSpace(s)).Distinct().ToList();
@@ -1988,6 +2130,53 @@ class Randomization
                     #region Kills
                     if (broad == false)
                     {
+                        killsList.Remove("Accidental Explosion");
+                        killsList.Remove("Accidental Fall");
+                        killsList.Remove("Electrocution");
+                        killsList.Remove("Falling Object");
+                        killsList.Remove("Drowning");
+                        killsList.Remove("Unarmed");
+                        killsList.Remove("Fiber Wire");
+                        killsList.Remove("Loud Pistol Elimination");
+                        killsList.Remove("Silenced Pistol Elimination");
+                        killsList.Remove("Loud SMG Elimination");
+                        killsList.Remove("Silenced SMG Elimination");
+                        killsList.Remove("SMG Elimination");
+                        killsList.Remove("Pistol Elimination");
+                        killsList.Remove("Poison");
+                        killsList.Remove("Injected Poison");
+                        killsList.Remove("SMG");
+                        killsList.Remove("Assault Rifle");
+                        killsList.Remove("Pistol");
+                        killsList.Remove("Sniper Rifle");
+                        killsList.Remove("Silenced SMG");
+                        killsList.Remove("Silenced Assault Rifle");
+                        killsList.Remove("Silenced Pistol");
+                        killsList.Remove("Silenced Sniper Rifle");
+                        killsList.Remove("Silenced Shotgun");
+                        killsList.Remove("Loud Shotgun");
+                        killsList.Remove("Loud SMG");
+                        killsList.Remove("Loud Assault Rifle");
+                        killsList.Remove("Loud Pistol");
+                        killsList.Remove("Loud Sniper Rifle");
+                        killsList.Remove("Any Method");
+                        killsList.Remove("Explosive Device");
+                        killsList.Remove("Any Axe");
+                        killsList.Remove("Any Sword");
+                        killsList.Remove("Any Machete");
+                        killsList.Remove("Any Knife");
+
+                        for (int i = 0; i < listMapItems.Count(); i++)
+                        {
+                            killsList.Remove("Loud SMG");
+                            killsList.Add(listMapItems[i]);
+                        }
+
+                        // DEBUG PRINT
+                       // Console.WriteLine("Done Adding Items");
+
+                        List<String> listMasteryItemsToAdd = new List<String>();
+
                         for (int i = 0; i < 23; i++)
                         {
                             int masteryLevel = masteryList[i];
@@ -1997,37 +2186,37 @@ class Randomization
                             {
                                 if (masteryLevel == 20)
                                 {
-                                    killsList.Add("Jaeger 7");
-                                    killsList.Add("HWK21");
-                                    killsList.Add("ICA19 Silverballer");
-                                    killsList.Add("TAC-SMG");
-                                    killsList.Add("HWK21 Covert");
+                                    listMasteryItemsToAdd.Add("Jaeger 7");
+                                    listMasteryItemsToAdd.Add("HWK21");
+                                    listMasteryItemsToAdd.Add("ICA19 Silverballer");
+                                    listMasteryItemsToAdd.Add("TAC-SMG");
+                                    listMasteryItemsToAdd.Add("HWK21 Covert");
                                     additions = additions + 5;
                                 }
                                 else if (masteryLevel >= 12)
                                 {
-                                    killsList.Add("Jaeger 7");
-                                    killsList.Add("HWK21");
-                                    killsList.Add("ICA19 Silverballer");
-                                    killsList.Add("TAC-SMG");
+                                    listMasteryItemsToAdd.Add("Jaeger 7");
+                                    listMasteryItemsToAdd.Add("HWK21");
+                                    listMasteryItemsToAdd.Add("ICA19 Silverballer");
+                                    listMasteryItemsToAdd.Add("TAC-SMG");
                                     additions = additions + 4;
                                 }
                                 else if (masteryLevel >= 11)
                                 {
-                                    killsList.Add("Jaeger 7");
-                                    killsList.Add("HWK21");
-                                    killsList.Add("ICA19 Silverballer");
+                                    listMasteryItemsToAdd.Add("Jaeger 7");
+                                    listMasteryItemsToAdd.Add("HWK21");
+                                    listMasteryItemsToAdd.Add("ICA19 Silverballer");
                                     additions = additions + 3;
                                 }
                                 else if (masteryLevel >= 7)
                                 {
-                                    killsList.Add("Jaeger 7");
-                                    killsList.Add("HWK21");
+                                    listMasteryItemsToAdd.Add("Jaeger 7");
+                                    listMasteryItemsToAdd.Add("HWK21");
                                     additions = additions + 2;
                                 }
                                 else if (masteryLevel >= 5)
                                 {
-                                    killsList.Add("Jaeger 7");
+                                    listMasteryItemsToAdd.Add("Jaeger 7");
                                     additions = additions + 1;
                                 }
                             }
@@ -2036,28 +2225,28 @@ class Randomization
                             {
                                 if (masteryLevel == 20)
                                 {
-                                    killsList.Add("TAC4-AR Auto");
-                                    killsList.Add("Combat Knife");
-                                    killsList.Add("Enram HV");
-                                    killsList.Add("Jaeger 7 Lancer");
+                                    listMasteryItemsToAdd.Add("TAC4-AR Auto");
+                                    listMasteryItemsToAdd.Add("Combat Knife");
+                                    listMasteryItemsToAdd.Add("Enram HV");
+                                    listMasteryItemsToAdd.Add("Jaeger 7 Lancer");
                                     additions = additions + 4;
                                 }
                                 else if (masteryLevel >= 12)
                                 {
-                                    killsList.Add("TAC4-AR Auto");
-                                    killsList.Add("Combat Knife");
-                                    killsList.Add("Enram HV");
+                                    listMasteryItemsToAdd.Add("TAC4-AR Auto");
+                                    listMasteryItemsToAdd.Add("Combat Knife");
+                                    listMasteryItemsToAdd.Add("Enram HV");
                                     additions = additions + 3;
                                 }
                                 else if (masteryLevel >= 7)
                                 {
-                                    killsList.Add("TAC4-AR Auto");
-                                    killsList.Add("Combat Knife");
+                                    listMasteryItemsToAdd.Add("TAC4-AR Auto");
+                                    listMasteryItemsToAdd.Add("Combat Knife");
                                     additions = additions + 2;
                                 }
                                 else if (masteryLevel >= 5)
                                 {
-                                    killsList.Add("TAC4-AR Auto");
+                                    listMasteryItemsToAdd.Add("TAC4-AR Auto");
                                     additions = additions + 1;
                                 }
 
@@ -2067,28 +2256,28 @@ class Randomization
                             {
                                 if (masteryLevel == 20)
                                 {
-                                    killsList.Add("ICA19 F/A");
-                                    killsList.Add("Janbiya");
-                                    killsList.Add("Enram HV CM");
-                                    killsList.Add("TAC4-AR Stealth");
+                                    listMasteryItemsToAdd.Add("ICA19 F/A");
+                                    listMasteryItemsToAdd.Add("Janbiya");
+                                    listMasteryItemsToAdd.Add("Enram HV CM");
+                                    listMasteryItemsToAdd.Add("TAC4-AR Stealth");
                                     additions = additions + 4;
                                 }
                                 else if (masteryLevel >= 12)
                                 {
-                                    killsList.Add("ICA19 F/A");
-                                    killsList.Add("Janbiya");
-                                    killsList.Add("Enram HV CM");
+                                    listMasteryItemsToAdd.Add("ICA19 F/A");
+                                    listMasteryItemsToAdd.Add("Janbiya");
+                                    listMasteryItemsToAdd.Add("Enram HV CM");
                                     additions = additions + 3;
                                 }
                                 else if (masteryLevel >= 10)
                                 {
-                                    killsList.Add("ICA19 F/A");
-                                    killsList.Add("Janbiya");
+                                    listMasteryItemsToAdd.Add("ICA19 F/A");
+                                    listMasteryItemsToAdd.Add("Janbiya");
                                     additions = additions + 2;
                                 }
                                 else if (masteryLevel >= 5)
                                 {
-                                    killsList.Add("ICA19 F/A");
+                                    listMasteryItemsToAdd.Add("ICA19 F/A");
                                     additions = additions + 1;
                                 }
 
@@ -2098,37 +2287,37 @@ class Randomization
                             {
                                 if (masteryLevel == 20)
                                 {
-                                    killsList.Add("Nne Obara's Machete");
-                                    killsList.Add("Enram HV Covert");
-                                    killsList.Add("TAC-SMG S");
-                                    killsList.Add("Jaeger 7 Tiger");
-                                    killsList.Add("Krugermeier 2-2");
+                                    listMasteryItemsToAdd.Add("Nne Obara's Machete");
+                                    listMasteryItemsToAdd.Add("Enram HV Covert");
+                                    listMasteryItemsToAdd.Add("TAC-SMG S");
+                                    listMasteryItemsToAdd.Add("Jaeger 7 Tiger");
+                                    listMasteryItemsToAdd.Add("Krugermeier 2-2");
                                     additions = additions + 5;
                                 }
                                 else if (masteryLevel >= 15)
                                 {
-                                    killsList.Add("Nne Obara's Machete");
-                                    killsList.Add("Enram HV Covert");
-                                    killsList.Add("TAC-SMG S");
-                                    killsList.Add("Jaeger 7 Tiger");
+                                    listMasteryItemsToAdd.Add("Nne Obara's Machete");
+                                    listMasteryItemsToAdd.Add("Enram HV Covert");
+                                    listMasteryItemsToAdd.Add("TAC-SMG S");
+                                    listMasteryItemsToAdd.Add("Jaeger 7 Tiger");
                                     additions = additions + 4;
                                 }
                                 else if (masteryLevel >= 7)
                                 {
-                                    killsList.Add("Nne Obara's Machete");
-                                    killsList.Add("Enram HV Covert");
-                                    killsList.Add("TAC-SMG S");
+                                    listMasteryItemsToAdd.Add("Nne Obara's Machete");
+                                    listMasteryItemsToAdd.Add("Enram HV Covert");
+                                    listMasteryItemsToAdd.Add("TAC-SMG S");
                                     additions = additions + 3;
                                 }
                                 else if (masteryLevel >= 5)
                                 {
-                                    killsList.Add("Nne Obara's Machete");
-                                    killsList.Add("Enram HV Covert");
+                                    listMasteryItemsToAdd.Add("Nne Obara's Machete");
+                                    listMasteryItemsToAdd.Add("Enram HV Covert");
                                     additions = additions + 2;
                                 }
                                 else if (masteryLevel >= 2)
                                 {
-                                    killsList.Add("Nne Obara's Machete");
+                                    listMasteryItemsToAdd.Add("Nne Obara's Machete");
                                     additions = additions + 1;
                                 }
 
@@ -2139,37 +2328,37 @@ class Randomization
                             {
                                 if (masteryLevel == 20)
                                 {
-                                    killsList.Add("RS-15");
-                                    killsList.Add("TAC4 S/A");
-                                    killsList.Add("ICA19 F/A Stealth");
-                                    killsList.Add("Sieger 300");
-                                    killsList.Add("Remote CX Demo Block");
+                                    listMasteryItemsToAdd.Add("RS-15");
+                                    listMasteryItemsToAdd.Add("TAC4 S/A");
+                                    listMasteryItemsToAdd.Add("ICA19 F/A Stealth");
+                                    listMasteryItemsToAdd.Add("Sieger 300");
+                                    listMasteryItemsToAdd.Add("Remote CX Demo Block");
                                     additions = additions + 5;
                                 }
                                 else if (masteryLevel >= 15)
                                 {
-                                    killsList.Add("RS-15");
-                                    killsList.Add("TAC4 S/A");
-                                    killsList.Add("ICA19 F/A Stealth");
-                                    killsList.Add("Sieger 300");
+                                    listMasteryItemsToAdd.Add("RS-15");
+                                    listMasteryItemsToAdd.Add("TAC4 S/A");
+                                    listMasteryItemsToAdd.Add("ICA19 F/A Stealth");
+                                    listMasteryItemsToAdd.Add("Sieger 300");
                                     additions = additions + 4;
                                 }
                                 else if (masteryLevel >= 10)
                                 {
-                                    killsList.Add("RS-15");
-                                    killsList.Add("TAC4 S/A");
-                                    killsList.Add("ICA19 F/A Stealth");
+                                    listMasteryItemsToAdd.Add("RS-15");
+                                    listMasteryItemsToAdd.Add("TAC4 S/A");
+                                    listMasteryItemsToAdd.Add("ICA19 F/A Stealth");
                                     additions = additions + 3;
                                 }
                                 else if (masteryLevel >= 5)
                                 {
-                                    killsList.Add("RS-15");
-                                    killsList.Add("TAC4 S/A");
+                                    listMasteryItemsToAdd.Add("RS-15");
+                                    listMasteryItemsToAdd.Add("TAC4 S/A");
                                     additions = additions + 2;
                                 }
                                 else if (masteryLevel >= 2)
                                 {
-                                    killsList.Add("RS-15");
+                                    listMasteryItemsToAdd.Add("RS-15");
                                     additions = additions + 1;
                                 }
 
@@ -2179,37 +2368,37 @@ class Randomization
                             {
                                 if (masteryLevel == 20)
                                 {
-                                    killsList.Add("Shuriken");
-                                    killsList.Add("Custom 5mm");
-                                    killsList.Add("Masamune");
-                                    killsList.Add("Concealable Knife");
-                                    killsList.Add("Sieger 300 Advanced");
+                                    listMasteryItemsToAdd.Add("Shuriken");
+                                    listMasteryItemsToAdd.Add("Custom 5mm");
+                                    listMasteryItemsToAdd.Add("Masamune");
+                                    listMasteryItemsToAdd.Add("Concealable Knife");
+                                    listMasteryItemsToAdd.Add("Sieger 300 Advanced");
                                     additions = additions + 5;
                                 }
                                 else if (masteryLevel >= 12)
                                 {
-                                    killsList.Add("Shuriken");
-                                    killsList.Add("Custom 5mm");
-                                    killsList.Add("Masamune");
-                                    killsList.Add("Concealable Knife");
+                                    listMasteryItemsToAdd.Add("Shuriken");
+                                    listMasteryItemsToAdd.Add("Custom 5mm");
+                                    listMasteryItemsToAdd.Add("Masamune");
+                                    listMasteryItemsToAdd.Add("Concealable Knife");
                                     additions = additions + 4;
                                 }
                                 else if (masteryLevel >= 7)
                                 {
-                                    killsList.Add("Shuriken");
-                                    killsList.Add("Custom 5mm");
-                                    killsList.Add("Masamune");
+                                    listMasteryItemsToAdd.Add("Shuriken");
+                                    listMasteryItemsToAdd.Add("Custom 5mm");
+                                    listMasteryItemsToAdd.Add("Masamune");
                                     additions = additions + 3;
                                 }
                                 else if (masteryLevel >= 5)
                                 {
-                                    killsList.Add("Shuriken");
-                                    killsList.Add("Custom 5mm");
+                                    listMasteryItemsToAdd.Add("Shuriken");
+                                    listMasteryItemsToAdd.Add("Custom 5mm");
                                     additions = additions + 2;
                                 }
                                 else if (masteryLevel >= 2)
                                 {
-                                    killsList.Add("Shuriken");
+                                    listMasteryItemsToAdd.Add("Shuriken");
                                     additions = additions + 1;
                                 }
 
@@ -2219,7 +2408,7 @@ class Randomization
                             {
                                 if (masteryLevel == 5)
                                 {
-                                    killsList.Add("Tanto");
+                                    listMasteryItemsToAdd.Add("Tanto");
                                     additions = additions + 1;
                                 }
                             }
@@ -2228,28 +2417,28 @@ class Randomization
                             {
                                 if (masteryLevel >= 16)
                                 {
-                                    killsList.Add("Jaeger Seven MK II");
-                                    killsList.Add("HWK 21 MK II");
-                                    killsList.Add("Concept 5");
-                                    killsList.Add("Fishing Line");
+                                    listMasteryItemsToAdd.Add("Jaeger Seven MK II");
+                                    listMasteryItemsToAdd.Add("HWK 21 MK II");
+                                    listMasteryItemsToAdd.Add("Concept 5");
+                                    listMasteryItemsToAdd.Add("Fishing Line");
                                     additions = additions + 4;
                                 }
                                 else if (masteryLevel >= 15)
                                 {
-                                    killsList.Add("Jaeger Seven MK II");
-                                    killsList.Add("HWK 21 MK II");
-                                    killsList.Add("Concept 5");
+                                    listMasteryItemsToAdd.Add("Jaeger Seven MK II");
+                                    listMasteryItemsToAdd.Add("HWK 21 MK II");
+                                    listMasteryItemsToAdd.Add("Concept 5");
                                     additions = additions + 3;
                                 }
                                 else if (masteryLevel >= 7)
                                 {
-                                    killsList.Add("Jaeger Seven MK II");
-                                    killsList.Add("HWK 21 MK II");
+                                    listMasteryItemsToAdd.Add("Jaeger Seven MK II");
+                                    listMasteryItemsToAdd.Add("HWK 21 MK II");
                                     additions = additions + 2;
                                 }
                                 else if (masteryLevel >= 5)
                                 {
-                                    killsList.Add("Jaeger Seven MK II");
+                                    listMasteryItemsToAdd.Add("Jaeger Seven MK II");
                                     additions = additions + 1;
                                 }
                             }
@@ -2258,20 +2447,20 @@ class Randomization
                             {
                                 if (masteryLevel >= 16)
                                 {
-                                    killsList.Add("Shaskha A33 H");
-                                    killsList.Add("TAC-SMG MK II");
-                                    killsList.Add("Sacrifical Knife");
+                                    listMasteryItemsToAdd.Add("Shaskha A33 H");
+                                    listMasteryItemsToAdd.Add("TAC-SMG MK II");
+                                    listMasteryItemsToAdd.Add("Sacrifical Knife");
                                     additions = additions + 3;
                                 }
                                 else if (masteryLevel >= 13)
                                 {
-                                    killsList.Add("Shaskha A33 H");
-                                    killsList.Add("TAC-SMG MK II");
+                                    listMasteryItemsToAdd.Add("Shaskha A33 H");
+                                    listMasteryItemsToAdd.Add("TAC-SMG MK II");
                                     additions = additions + 2;
                                 }
                                 else if (masteryLevel >= 10)
                                 {
-                                    killsList.Add("Shaskha A33 H");
+                                    listMasteryItemsToAdd.Add("Shaskha A33 H");
                                     additions = additions + 1;
                                 }
 
@@ -2281,37 +2470,37 @@ class Randomization
                             {
                                 if (masteryLevel == 20)
                                 {
-                                    killsList.Add("ICA19 Silverballer MK II");
-                                    killsList.Add("Bartoli 12G Short H");
-                                    killsList.Add("DAK X2 Covert Special");
-                                    killsList.Add("Antique Curved Knife");
-                                    killsList.Add("Druzhina 34");
+                                    listMasteryItemsToAdd.Add("ICA19 Silverballer MK II");
+                                    listMasteryItemsToAdd.Add("Bartoli 12G Short H");
+                                    listMasteryItemsToAdd.Add("DAK X2 Covert Special");
+                                    listMasteryItemsToAdd.Add("Antique Curved Knife");
+                                    listMasteryItemsToAdd.Add("Druzhina 34");
                                     additions = additions + 5;
                                 }
                                 else if (masteryLevel >= 18)
                                 {
-                                    killsList.Add("ICA19 Silverballer MK II");
-                                    killsList.Add("Bartoli 12G Short H");
-                                    killsList.Add("DAK X2 Covert Special");
-                                    killsList.Add("Antique Curved Knife");
+                                    listMasteryItemsToAdd.Add("ICA19 Silverballer MK II");
+                                    listMasteryItemsToAdd.Add("Bartoli 12G Short H");
+                                    listMasteryItemsToAdd.Add("DAK X2 Covert Special");
+                                    listMasteryItemsToAdd.Add("Antique Curved Knife");
                                     additions = additions + 4;
                                 }
                                 else if (masteryLevel >= 15)
                                 {
-                                    killsList.Add("ICA19 Silverballer MK II");
-                                    killsList.Add("Bartoli 12G Short H");
-                                    killsList.Add("DAK X2 Covert Special");
+                                    listMasteryItemsToAdd.Add("ICA19 Silverballer MK II");
+                                    listMasteryItemsToAdd.Add("Bartoli 12G Short H");
+                                    listMasteryItemsToAdd.Add("DAK X2 Covert Special");
                                     additions = additions + 3;
                                 }
                                 else if (masteryLevel >= 5)
                                 {
-                                    killsList.Add("ICA19 Silverballer MK II");
-                                    killsList.Add("Bartoli 12G Short H");
+                                    listMasteryItemsToAdd.Add("ICA19 Silverballer MK II");
+                                    listMasteryItemsToAdd.Add("Bartoli 12G Short H");
                                     additions = additions + 2;
                                 }
                                 else if (masteryLevel >= 2)
                                 {
-                                    killsList.Add("ICA19 Silverballer MK II");
+                                    listMasteryItemsToAdd.Add("ICA19 Silverballer MK II");
                                     additions = additions + 1;
                                 }
 
@@ -2321,13 +2510,13 @@ class Randomization
                             {
                                 if (masteryLevel >= 15)
                                 {
-                                    killsList.Add("TAC-4 AR MK II");
-                                    killsList.Add("Rude Ruby");
+                                    listMasteryItemsToAdd.Add("TAC-4 AR MK II");
+                                    listMasteryItemsToAdd.Add("Rude Ruby");
                                     additions = additions + 2;
                                 }
                                 else if (masteryLevel >= 2)
                                 {
-                                    killsList.Add("TAC-4 AR MK II");
+                                    listMasteryItemsToAdd.Add("TAC-4 AR MK II");
                                     additions = additions + 1;
                                 }
 
@@ -2337,20 +2526,20 @@ class Randomization
                             {
                                 if (masteryLevel >= 18)
                                 {
-                                    killsList.Add("Sieger 300 Tactical");
-                                    killsList.Add("Broadsword");
-                                    killsList.Add("Enram HV Covert MK II");
+                                    listMasteryItemsToAdd.Add("Sieger 300 Tactical");
+                                    listMasteryItemsToAdd.Add("Broadsword");
+                                    listMasteryItemsToAdd.Add("Enram HV Covert MK II");
                                     additions = additions + 3;
                                 }
                                 else if (masteryLevel >= 15)
                                 {
-                                    killsList.Add("Sieger 300 Tactical");
-                                    killsList.Add("Broadsword");
+                                    listMasteryItemsToAdd.Add("Sieger 300 Tactical");
+                                    listMasteryItemsToAdd.Add("Broadsword");
                                     additions = additions + 2;
                                 }
                                 else if (masteryLevel >= 10)
                                 {
-                                    killsList.Add("Sieger 300 Tactical");
+                                    listMasteryItemsToAdd.Add("Sieger 300 Tactical");
                                     additions = additions + 1;
                                 }
 
@@ -2360,7 +2549,7 @@ class Randomization
                             {
                                 if (masteryLevel >= 13)
                                 {
-                                    killsList.Add("Sawed Off Bartoli 12G H");
+                                    listMasteryItemsToAdd.Add("Sawed Off Bartoli 12G H");
                                     additions = additions + 1;
                                 }
                             }
@@ -2369,20 +2558,20 @@ class Randomization
                             {
                                 if (masteryLevel == 20)
                                 {
-                                    killsList.Add("Jarl's Pirate Saber");
-                                    killsList.Add("The Black Almond's Dagger");
-                                    killsList.Add("Jaeger 7 Tuatara");
+                                    listMasteryItemsToAdd.Add("Jarl's Pirate Saber");
+                                    listMasteryItemsToAdd.Add("The Black Almond's Dagger");
+                                    listMasteryItemsToAdd.Add("Jaeger 7 Tuatara");
                                     additions = additions + 3;
                                 }
                                 else if (masteryLevel >= 15)
                                 {
-                                    killsList.Add("Jarl's Pirate Saber");
-                                    killsList.Add("The Black Almond's Dagger");
+                                    listMasteryItemsToAdd.Add("Jarl's Pirate Saber");
+                                    listMasteryItemsToAdd.Add("The Black Almond's Dagger");
                                     additions = additions + 2;
                                 }
                                 else if (masteryLevel >= 2)
                                 {
-                                    killsList.Add("Jarl's Pirate Saber");
+                                    listMasteryItemsToAdd.Add("Jarl's Pirate Saber");
                                     additions = additions + 1;
                                 }
 
@@ -2392,7 +2581,7 @@ class Randomization
                             {
                                 if (masteryLevel == 20)
                                 {
-                                    killsList.Add("Druhzina 34 ICA Arctic");
+                                    listMasteryItemsToAdd.Add("Druhzina 34 ICA Arctic");
                                     additions = additions + 1;
                                 }
                             }
@@ -2401,13 +2590,13 @@ class Randomization
                             {
                                 if (masteryLevel >= 15)
                                 {
-                                    killsList.Add("Ornate Scimitar");
-                                    killsList.Add("Druhzina 34 DTI");
+                                    listMasteryItemsToAdd.Add("Ornate Scimitar");
+                                    listMasteryItemsToAdd.Add("Druhzina 34 DTI");
                                     additions = additions + 2;
                                 }
                                 else if (masteryLevel >= 13)
                                 {
-                                    killsList.Add("Ornate Scimitar");
+                                    listMasteryItemsToAdd.Add("Ornate Scimitar");
                                     additions = additions + 1;
                                 }
                             }
@@ -2416,20 +2605,20 @@ class Randomization
                             {
                                 if (masteryLevel == 20)
                                 {
-                                    killsList.Add("ICA19 Shortballer");
-                                    killsList.Add("Kukri Knife");
-                                    killsList.Add("Bartoli Woodsman Hunting Rifle");
+                                    listMasteryItemsToAdd.Add("ICA19 Shortballer");
+                                    listMasteryItemsToAdd.Add("Kukri Knife");
+                                    listMasteryItemsToAdd.Add("Bartoli Woodsman Hunting Rifle");
                                     additions = additions + 3;
                                 }
                                 else if (masteryLevel >= 13)
                                 {
-                                    killsList.Add("ICA19 Shortballer");
-                                    killsList.Add("Kukri Knife");
+                                    listMasteryItemsToAdd.Add("ICA19 Shortballer");
+                                    listMasteryItemsToAdd.Add("Kukri Knife");
                                     additions = additions + 2;
                                 }
                                 else if (masteryLevel >= 5)
                                 {
-                                    killsList.Add("ICA19 Shortballer");
+                                    listMasteryItemsToAdd.Add("ICA19 Shortballer");
                                     additions = additions + 1;
                                 }
 
@@ -2439,7 +2628,7 @@ class Randomization
                             {
                                 if (masteryLevel >= 7)
                                 {
-                                    killsList.Add("Custom 5mm DTI");
+                                    listMasteryItemsToAdd.Add("Custom 5mm DTI");
                                     additions = additions + 1;
                                 }
                             }
@@ -2448,20 +2637,20 @@ class Randomization
                             {
                                 if (masteryLevel == 20)
                                 {
-                                    killsList.Add("ICA Tactical Shotgun");
-                                    killsList.Add("ICA SMG Raptor Covert");
-                                    killsList.Add("Hackl Leviathan Sniper Rifle Covert");
+                                    listMasteryItemsToAdd.Add("ICA Tactical Shotgun");
+                                    listMasteryItemsToAdd.Add("ICA SMG Raptor Covert");
+                                    listMasteryItemsToAdd.Add("Hackl Leviathan Sniper Rifle Covert");
                                     additions = additions + 3;
                                 }
                                 else if (masteryLevel >= 15)
                                 {
-                                    killsList.Add("ICA Tactical Shotgun");
-                                    killsList.Add("ICA SMG Raptor Covert");
+                                    listMasteryItemsToAdd.Add("ICA Tactical Shotgun");
+                                    listMasteryItemsToAdd.Add("ICA SMG Raptor Covert");
                                     additions = additions + 2;
                                 }
                                 else if (masteryLevel >= 10)
                                 {
-                                    killsList.Add("ICA Tactical Shotgun");
+                                    listMasteryItemsToAdd.Add("ICA Tactical Shotgun");
                                     additions = additions + 1;
                                 }
 
@@ -2471,37 +2660,37 @@ class Randomization
                             {
                                 if (masteryLevel == 20)
                                 {
-                                    killsList.Add("ICA DTI Stealth");
-                                    killsList.Add("ICA Combat Axe");
-                                    killsList.Add("Krugermeier 2-2 Silver");
-                                    killsList.Add("DAK Black Covert");
-                                    killsList.Add("Sieger 300 Viper");
+                                    listMasteryItemsToAdd.Add("ICA DTI Stealth");
+                                    listMasteryItemsToAdd.Add("ICA Combat Axe");
+                                    listMasteryItemsToAdd.Add("Krugermeier 2-2 Silver");
+                                    listMasteryItemsToAdd.Add("DAK Black Covert");
+                                    listMasteryItemsToAdd.Add("Sieger 300 Viper");
                                     additions = additions + 5;
                                 }
                                 else if (masteryLevel >= 15)
                                 {
-                                    killsList.Add("ICA DTI Stealth");
-                                    killsList.Add("ICA Combat Axe");
-                                    killsList.Add("Krugermeier 2-2 Silver");
-                                    killsList.Add("DAK Black Covert");
+                                    listMasteryItemsToAdd.Add("ICA DTI Stealth");
+                                    listMasteryItemsToAdd.Add("ICA Combat Axe");
+                                    listMasteryItemsToAdd.Add("Krugermeier 2-2 Silver");
+                                    listMasteryItemsToAdd.Add("DAK Black Covert");
                                     additions = additions + 4;
                                 }
                                 else if (masteryLevel >= 10)
                                 {
-                                    killsList.Add("ICA DTI Stealth");
-                                    killsList.Add("ICA Combat Axe");
-                                    killsList.Add("Krugermeier 2-2 Silver");
+                                    listMasteryItemsToAdd.Add("ICA DTI Stealth");
+                                    listMasteryItemsToAdd.Add("ICA Combat Axe");
+                                    listMasteryItemsToAdd.Add("Krugermeier 2-2 Silver");
                                     additions = additions + 3;
                                 }
                                 else if (masteryLevel >= 7)
                                 {
-                                    killsList.Add("ICA DTI Stealth");
-                                    killsList.Add("ICA Combat Axe");
+                                    listMasteryItemsToAdd.Add("ICA DTI Stealth");
+                                    listMasteryItemsToAdd.Add("ICA Combat Axe");
                                     additions = additions + 2;
                                 }
                                 else if (masteryLevel >= 2)
                                 {
-                                    killsList.Add("ICA DTI Stealth");
+                                    listMasteryItemsToAdd.Add("ICA DTI Stealth");
                                     additions = additions + 1;
                                 }
 
@@ -2511,23 +2700,23 @@ class Randomization
                             {
                                 if (masteryLevel == 5)
                                 {
-                                    killsList.Add("HWK Pale Homemade Silencer");
-                                    killsList.Add("Goldballer");
-                                    killsList.Add("Proximity Semtex Demo Block MK III");
-                                    killsList.Add("ICA Tactical Shotgun Covert");
+                                    listMasteryItemsToAdd.Add("HWK Pale Homemade Silencer");
+                                    listMasteryItemsToAdd.Add("Goldballer");
+                                    listMasteryItemsToAdd.Add("Proximity Semtex Demo Block MK III");
+                                    listMasteryItemsToAdd.Add("ICA Tactical Shotgun Covert");
                                     additions = additions + 4;
                                 }
                                 else if (masteryLevel >= 4)
                                 {
-                                    killsList.Add("HWK Pale Homemade Silencer");
-                                    killsList.Add("Goldballer");
-                                    killsList.Add("Proximity Semtex Demo Block MK III");
+                                    listMasteryItemsToAdd.Add("HWK Pale Homemade Silencer");
+                                    listMasteryItemsToAdd.Add("Goldballer");
+                                    listMasteryItemsToAdd.Add("Proximity Semtex Demo Block MK III");
                                     additions = additions + 3;
                                 }
                                 else if (masteryLevel >= 2)
                                 {
-                                    killsList.Add("HWK Pale Homemade Silencer");
-                                    killsList.Add("Goldballer");
+                                    listMasteryItemsToAdd.Add("HWK Pale Homemade Silencer");
+                                    listMasteryItemsToAdd.Add("Goldballer");
                                     additions = additions + 2;
                                 }
 
@@ -2537,37 +2726,37 @@ class Randomization
                             {
                                 if (masteryLevel == 20)
                                 {
-                                    killsList.Add("Kukri Machete");
-                                    killsList.Add("Brine Damaged SMG");
-                                    killsList.Add("Hook");
-                                    killsList.Add("Militia Issued HX-10 SMG");
-                                    killsList.Add("Molotov Cocktail");
+                                    listMasteryItemsToAdd.Add("Kukri Machete");
+                                    listMasteryItemsToAdd.Add("Brine Damaged SMG");
+                                    listMasteryItemsToAdd.Add("Hook");
+                                    listMasteryItemsToAdd.Add("Militia Issued HX-10 SMG");
+                                    listMasteryItemsToAdd.Add("Molotov Cocktail");
                                     additions = additions + 5;
                                 }
                                 else if (masteryLevel >= 13)
                                 {
-                                    killsList.Add("Kukri Machete");
-                                    killsList.Add("Brine Damaged SMG");
-                                    killsList.Add("Hook");
-                                    killsList.Add("Militia Issued HX-10 SMG");
+                                    listMasteryItemsToAdd.Add("Kukri Machete");
+                                    listMasteryItemsToAdd.Add("Brine Damaged SMG");
+                                    listMasteryItemsToAdd.Add("Hook");
+                                    listMasteryItemsToAdd.Add("Militia Issued HX-10 SMG");
                                     additions = additions + 4;
                                 }
                                 else if (masteryLevel >= 10)
                                 {
-                                    killsList.Add("Kukri Machete");
-                                    killsList.Add("Brine Damaged SMG");
-                                    killsList.Add("Hook");
+                                    listMasteryItemsToAdd.Add("Kukri Machete");
+                                    listMasteryItemsToAdd.Add("Brine Damaged SMG");
+                                    listMasteryItemsToAdd.Add("Hook");
                                     additions = additions + 3;
                                 }
                                 else if (masteryLevel >= 6)
                                 {
-                                    killsList.Add("Kukri Machete");
-                                    killsList.Add("Brine Damaged SMG");
+                                    listMasteryItemsToAdd.Add("Kukri Machete");
+                                    listMasteryItemsToAdd.Add("Brine Damaged SMG");
                                     additions = additions + 2;
                                 }
                                 else if (masteryLevel >= 3)
                                 {
-                                    killsList.Add("Kukri Machete");
+                                    listMasteryItemsToAdd.Add("Kukri Machete");
                                     additions = additions + 1;
                                 }
 
@@ -2577,112 +2766,112 @@ class Randomization
                             {
                                 if (masteryLevel >= 60)
                                 {
-                                    killsList.Add("The Ancestral Knife");
-                                    killsList.Add("The Ancestral Sniper Rifle");
-                                    killsList.Add("The Ancestral Assault Rifle");
-                                    killsList.Add("The Ancestral Shotgun");
-                                    killsList.Add("The Ancestral Pistol");
-                                    killsList.Add("The Ornamental Sniper Rifle");
-                                    killsList.Add("The Ornamental SMG");
-                                    killsList.Add("The Ornamental Shotgun");
-                                    killsList.Add("The Ornamental Katana");
-                                    killsList.Add("The Ornamental Assault Rifle");
-                                    killsList.Add("The Ornamental Pistol");
+                                    listMasteryItemsToAdd.Add("The Ancestral Knife");
+                                    listMasteryItemsToAdd.Add("The Ancestral Sniper Rifle");
+                                    listMasteryItemsToAdd.Add("The Ancestral Assault Rifle");
+                                    listMasteryItemsToAdd.Add("The Ancestral Shotgun");
+                                    listMasteryItemsToAdd.Add("The Ancestral Pistol");
+                                    listMasteryItemsToAdd.Add("The Ornamental Sniper Rifle");
+                                    listMasteryItemsToAdd.Add("The Ornamental SMG");
+                                    listMasteryItemsToAdd.Add("The Ornamental Shotgun");
+                                    listMasteryItemsToAdd.Add("The Ornamental Katana");
+                                    listMasteryItemsToAdd.Add("The Ornamental Assault Rifle");
+                                    listMasteryItemsToAdd.Add("The Ornamental Pistol");
                                     additions = additions + 11;
                                 }
                                 else if (masteryLevel >= 55)
                                 {
-                                    killsList.Add("The Ancestral Sniper Rifle");
-                                    killsList.Add("The Ancestral Assault Rifle");
-                                    killsList.Add("The Ancestral Shotgun");
-                                    killsList.Add("The Ancestral Pistol");
-                                    killsList.Add("The Ornamental Sniper Rifle");
-                                    killsList.Add("The Ornamental SMG");
-                                    killsList.Add("The Ornamental Shotgun");
-                                    killsList.Add("The Ornamental Katana");
-                                    killsList.Add("The Ornamental Assault Rifle");
-                                    killsList.Add("The Ornamental Pistol");
+                                    listMasteryItemsToAdd.Add("The Ancestral Sniper Rifle");
+                                    listMasteryItemsToAdd.Add("The Ancestral Assault Rifle");
+                                    listMasteryItemsToAdd.Add("The Ancestral Shotgun");
+                                    listMasteryItemsToAdd.Add("The Ancestral Pistol");
+                                    listMasteryItemsToAdd.Add("The Ornamental Sniper Rifle");
+                                    listMasteryItemsToAdd.Add("The Ornamental SMG");
+                                    listMasteryItemsToAdd.Add("The Ornamental Shotgun");
+                                    listMasteryItemsToAdd.Add("The Ornamental Katana");
+                                    listMasteryItemsToAdd.Add("The Ornamental Assault Rifle");
+                                    listMasteryItemsToAdd.Add("The Ornamental Pistol");
                                     additions = additions + 10;
                                 }
                                 else if (masteryLevel >= 50)
                                 {
-                                    killsList.Add("The Ancestral Assault Rifle");
-                                    killsList.Add("The Ancestral Shotgun");
-                                    killsList.Add("The Ancestral Pistol");
-                                    killsList.Add("The Ornamental Sniper Rifle");
-                                    killsList.Add("The Ornamental SMG");
-                                    killsList.Add("The Ornamental Shotgun");
-                                    killsList.Add("The Ornamental Katana");
-                                    killsList.Add("The Ornamental Assault Rifle");
-                                    killsList.Add("The Ornamental Pistol");
+                                    listMasteryItemsToAdd.Add("The Ancestral Assault Rifle");
+                                    listMasteryItemsToAdd.Add("The Ancestral Shotgun");
+                                    listMasteryItemsToAdd.Add("The Ancestral Pistol");
+                                    listMasteryItemsToAdd.Add("The Ornamental Sniper Rifle");
+                                    listMasteryItemsToAdd.Add("The Ornamental SMG");
+                                    listMasteryItemsToAdd.Add("The Ornamental Shotgun");
+                                    listMasteryItemsToAdd.Add("The Ornamental Katana");
+                                    listMasteryItemsToAdd.Add("The Ornamental Assault Rifle");
+                                    listMasteryItemsToAdd.Add("The Ornamental Pistol");
                                     additions = additions + 9;
                                 }
                                 else if (masteryLevel >= 45)
                                 {
-                                    killsList.Add("The Ancestral Shotgun");
-                                    killsList.Add("The Ancestral Pistol");
-                                    killsList.Add("The Ornamental Sniper Rifle");
-                                    killsList.Add("The Ornamental SMG");
-                                    killsList.Add("The Ornamental Shotgun");
-                                    killsList.Add("The Ornamental Katana");
-                                    killsList.Add("The Ornamental Assault Rifle");
-                                    killsList.Add("The Ornamental Pistol");
+                                    listMasteryItemsToAdd.Add("The Ancestral Shotgun");
+                                    listMasteryItemsToAdd.Add("The Ancestral Pistol");
+                                    listMasteryItemsToAdd.Add("The Ornamental Sniper Rifle");
+                                    listMasteryItemsToAdd.Add("The Ornamental SMG");
+                                    listMasteryItemsToAdd.Add("The Ornamental Shotgun");
+                                    listMasteryItemsToAdd.Add("The Ornamental Katana");
+                                    listMasteryItemsToAdd.Add("The Ornamental Assault Rifle");
+                                    listMasteryItemsToAdd.Add("The Ornamental Pistol");
                                     additions = additions + 8;
                                 }
                                 else if (masteryLevel >= 40)
                                 {
-                                    killsList.Add("The Ancestral Pistol");
-                                    killsList.Add("The Ornamental Sniper Rifle");
-                                    killsList.Add("The Ornamental SMG");
-                                    killsList.Add("The Ornamental Shotgun");
-                                    killsList.Add("The Ornamental Katana");
-                                    killsList.Add("The Ornamental Assault Rifle");
-                                    killsList.Add("The Ornamental Pistol");
+                                    listMasteryItemsToAdd.Add("The Ancestral Pistol");
+                                    listMasteryItemsToAdd.Add("The Ornamental Sniper Rifle");
+                                    listMasteryItemsToAdd.Add("The Ornamental SMG");
+                                    listMasteryItemsToAdd.Add("The Ornamental Shotgun");
+                                    listMasteryItemsToAdd.Add("The Ornamental Katana");
+                                    listMasteryItemsToAdd.Add("The Ornamental Assault Rifle");
+                                    listMasteryItemsToAdd.Add("The Ornamental Pistol");
                                     additions = additions + 7;
                                 }
                                 else if (masteryLevel >= 30)
                                 {
-                                    killsList.Add("The Ornamental Sniper Rifle");
-                                    killsList.Add("The Ornamental SMG");
-                                    killsList.Add("The Ornamental Shotgun");
-                                    killsList.Add("The Ornamental Katana");
-                                    killsList.Add("The Ornamental Assault Rifle");
-                                    killsList.Add("The Ornamental Pistol");
+                                    listMasteryItemsToAdd.Add("The Ornamental Sniper Rifle");
+                                    listMasteryItemsToAdd.Add("The Ornamental SMG");
+                                    listMasteryItemsToAdd.Add("The Ornamental Shotgun");
+                                    listMasteryItemsToAdd.Add("The Ornamental Katana");
+                                    listMasteryItemsToAdd.Add("The Ornamental Assault Rifle");
+                                    listMasteryItemsToAdd.Add("The Ornamental Pistol");
                                     additions = additions + 6;
                                 }
                                 else if (masteryLevel >= 25)
                                 {
-                                    killsList.Add("The Ornamental SMG");
-                                    killsList.Add("The Ornamental Shotgun");
-                                    killsList.Add("The Ornamental Katana");
-                                    killsList.Add("The Ornamental Assault Rifle");
-                                    killsList.Add("The Ornamental Pistol");
+                                    listMasteryItemsToAdd.Add("The Ornamental SMG");
+                                    listMasteryItemsToAdd.Add("The Ornamental Shotgun");
+                                    listMasteryItemsToAdd.Add("The Ornamental Katana");
+                                    listMasteryItemsToAdd.Add("The Ornamental Assault Rifle");
+                                    listMasteryItemsToAdd.Add("The Ornamental Pistol");
                                     additions = additions + 5;
                                 }
                                 else if (masteryLevel >= 20)
                                 {
-                                    killsList.Add("The Ornamental Shotgun");
-                                    killsList.Add("The Ornamental Katana");
-                                    killsList.Add("The Ornamental Assault Rifle");
-                                    killsList.Add("The Ornamental Pistol");
+                                    listMasteryItemsToAdd.Add("The Ornamental Shotgun");
+                                    listMasteryItemsToAdd.Add("The Ornamental Katana");
+                                    listMasteryItemsToAdd.Add("The Ornamental Assault Rifle");
+                                    listMasteryItemsToAdd.Add("The Ornamental Pistol");
                                     additions = additions + 4;
                                 }
                                 else if (masteryLevel >= 15)
                                 {
-                                    killsList.Add("The Ornamental Katana");
-                                    killsList.Add("The Ornamental Assault Rifle");
-                                    killsList.Add("The Ornamental Pistol");
+                                    listMasteryItemsToAdd.Add("The Ornamental Katana");
+                                    listMasteryItemsToAdd.Add("The Ornamental Assault Rifle");
+                                    listMasteryItemsToAdd.Add("The Ornamental Pistol");
                                     additions = additions + 3;
                                 }
                                 else if (masteryLevel >= 10)
                                 {
-                                    killsList.Add("The Ornamental Assault Rifle");
-                                    killsList.Add("The Ornamental Pistol");
+                                    listMasteryItemsToAdd.Add("The Ornamental Assault Rifle");
+                                    listMasteryItemsToAdd.Add("The Ornamental Pistol");
                                     additions = additions + 2;
                                 }
                                 else if (masteryLevel >= 5)
                                 {
-                                    killsList.Add("The Ornamental Pistol");
+                                    listMasteryItemsToAdd.Add("The Ornamental Pistol");
                                     additions = additions + 1;
                                 }
                             }
@@ -2705,149 +2894,139 @@ class Randomization
 
                         if (sevenDeadly == true)
                         {
-                            killsList.Add("The Proud Swashbuckler");
-                            killsList.Add("The Majestic");
-                            killsList.Add("Slapdash SMG");
-                            killsList.Add("Serpent's Bite");
-                            killsList.Add("The Maximalist Shotgun");
-                            killsList.Add("The Cat's Claw");
-                            killsList.Add("Jaeger 7 Green Eye");
-                            killsList.Add("The Shashka Beast");
+                            listMasteryItemsToAdd.Add("The Proud Swashbuckler");
+                            listMasteryItemsToAdd.Add("The Majestic");
+                            listMasteryItemsToAdd.Add("Slapdash SMG");
+                            listMasteryItemsToAdd.Add("Serpent's Bite");
+                            listMasteryItemsToAdd.Add("The Maximalist Shotgun");
+                            listMasteryItemsToAdd.Add("The Cat's Claw");
+                            listMasteryItemsToAdd.Add("Jaeger 7 Green Eye");
+                            listMasteryItemsToAdd.Add("The Shashka Beast");
                             additions = additions + 8;
                         }
                         if (concreteArt == true)
                         {
-                            killsList.Add("The Concrete Bunny Pistol");
-                            killsList.Add("The Concrete Shotgun");
-                            killsList.Add("The Shark SMG");
-                            killsList.Add("The Concrete Assault Rifle");
-                            killsList.Add("The Concrete Sniper Rifle");
+                            listMasteryItemsToAdd.Add("The Concrete Bunny Pistol");
+                            listMasteryItemsToAdd.Add("The Concrete Shotgun");
+                            listMasteryItemsToAdd.Add("The Shark SMG");
+                            listMasteryItemsToAdd.Add("The Concrete Assault Rifle");
+                            listMasteryItemsToAdd.Add("The Concrete Sniper Rifle");
                             additions = additions + 5;
                         }
                         if (makeshiftPack == true)
                         {
-                            killsList.Add("The Makeshift Katana");
-                            killsList.Add("The Scrap Gun");
-                            killsList.Add("The Makeshift Scrap Shotgun");
-                            killsList.Add("The Scrap SMG");
-                            killsList.Add("The Makeshift Scrap Assault Rifle");
-                            killsList.Add("The Scrappy Sniper Rifle");
+                            listMasteryItemsToAdd.Add("The Makeshift Katana");
+                            listMasteryItemsToAdd.Add("The Scrap Gun");
+                            listMasteryItemsToAdd.Add("The Makeshift Scrap Shotgun");
+                            listMasteryItemsToAdd.Add("The Scrap SMG");
+                            listMasteryItemsToAdd.Add("The Makeshift Scrap Assault Rifle");
+                            listMasteryItemsToAdd.Add("The Scrappy Sniper Rifle");
                             additions = additions + 5;
                         }
                         if (deluxe == true)
                         {
-                            killsList.Add("DAK Gold Covert");
-                            killsList.Add("Bartoli Hunting Shotgun Deluxe");
-                            killsList.Add("The Golden Dragon");
-                            killsList.Add("Sieger 300 Arctic");
-                            killsList.Add("White Katana");
+                            listMasteryItemsToAdd.Add("DAK Gold Covert");
+                            listMasteryItemsToAdd.Add("Bartoli Hunting Shotgun Deluxe");
+                            listMasteryItemsToAdd.Add("The Golden Dragon");
+                            listMasteryItemsToAdd.Add("Sieger 300 Arctic");
+                            listMasteryItemsToAdd.Add("White Katana");
                             additions = additions + 5;
                         }
                         if (trinityPack == true)
                         {
-                            killsList.Add("ICA19 White Trinity");
-                            killsList.Add("ICA19 Red Trinity");
-                            killsList.Add("ICA19 Black Trinity");
+                            listMasteryItemsToAdd.Add("ICA19 White Trinity");
+                            listMasteryItemsToAdd.Add("ICA19 Red Trinity");
+                            listMasteryItemsToAdd.Add("ICA19 Black Trinity");
                             additions = additions + 3;
                         }
                         if (undyingPack == true)
                         {
-                            killsList.Add("Krondstadt IOI-1998X Surround Earphones");
-                            killsList.Add("Krondstadt Explosive Pen (Gen 2)");
+                            listMasteryItemsToAdd.Add("Krondstadt IOI-1998X Surround Earphones");
+                            listMasteryItemsToAdd.Add("Krondstadt Explosive Pen (Gen 2)");
                             additions = additions + 2;
                         }
                         if (disruptorPack == true)
                         {
-                            killsList.Add("The Disruptor Resistance Band");
+                            listMasteryItemsToAdd.Add("The Disruptor Resistance Band");
                             additions = additions + 1;
                         }
                         if (dropPack == true)
                         {
-                            killsList.Add("The Club Boom 12\" Vinyl Sampler");
+                            listMasteryItemsToAdd.Add("The Club Boom 12\" Vinyl Sampler");
                             additions = additions + 1;
                         }
                         if (splitterPack == true)
                         {
-                            killsList.Add("The Splitter SMG");
-                            killsList.Add("The Splitter Kukri Knife");
+                            listMasteryItemsToAdd.Add("The Splitter SMG");
+                            listMasteryItemsToAdd.Add("The Splitter Kukri Knife");
                             additions = additions + 2;
                         }
 
                         if (bankerPack == true)
                         {
-                            killsList.Add("The Banker Silenced Pistol");
-                            killsList.Add("The Banker Rope");
+                            listMasteryItemsToAdd.Add("The Banker Silenced Pistol");
+                            listMasteryItemsToAdd.Add("The Banker Rope");
                             additions = additions + 2;
                         }
 
                         if (bruceLeePack == true)
                         {
-                            killsList.Add("Jade Dagger");
-                            killsList.Add("Golden Dragon Scissors");
+                            listMasteryItemsToAdd.Add("Jade Dagger");
+                            listMasteryItemsToAdd.Add("Golden Dragon Scissors");
                             additions = additions + 2;
                         }
 
                         if (freeRemove.Equals("N", StringComparison.OrdinalIgnoreCase))
                         {
-                            killsList.Add("Sieger 300 Ghost");
-                            killsList.Add("Floral Baller");
-                            killsList.Add("Fiber Wire Classic");
-                            killsList.Add("ICA Bartoli Woodsman Hunting Rifle Covert");
-                            killsList.Add("TAC-4 AR Desert");
-                            killsList.Add("Earphones");
-                            killsList.Add("ICA19");
-                            killsList.Add("ICA19 Classicballer");
-                            killsList.Add("TAC-4 S/A Jungle");
-                            killsList.Add("Measuring Tape");
-                            killsList.Add("Krugermeier 2-2 Dark");
-                            killsList.Add("Sieger AR552 Tactical");
-                            killsList.Add("Striker V3");
-                            killsList.Add("The Ducky Gun");
-                            killsList.Add("The Iridescent Katana");
-                            killsList.Add("The White Ruby Rude 300 Sniper Rifle");
-                            killsList.Add("IO Elite S2VP Earphones");
-                            killsList.Add("Piton");
-                            killsList.Add("Quickdraw");
-                            killsList.Add("Ice Pick");
-                            killsList.Add("Ice Axe");
-                            killsList.Add("Nitroglycerin");
-                            killsList.Add("Remote Explosive Present");
-                            killsList.Add("Ancestral Fountain Pen");
-                            killsList.Add("ICA19 Iceballer");
-                            killsList.Add("Shashka A33 Gold");
-                            killsList.Add("Explosive Pen");
-                            killsList.Add("Professional Screwdriver");
-                            killsList.Add("Burial Dagger");
-                            killsList.Add("Golden Sawed Off Bartoli 12G");
-                            killsList.Add("Purple Streak ICA19 Classic Baller");
+                            listMasteryItemsToAdd.Add("Sieger 300 Ghost");
+                            listMasteryItemsToAdd.Add("Floral Baller");
+                            listMasteryItemsToAdd.Add("Fiber Wire Classic");
+                            listMasteryItemsToAdd.Add("ICA Bartoli Woodsman Hunting Rifle Covert");
+                            listMasteryItemsToAdd.Add("TAC-4 AR Desert");
+                            listMasteryItemsToAdd.Add("Earphones");
+                            listMasteryItemsToAdd.Add("ICA19");
+                            listMasteryItemsToAdd.Add("ICA19 Classicballer");
+                            listMasteryItemsToAdd.Add("TAC-4 S/A Jungle");
+                            listMasteryItemsToAdd.Add("Measuring Tape");
+                            listMasteryItemsToAdd.Add("Krugermeier 2-2 Dark");
+                            listMasteryItemsToAdd.Add("Sieger AR552 Tactical");
+                            listMasteryItemsToAdd.Add("Striker V3");
+                            listMasteryItemsToAdd.Add("The Ducky Gun");
+                            listMasteryItemsToAdd.Add("The Iridescent Katana");
+                            listMasteryItemsToAdd.Add("The White Ruby Rude 300 Sniper Rifle");
+                            listMasteryItemsToAdd.Add("IO Elite S2VP Earphones");
+                            listMasteryItemsToAdd.Add("Piton");
+                            listMasteryItemsToAdd.Add("Quickdraw");
+                            listMasteryItemsToAdd.Add("Ice Pick");
+                            listMasteryItemsToAdd.Add("Ice Axe");
+                            listMasteryItemsToAdd.Add("Nitroglycerin");
+                            listMasteryItemsToAdd.Add("Remote Explosive Present");
+                            listMasteryItemsToAdd.Add("Ancestral Fountain Pen");
+                            listMasteryItemsToAdd.Add("ICA19 Iceballer");
+                            listMasteryItemsToAdd.Add("Shashka A33 Gold");
+                            listMasteryItemsToAdd.Add("Explosive Pen");
+                            listMasteryItemsToAdd.Add("Professional Screwdriver");
+                            listMasteryItemsToAdd.Add("Burial Dagger");
+                            listMasteryItemsToAdd.Add("Golden Sawed Off Bartoli 12G");
+                            listMasteryItemsToAdd.Add("Purple Streak ICA19 Classic Baller");
 
                             additions = additions + 30;
                         }
 
-                        #endregion
-
-                        if (modifierSelect != 1)
+                        for (int i = 0; i < listMasteryItemsToAdd.Count(); i++)
                         {
-                            switch (modifierSelect)
-                            {
-                                case 2:
-                                    killsList.RemoveAll(item => !item.Contains("axe", StringComparison.OrdinalIgnoreCase));
-                                    break;
-                                case 3:
-                                    killsList.RemoveAll(item =>
-                                        !item.Contains("axe", StringComparison.OrdinalIgnoreCase) &&
-                                        !item.Contains("sword", StringComparison.OrdinalIgnoreCase) &&
-                                        !item.Contains("broad", StringComparison.OrdinalIgnoreCase) &&
-                                        !item.Contains("saber", StringComparison.OrdinalIgnoreCase) &&
-                                        !item.Contains("swashbuckler", StringComparison.OrdinalIgnoreCase) &&
-                                        !item.Contains("claw", StringComparison.OrdinalIgnoreCase) &&
-                                        !item.Contains("katana", StringComparison.OrdinalIgnoreCase) &&
-                                        !item.Contains("tanto", StringComparison.OrdinalIgnoreCase) &&
-                                        !item.Contains("masamune", StringComparison.OrdinalIgnoreCase) &&
-                                        !item.Contains("dagger", StringComparison.OrdinalIgnoreCase));
-                                    break;
-                            }
+                            killsList.Add(listMasteryItemsToAdd[i]);
                         }
+
+                        // DEBUG PRINT
+                        /*
+                        if (listMasteryItemsToAdd.Count() != 0)
+                        {
+                            Console.WriteLine("Added Mastery Items");
+                        }
+                        */
+
+                        #endregion
 
                         int valueList = killsList.Count();
                         int killChosenInt = randomNumber.Next(valueList);
@@ -2859,32 +3038,8 @@ class Randomization
                         {
                             while (killChosen == null || killChosen.Equals("") || killChosen.Equals("Suit"))
                             {
-                                if (modifierSelect == 1)
-                                {
-                                    killChosenInt = randomNumber.Next(30 + additions);
-                                    killChosen = killsList[killChosenInt];
-                                }
-                                else
-                                {
-                                    switch (modifierSelect)
-                                    {
-                                        case 2:
-                                            killsList.RemoveAll(item => !item.Contains("axe", StringComparison.OrdinalIgnoreCase));
-                                            break;
-                                        case 3:
-                                            killsList.RemoveAll(item =>
-                                                !item.Contains("axe", StringComparison.OrdinalIgnoreCase) &&
-                                                !item.Contains("sword", StringComparison.OrdinalIgnoreCase) &&
-                                                !item.Contains("broad", StringComparison.OrdinalIgnoreCase) &&
-                                                !item.Contains("scrap", StringComparison.OrdinalIgnoreCase) &&
-                                                !item.Contains("saber", StringComparison.OrdinalIgnoreCase) &&
-                                                !item.Contains("knife", StringComparison.OrdinalIgnoreCase) &&
-                                                !item.Contains("dagger", StringComparison.OrdinalIgnoreCase));
-                                            break;
-                                    }
-                                    killChosenInt = randomNumber.Next(valueList);
-                                    killChosen = killsList[killChosenInt];
-                                }
+                                killChosenInt = randomNumber.Next(killsList.Count() + additions);
+                                killChosen = killsList[killChosenInt];
                             }
                         }
 
