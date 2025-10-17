@@ -14,10 +14,9 @@ Features
 
 ## Recent Updates!
 
-- Added Starfish To Sgail.
-- Added The Bruce Lee Pack DLC Support.
-(Elusive Target will come down the line)
-- Fixed minor logic issues.
+- Revamped Broad / Specific kill system. Should be much more diverse now, and separated map items from mastery kills to allow map items even after 2 mastery kills.
+- Added The Dragon Elusive Target.
+- Removed Modifiers System. Generally just pointless to include.
 
 # USE:
 
